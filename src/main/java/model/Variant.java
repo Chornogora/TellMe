@@ -1,11 +1,29 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "variants")
 public class Variant {
+
+    @Id
+    @Column(name = "variant_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "variant_number")
     private int number;
 
+    @Column(name = "variant_rightequivalent")
     private String rightEquivalent;
 
+    @Column(name = "variant_text")
     private String text;
+
+    //Empty constructor for Hibernate
+    public Variant(){
+
+    }
 
     public Variant(int num, String right, String text){
         this.number = num;
@@ -35,5 +53,13 @@ public class Variant {
 
     public void setText(String text){
         this.text = text;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
