@@ -1,22 +1,42 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="words")
 public class Word {
+
+    @Id
+    @Column(name = "word_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "word_description")
     private String description;
 
+    @Column(name = "word_name")
     private String name;
+
     //just a link
+    @Column(name = "word_picture")
     private String picture;
 
+    @Column(name = "word_translation")
     private String translation;
 
-    public Word(String desc, String name, String trans){
+    //Empty constructor for Hibernate
+    public Word(){
+
+    }
+
+    public Word(String name, String desc, String trans){
         this.description = desc;
         this.name = name;
         this.translation = trans;
     }
 
-    public Word(String desc, String name, String trans, String picture){
-        this(desc, name, trans);
+    public Word(String name, String desc, String trans, String picture){
+        this(name, desc, trans);
         this.picture = picture;
     }
 
