@@ -1,27 +1,57 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public enum Levels {
-    ELEMENTARY(0), BEGINNER(100), PREINTERMEDIATE(500), INTERMEDIATE(5000), UPPERINTERMEDIATE(15000), ADVANCED(30000), MASTER(50000);
+    ELEMENTARY(getPoints(0)), BEGINNER(getPoints(1)), PREINTERMEDIATE(getPoints(2)), INTERMEDIATE(getPoints(3)), UPPERINTERMEDIATE(getPoints(4)), ADVANCED(getPoints(5)), MASTER(getPoints(6));
 
     Levels(int i){
 
     }
 
+    public int getMinPoints(){
+        return getPoints(this.ordinal());
+    }
+
+    private static String allPoints;
+
+    private static int getPoints(int ordinal){
+        if(allPoints == null){
+            allPoints = getAllPoints();
+        }
+        String points = allPoints.split(" ")[ordinal];
+        return Integer.valueOf(points);
+    }
+
     static Levels getLevelByPoints(int points){
-        if(points < 100){
+
+        if(points < getPoints(1)){
             return ELEMENTARY;
-        }else if(points >= 100 && points < 500){
+        }else if(points < getPoints(2)){
             return BEGINNER;
-        }else if(points >= 500 && points < 5000){
+        }else if(points < getPoints(3)){
             return PREINTERMEDIATE;
-        }else if(points >= 5000 && points < 15000){
+        }else if(points < getPoints(4)){
             return INTERMEDIATE;
-        }else if(points >= 15000 && points < 30000){
+        }else if(points < getPoints(5)){
             return UPPERINTERMEDIATE;
-        }else if(points >= 30000 && points < 50000){
+        }else if(points < getPoints(6)){
             return ADVANCED;
         }else{
             return MASTER;
         }
+    }
+
+    public static String getAllPoints(){
+        File file = new File("src/main/resources/Points");
+        String str = "";
+        try(Scanner sc = new Scanner(file)){
+            str = sc.nextLine();
+        }catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        return str;
     }
 }

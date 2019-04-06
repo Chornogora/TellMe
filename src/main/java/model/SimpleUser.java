@@ -1,25 +1,37 @@
 package model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "simple_users")
 public class SimpleUser extends User {
     //link to image
+    @Column(name = "user_avatar")
     private String avatar;
 
+    @Column(name = "user_birthday")
     private Date birthday;
 
+    @Enumerated(EnumType.STRING)
     private Levels level;
 
+    @Column(name = "points")
     private int points;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "user_signupdate")
     private Date signUpDate;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Notification> notifications;
 
     private List<Progress> progresses;
+
+    private List<Chat> chats;
 
     public SimpleUser(String login, String pass, String mail){
         super(login, pass, mail);
@@ -28,6 +40,7 @@ public class SimpleUser extends User {
         signUpDate = new Date(Calendar.getInstance().getTimeInMillis());
         notifications = new ArrayList<>();
         progresses = new ArrayList<>();
+        chats = new ArrayList<>();
     }
 
     public SimpleUser(String login, String pass, String mail, String ava){

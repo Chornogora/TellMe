@@ -21,4 +21,25 @@ create table words
   word_picture varchar
 );
 
+create table administrators
+(
+  user_id bigserial
+    constraint administrators_pk
+      primary key,
+  user_login varchar not null,
+  user_password varchar not null,
+  user_email varchar not null,
+  administrator_access int not null
+);
+
+create unique index administrators_user_login_uindex
+  on administrators (user_login);
+
+create table notifications
+(
+  notification_id bigserial,
+  notification_generatedTimestamp TIMESTAMP not null,
+  notification_isviewed BOOLEAN not null,
+  notification_text varchar not null
+);
 -- </Tables creating>

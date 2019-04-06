@@ -6,20 +6,24 @@ import javax.persistence.*;
 public abstract class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
 
-    @Column(name="login")
+    @Column(name="user_login")
     private String login;
 
-    @Column(name="password")
-    @org.hibernate.annotations.ColumnTransformer()
+    @Column(name="user_password")
     private String password;
 
+    @Column(name="user_email")
     private String email;
 
-    public User(String login, String pass, String mail){
+    User(){
+
+    }
+
+    User(String login, String pass, String mail){
         this.login = login;
         this.password = pass;
         this.email = mail;
@@ -30,11 +34,11 @@ public abstract class User {
     }
 
     public String getPassword() {
-        return password;
+        return util.Encoder.decode("password");
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = util.Encoder.encode(password);
     }
 
     public String getEmail() {
