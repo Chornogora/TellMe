@@ -22,6 +22,8 @@ public class PasswordGenerator {
     private static final int LAST_LOWER_ASCII_LETTER = 122;
     private static final int DIFF_LOWER_ASCII_LETTER = LAST_LOWER_ASCII_LETTER - FIRST_LOWER_ASCII_LETTER;
 
+    private static Random random = new Random();
+
     private List<Character> getCharacterPassword(int length, Random random) {
         List<Character> charPassword = new ArrayList<>();
 
@@ -47,7 +49,6 @@ public class PasswordGenerator {
     }
 
     public String generatePassword() {
-        Random random = new Random();
 
         int randomNumberForLength = random.nextInt(DIFF_PASSWORD_LENGTH + 1) + MIN_LENGTH_PASSWORD;
 

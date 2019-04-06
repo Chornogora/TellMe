@@ -1,8 +1,20 @@
 package model;
 
+import javax.persistence.*;
+
+@MappedSuperclass
 public abstract class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private long id;
+
+    @Column(name="login")
     private String login;
 
+    @Column(name="password")
+    @org.hibernate.annotations.ColumnTransformer()
     private String password;
 
     private String email;
@@ -31,5 +43,13 @@ public abstract class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
