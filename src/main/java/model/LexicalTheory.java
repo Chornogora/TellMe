@@ -1,16 +1,22 @@
 package model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "ltheory")
 public class LexicalTheory extends Task{
+
+    @OneToMany(mappedBy = "theory", fetch = FetchType.LAZY)
     private List<Word> words;
 
-    public LexicalTheory(List<Word> lst){
-        this.words = lst;
+    public LexicalTheory(){
+
     }
 
-    public LexicalTheory(){
+    public LexicalTheory(int number){
+        super(number);
         this.words = new ArrayList<>();
     }
 

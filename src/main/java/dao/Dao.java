@@ -3,9 +3,7 @@ package dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.transaction.Transactional;
-
-public class Dao<T> {
+public class Dao<T> implements DataProcessable<T>{
 
     public void save(T object){
         try(Session session = getSession()) {
@@ -35,11 +33,8 @@ public class Dao<T> {
         T object = null;
         try(Session session = getSession()){
             object = session.get(typeclass, id);
+            //object = session.get(typeclass, id);
         }
         return object;
-    }
-
-    private Session getSession(){
-        return HibernateSessionFactory.getSessionFactory().openSession();
     }
 }

@@ -24,6 +24,10 @@ public class Word {
     @Column(name = "word_translation")
     private String translation;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private LexicalTheory theory;
+
     //Empty constructor for Hibernate
     public Word(){
 
@@ -70,5 +74,13 @@ public class Word {
 
     public void setTranslation(String translation) {
         this.translation = translation;
+    }
+
+    public LexicalTheory getTheory() {
+        return theory;
+    }
+
+    public void setTheory(LexicalTheory theory) {
+        this.theory = theory;
     }
 }

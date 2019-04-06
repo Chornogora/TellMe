@@ -13,11 +13,15 @@ public class Tournament {
 
     private int score2;
 
-    public Tournament(SimpleUser user1, SimpleUser user2, List<Test> tests){
+    public Tournament(SimpleUser user1, SimpleUser user2){
         this.player1 = user1;
         this.player2 = user2;
-        this.questions = tests;
         score1 = 0;
         score2 = 0;
+    }
+
+    public Tournament(SimpleUser user1, SimpleUser user2, List<Test> tests){
+        this(user1, user2);
+        this.questions = tests;
     }
 }

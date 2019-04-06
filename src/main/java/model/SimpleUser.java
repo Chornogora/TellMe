@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "simple_users")
+@Table(name = "users")
 public class SimpleUser extends User {
     //link to image
     @Column(name = "user_avatar")
@@ -16,10 +16,9 @@ public class SimpleUser extends User {
     @Column(name = "user_birthday")
     private Date birthday;
 
-    @Enumerated(EnumType.STRING)
     private Levels level;
 
-    @Column(name = "points")
+    @Column(name = "user_points")
     private int points;
 
     @Temporal(TemporalType.DATE)
@@ -29,9 +28,15 @@ public class SimpleUser extends User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Notification> notifications;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Progress> progresses;
 
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     private List<Chat> chats;
+
+    public SimpleUser(){
+
+    }
 
     public SimpleUser(String login, String pass, String mail){
         super(login, pass, mail);
@@ -84,6 +89,9 @@ public class SimpleUser extends User {
     }
 
     public Levels getLevel() {
+        if(level == null) {
+            level = Levels.getLevelByPoints(points);
+        }
         return level;
     }
 

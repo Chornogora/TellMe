@@ -20,6 +20,10 @@ public class Variant {
     @Column(name = "variant_text")
     private String text;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private Test test;
+
     //Empty constructor for Hibernate
     public Variant(){
 
@@ -61,5 +65,13 @@ public class Variant {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
     }
 }

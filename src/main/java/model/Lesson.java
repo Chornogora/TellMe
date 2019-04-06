@@ -1,15 +1,36 @@
 package model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name="lessons")
 public class Lesson {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "lesson_id")
+    private long id;
+
+    @Column(name="lesson_name")
     private String name;
 
+    @Column(name="lesson_points")
     private int points;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "lesson_level")
+    private Levels level;
+
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
     private List<Task> tasks;
 
-    private Levels level;
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
+    private List<Progress> progresses;
+
+    public Lesson(){
+
+    }
 
     public Lesson(String name, int points, Levels lvl){
         this.name = name;

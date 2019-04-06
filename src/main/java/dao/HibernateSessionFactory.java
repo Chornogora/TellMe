@@ -16,6 +16,9 @@ public class HibernateSessionFactory {
         config.addAnnotatedClass(User.class);
         //config.addAnnotatedClass(Notification.class);
         config.addAnnotatedClass(Administrator.class);
+        config.addAnnotatedClass(Task.class);
+        config.addAnnotatedClass(GrammarTheory.class);
+        config.addAnnotatedClass(LexicalTheory.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         sessionFactory = config.buildSessionFactory(builder.build());
     }
