@@ -16,6 +16,18 @@
             root
         </property>
 
+        <!--<property name="hibernate.connection.url">
+            jdbc:postgresql://ec2-54-225-113-7.compute-1.amazonaws.com:5432/d9b7e57khhollh?sslmode=require
+        </property>
+
+        <property name="hibernate.connection.username">
+            hzrzkbtwcdrery
+        </property>
+
+        <property name="hibernate.connection.password">
+            a82f81356e15f6af132eedb7a0b2c628f0f414989050a66b7b0a52366e1c732d
+        </property>-->
+
         <property name="hibernate.dialect">
             org.hibernate.dialect.PostgreSQL9Dialect
         </property>

@@ -1,7 +1,6 @@
 package model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -28,6 +27,10 @@ public class Message {
 
     @Column(name="message_text")
     private String text;
+
+    public Message(){
+
+    }
 
     public Message(Chat chat, SimpleUser user, String text){
         this.chat = chat;
