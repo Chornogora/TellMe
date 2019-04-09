@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name="notifications")
@@ -14,7 +16,7 @@ public class Notification {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "notification_generatedTimestamp")
-    private Timestamp generatedTimestamp;
+    private Calendar generatedTimestamp;
 
     @Column(name = "notification_isviewed")
     private boolean isViewed;
@@ -26,7 +28,11 @@ public class Notification {
     @JoinColumn(name = "user_id")
     private SimpleUser user;
 
-    public Notification(Timestamp timestamp, String text){
+    public Notification(){
+
+    }
+
+    public Notification(Calendar timestamp, String text){
         this.generatedTimestamp = timestamp;
         this.text = text;
     }
@@ -35,7 +41,7 @@ public class Notification {
         return isViewed;
     }
 
-    public Timestamp getGeneratedTimestamp() {
+    public Calendar getGeneratedTimestamp() {
         return generatedTimestamp;
     }
 

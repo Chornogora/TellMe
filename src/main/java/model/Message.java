@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "messages")
@@ -19,7 +20,7 @@ public class Message {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "message_senttimestamp")
-    private Timestamp sentTimestamp;
+    private Calendar sentTimestamp;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
@@ -32,6 +33,6 @@ public class Message {
         this.chat = chat;
         this.sender = user;
         this.text = text;
-        this.sentTimestamp = new Timestamp(Calendar.getInstance().getTimeInMillis());
+        this.sentTimestamp = new GregorianCalendar();
     }
 }
