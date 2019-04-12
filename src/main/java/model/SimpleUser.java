@@ -16,6 +16,7 @@ public class SimpleUser extends User {
     @Column(name = "user_birthday")
     private Date birthday;
 
+    @Transient
     private Levels level;
 
     @Column(name = "user_points")
@@ -26,13 +27,13 @@ public class SimpleUser extends User {
     private Date signUpDate;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Notification> notifications;
+    transient private List<Notification> notifications;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Progress> progresses;
+    transient private List<Progress> progresses;
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
-    private List<Chat> chats;
+    transient private List<Chat> chats;
 
     public SimpleUser(){
 
@@ -48,18 +49,8 @@ public class SimpleUser extends User {
         chats = new ArrayList<>();
     }
 
-    public SimpleUser(String login, String pass, String mail, String ava){
-        this(login, pass, mail);
-        this.avatar = ava;
-    }
-
     public SimpleUser(String login, String pass, String mail, Date birthday){
         this(login, pass, mail);
-        this.birthday = birthday;
-    }
-
-    public SimpleUser(String login, String pass, String mail, String ava, Date birthday){
-        this(login, pass, mail, ava);
         this.birthday = birthday;
     }
 

@@ -25,7 +25,7 @@ public abstract class User {
 
     User(String login, String pass, String mail){
         this.login = login;
-        this.password = pass;
+        setPassword(pass);
         this.email = mail;
     }
 
@@ -33,12 +33,17 @@ public abstract class User {
         return login;
     }
 
-    public String getPassword() {
+    private String getPassword() {
         return util.Encoder.decode("password");
     }
 
     public void setPassword(String password) {
         this.password = util.Encoder.encode(password);
+    }
+
+    public boolean isPasswordCorrect(String pass){
+        String p = getPassword();
+        return p.equals(pass);
     }
 
     public String getEmail() {
