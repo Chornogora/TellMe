@@ -34,7 +34,7 @@ public abstract class User {
     }
 
     private String getPassword() {
-        return util.Encoder.decode("password");
+        return util.Encoder.decode(password);
     }
 
     public void setPassword(String password) {

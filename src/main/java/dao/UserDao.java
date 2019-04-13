@@ -48,17 +48,15 @@ public class UserDao implements DataProcessable<SimpleUser> {
     public SimpleUser findByName(String login){
         SimpleUser object = null;
         try(Session session = getSession()){
-            String queryString = "FROM SimpleUser WHERE login = '\" + login + \"'";
+            StringBuilder sb = new StringBuilder("FROM SimpleUser WHERE login = '").append(login).append("'");
+
+            String queryString = sb.toString();
             Query<SimpleUser> query = session.createQuery(queryString);
             List<SimpleUser> lst = query.list();
             if(lst.isEmpty()) {
                 return null;
             }
-            System.out.println(SimpleUser.class);
-            System.out.println(lst.get(0).getClass());
-            if(SimpleUser.class == lst.get(0).getClass()) {
                 object = query.list().get(0);
-            }
         }
         return object;
     }
