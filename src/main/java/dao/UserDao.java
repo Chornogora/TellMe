@@ -11,7 +11,7 @@ public class UserDao implements DataProcessable<SimpleUser> {
 
     @Override
     public void save(SimpleUser object) {
-        try(Session session = getSession()) {
+        try (Session session = getSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(object);
             transaction.commit();
@@ -20,7 +20,7 @@ public class UserDao implements DataProcessable<SimpleUser> {
 
     @Override
     public void update(SimpleUser object) {
-        try(Session session = getSession()) {
+        try (Session session = getSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(object);
             transaction.commit();
@@ -29,7 +29,7 @@ public class UserDao implements DataProcessable<SimpleUser> {
 
     @Override
     public void delete(SimpleUser object) {
-        try(Session session = getSession()) {
+        try (Session session = getSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(object);
             transaction.commit();
@@ -39,24 +39,28 @@ public class UserDao implements DataProcessable<SimpleUser> {
     @Override
     public SimpleUser findById(Class<SimpleUser> typeclass, long id) {
         SimpleUser object = null;
-        try(Session session = getSession()){
+        try (Session session = getSession()) {
             object = session.get(typeclass, id);
         }
         return object;
     }
 
-    public SimpleUser findByName(String login){
+    public SimpleUser findByName(String login) {
         SimpleUser object = null;
-        try(Session session = getSession()){
+
+        try (Session session = getSession()) {
             StringBuilder sb = new StringBuilder("FROM SimpleUser WHERE login = '").append(login).append("'");
 
             String queryString = sb.toString();
             Query<SimpleUser> query = session.createQuery(queryString);
             List<SimpleUser> lst = query.list();
-            if(lst.isEmpty()) {
+            if (lst.isEmpty()) {
                 return null;
             }
-                object = query.list().get(0);
+
+            ClassLoader loader1 = SimpleUser.class.getClassLoader();
+            ClassLoader loader2 = query.list().get(0).getClass().getClassLoader();
+            //object = query.list().get(0);
         }
         return object;
     }
