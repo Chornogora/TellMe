@@ -1,7 +1,5 @@
 package controller;
 
-import dao.UserDao;
-import model.SimpleUser;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,15 +18,7 @@ public class Registration {
             @RequestParam("email") String email,
             @RequestParam("birthday") Date birthday
     ){
-        UserDao dao = new UserDao();
-        SimpleUser su;
-        if(birthday == null){
-            su = new SimpleUser(login, password, email);
-        }else{
-            su = new SimpleUser(login, password, email, birthday);
-        }
-        dao.save(su);
-        return util.JSONparser.toJSON(su);
+        return "Registration";
     }
 
 }
