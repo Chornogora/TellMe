@@ -1,1 +1,1 @@
-web: java -jar target/TellMe-1.0-SNAPSHOT.jar --server.port=$PORT
+web: java -jar target/TellMe-1.0-SNAPSHOT.jar
