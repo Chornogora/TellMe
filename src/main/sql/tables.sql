@@ -181,4 +181,5 @@ alter table notifications
 alter table notifications
   add constraint notifications_users_user_id_fk
     foreign key (user_id) references users;
+
 -- </Tables creating>
