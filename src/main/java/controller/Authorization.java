@@ -30,4 +30,9 @@ public class Authorization {
             return "Invalid password";
         }
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "Hello, World!";
+    }
 }

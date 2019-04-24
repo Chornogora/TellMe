@@ -1,0 +1,15 @@
+/bin/
+/target/
+*.class
+.eclipse
+*.project
+.project
+.settings
+*.jar
+*.war
+*.ear
+.idea
+*.iml
+target
+*.iml
+data/*
