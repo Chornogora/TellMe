@@ -16,8 +16,8 @@ public class Authorization {
         this.simpleUserRepo = simpleUserRepo;
     }
 
-    @GetMapping("/getauth")
-    public String getauthorize(@RequestParam("login") String login, @RequestParam("password") String password){
+    @PostMapping("/authorize")
+    public String authorize(@RequestParam("login") String login, @RequestParam("password") String password){
         SimpleUser user = simpleUserRepo.findByLogin(login);
 
         if(user == null){
@@ -29,10 +29,5 @@ public class Authorization {
         }else{
             return "Invalid password";
         }
-    }
-
-    @GetMapping("/test")
-    public String test(){
-        return "Hello, World!";
     }
 }

@@ -19,7 +19,7 @@ public class CodeGenerator {
     private static final int LAST_LOWER_ASCII_LETTER = 122;
     private static final int DIFF_LOWER_ASCII_LETTER = LAST_LOWER_ASCII_LETTER - FIRST_LOWER_ASCII_LETTER;
 
-    private String generateCode() {
+    public static String generateCode() {
         Random random = new Random();
         int randomNumberForLength = random.nextInt(DIFF_PASSWORD_LENGTH + 1) + MIN_LENGTH_PASSWORD;
         StringBuilder code = new StringBuilder();
