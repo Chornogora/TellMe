@@ -3,9 +3,7 @@ package util;
 import java.util.Random;
 
 public class CodeGenerator {
-    private static final int MIN_LENGTH_PASSWORD = 8;
-    private static final int MAX_LENGTH_PASSWORD = 16;
-    private static final int DIFF_PASSWORD_LENGTH = MAX_LENGTH_PASSWORD - MIN_LENGTH_PASSWORD;
+    private static final int MAX_LENGTH_CODE = 5;
 
     private static final int FIRST_ASCII_NUMBER = 48;
     private static final int LAST_ASCII_NUMBER = 57;
@@ -19,12 +17,12 @@ public class CodeGenerator {
     private static final int LAST_LOWER_ASCII_LETTER = 122;
     private static final int DIFF_LOWER_ASCII_LETTER = LAST_LOWER_ASCII_LETTER - FIRST_LOWER_ASCII_LETTER;
 
+
     private String generateCode() {
         Random random = new Random();
-        int randomNumberForLength = random.nextInt(DIFF_PASSWORD_LENGTH + 1) + MIN_LENGTH_PASSWORD;
         StringBuilder code = new StringBuilder();
 
-        for (int i = 0; i < randomNumberForLength; i++) {
+        for (int i = 0; i < MAX_LENGTH_CODE; i++) {
             int randNumber = random.nextInt(3) + 1;
             switch (randNumber) {
                 case 1:
