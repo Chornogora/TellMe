@@ -32,6 +32,11 @@ public class Registration {
             @RequestParam("email") String email,
             @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday
     ){
+
+        //TODO delete hardcode
+        String sender = "tellmesupport@ukr.net";
+        String pass = "TellMe12345";
+
         SimpleUser existsUser = simpleUserRepo.findByLogin(login);
         if(existsUser != null || codes.values().stream().anyMatch(user->user.getLogin().equals(login))){
             return "Login exists";
@@ -40,15 +45,18 @@ public class Registration {
         SimpleUser user = (birthday == null) ? new SimpleUser(login, password, email) : new SimpleUser(login, password, email, birthday);
         String code = util.CodeGenerator.generateCode();
         codes.put(code, user);
-
+        util.EmailSender.sendThroughRemote(sender, pass, email, code);
         return "OK";
     }
 
     @PostMapping("/confirm")
-    public String confirmCode(@RequestParam("login") String code){
+    public String confirmCode(@RequestParam("code") String code){
         SimpleUser user = codes.get(code);
+        if(user == null){
+            return "null";
+        }
         simpleUserRepo.save(user);
-        return "OK";
+        return util.JSONparser.toJSON(user);
     }
 
 }

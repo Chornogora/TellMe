@@ -8,7 +8,7 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
 
-    public static String sendThroughRemote(String sender, String password, String recipient){
+    public static String sendThroughRemote(String sender, String password, String recipient, String code){
         Properties properties = System.getProperties();
 
         String fileName = "target/classes/mailproperties.txt";
@@ -25,8 +25,8 @@ public class EmailSender {
             message.setFrom(new InternetAddress(sender));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 
-            message.setSubject("Train Java mailing");
-            message.setText("Hello, World!");
+            message.setSubject("Activation Code");
+            message.setText(code);
 
             Transport tr = session.getTransport();
             tr.connect(sender, password);

@@ -13,8 +13,29 @@
     <input type="submit">
 </form>
 
+
+<form method="POST" action="http://localhost:5000/registration/confirm" onsubmit="showCodeAnswer(this)">
+    <div id = "codeDiv" style="visibility: hidden">
+        <input type="text" name = "code">
+        <input type="submit">
+    </div>
+</form>
+
 <script>
     function showAnswer(form){
+        let request = new XMLHttpRequest();
+        request.onload = () => {
+            if(request.responseText == "OK")
+                document.getElementById("codeDiv").style.visibility = "visible";
+            else
+                alert(request.responseText);
+        };
+
+        request.open(form.method, form.action, true);
+        request.send(new FormData(form));
+    }
+
+    function showCodeAnswer(form){
         let request = new XMLHttpRequest();
         request.onload = () => {alert(request.responseText)};
         request.open(form.method, form.action, true);
