@@ -38,7 +38,10 @@ public class Registration {
         String pass = "TellMe12345";
 
         SimpleUser existsUser = simpleUserRepo.findByLogin(login);
-        if(existsUser != null || codes.values().stream().anyMatch(user->user.getLogin().equals(login))){
+        if(existsUser != null || codes.values().stream().anyMatch(user->{
+            String temp = user.getLogin();
+            return temp.equals(login);
+        })){
             return "Login exists";
         }
 
@@ -57,6 +60,13 @@ public class Registration {
         }
         simpleUserRepo.save(user);
         return util.JSONparser.toJSON(user);
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam("login") String login){
+        //TODO
+        SimpleUser user = simpleUserRepo.findByLogin(login);
+        return "null";
     }
 
 }

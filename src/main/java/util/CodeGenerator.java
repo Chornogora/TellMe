@@ -18,7 +18,7 @@ public class CodeGenerator {
     private static final int DIFF_LOWER_ASCII_LETTER = LAST_LOWER_ASCII_LETTER - FIRST_LOWER_ASCII_LETTER;
 
 
-    private String generateCode() {
+    public static String generateCode() {
         Random random = new Random();
         StringBuilder code = new StringBuilder();
 
