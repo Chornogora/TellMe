@@ -48,21 +48,4 @@ public class EmailSender {
         }
         return "OK";
     }
-
-    public static String[] getBoxMailInformation() {
-        FileInputStream fis;
-        Properties property = new Properties();
-        String sender = "";
-        String pass = "";
-        try {
-            fis = new FileInputStream("src/main/resources/mailBoxSecondConfig.properties");
-            property.load(fis);
-            sender = property.getProperty("mailBox.Email");
-            pass = property.getProperty("mailBox.Password");
-        } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл свойств отсуствует!");
-        }
-
-        return new String[]{sender, pass};
-    }
 }

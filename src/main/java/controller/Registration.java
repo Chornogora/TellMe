@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("/registration")
@@ -32,9 +33,9 @@ public class Registration {
             @RequestParam("email") String email,
             @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday
     ) {
-        String[] mailBox = util.EmailSender.getBoxMailInformation();
-        String sender = mailBox[0];
-        String pass = mailBox[1];
+        Properties properties = util.Property.getProperties("src/main/resources/mailBoxSecondConfig.properties");
+        String sender = properties.getProperty("mailBox.Email");
+        String pass = properties.getProperty("mailBox.Password");
 
         SimpleUser existsUser = simpleUserRepo.findByLogin(login);
         if (existsUser != null || codes.values().stream().anyMatch(user -> {
