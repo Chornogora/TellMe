@@ -31,17 +31,16 @@ public class Registration {
             @RequestParam("password") String password,
             @RequestParam("email") String email,
             @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday
-    ){
-
-        //TODO delete hardcode
-        String sender = "tellmesupport@ukr.net";
-        String pass = "TellMe12345";
+    ) {
+        String[] mailBox = util.EmailSender.getBoxMailInformation();
+        String sender = mailBox[0];
+        String pass = mailBox[1];
 
         SimpleUser existsUser = simpleUserRepo.findByLogin(login);
-        if(existsUser != null || codes.values().stream().anyMatch(user->{
+        if (existsUser != null || codes.values().stream().anyMatch(user -> {
             String temp = user.getLogin();
             return temp.equals(login);
-        })){
+        })) {
             return "Login exists";
         }
 
@@ -53,9 +52,9 @@ public class Registration {
     }
 
     @PostMapping("/confirm")
-    public String confirmCode(@RequestParam("code") String code){
+    public String confirmCode(@RequestParam("code") String code) {
         SimpleUser user = codes.get(code);
-        if(user == null){
+        if (user == null) {
             return "null";
         }
         simpleUserRepo.save(user);
@@ -63,7 +62,7 @@ public class Registration {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(@RequestParam("login") String login){
+    public String changePassword(@RequestParam("login") String login) {
         //TODO
         SimpleUser user = simpleUserRepo.findByLogin(login);
         return "null";

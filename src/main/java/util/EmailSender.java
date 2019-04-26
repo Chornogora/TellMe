@@ -1,14 +1,20 @@
 package util;
 
-import java.io.*;
-import java.util.Properties;
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 public class EmailSender {
 
-    public static String sendThroughRemote(String sender, String password, String recipient, String code){
+    public static String sendThroughRemote(String sender, String password, String recipient, String code) {
         Properties properties = System.getProperties();
 
         String fileName = "target/classes/mailproperties.txt";
@@ -31,15 +37,32 @@ public class EmailSender {
             Transport tr = session.getTransport();
             tr.connect(sender, password);
             tr.sendMessage(message, message.getAllRecipients());
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             return "Fail. Properties were not found";
-        }catch(IOException e1){
+        } catch (IOException e1) {
             return "Fail. IOException was thrown";
-        }catch(MessagingException e2){
+        } catch (MessagingException e2) {
             System.out.println(e2.getMessage());
             return "Fail. MessagingException was thrown";
 
         }
         return "OK";
+    }
+
+    public static String[] getBoxMailInformation() {
+        FileInputStream fis;
+        Properties property = new Properties();
+        String sender = "";
+        String pass = "";
+        try {
+            fis = new FileInputStream("src/main/resources/mailBoxSecondConfig.properties");
+            property.load(fis);
+            sender = property.getProperty("mailBox.Email");
+            pass = property.getProperty("mailBox.Password");
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
+
+        return new String[]{sender, pass};
     }
 }
