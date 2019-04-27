@@ -58,12 +58,12 @@ public class Personal{
                 File file = new File(STATIC_IMAGES_ROOT + user.getId() + extension);
                 boolean isCreated = file.createNewFile();
                 if(!isCreated){
-                    throw new IOException();
+                    throw new IOException("Cannot create file in /src");
                 }
                 Files.copy(image.getInputStream(), Paths.get(STATIC_IMAGES_ROOT + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
             }catch(IOException e2){
                 e2.printStackTrace();
-                return "Error";
+                return "Error in /src";
             }
         }
 
@@ -74,12 +74,12 @@ public class Personal{
                 File file = new File("target/classes/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension);
                 boolean isCreated = file.createNewFile();
                 if(!isCreated){
-                    throw new IOException();
+                    throw new IOException("Cannot create file in /target");
                 }
                 Files.copy(image.getInputStream(), Paths.get("target/classes/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
             }catch(IOException e2){
                 e2.printStackTrace();
-                return "Error";
+                return "Error in /target";
             }
         }
 
