@@ -62,6 +62,7 @@ public class Personal{
                 }
                 Files.copy(image.getInputStream(), Paths.get(STATIC_IMAGES_ROOT + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
             }catch(IOException e2){
+                e2.printStackTrace();
                 return "Error";
             }
         }
@@ -77,6 +78,7 @@ public class Personal{
                 }
                 Files.copy(image.getInputStream(), Paths.get("target/classes/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
             }catch(IOException e2){
+                e2.printStackTrace();
                 return "Error";
             }
         }
