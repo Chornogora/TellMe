@@ -23,7 +23,6 @@ public class EmailSender {
         try {
             properties.load(new FileInputStream(file));
             Session session = Session.getDefaultInstance(properties);
-            System.out.println(properties.getProperty("mail.smtp.socketFactory.port"));
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(sender));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
