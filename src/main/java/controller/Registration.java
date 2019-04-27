@@ -56,7 +56,7 @@ public class Registration {
     public String confirmCode(@RequestParam("code") String code) {
         SimpleUser user = codes.get(code);
         if (user == null) {
-            return "null";
+            throw new IllegalArgumentException("Invalid code");
         }
         simpleUserRepo.save(user);
         return util.JSONparser.toJSON(user);

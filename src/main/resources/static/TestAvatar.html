@@ -5,7 +5,9 @@
         <title>Title</title>
     </head>
     <body>
-        <form method="POST" action="http://localhost:5000/personal/setAvatar" enctype="multipart/form-data">
+        <!-- test setter -->
+
+        <form method="POST" action="personal/setAvatar" enctype="multipart/form-data">
             <div id = "imageDiv" style="visibility: visible">
                 <input type="number" name = "id">
                 <input type="file" name = "avatar" width="70">
@@ -14,11 +16,32 @@
         </form>
 
         <!-- test getter -->
+        <br />
+        <span>~~~~~~~~~~~~~</span>
+        <br />
 
-        <img id = "userAvatar" />
+        <img id = "userAvatar" style="position: absolute; left: 400px; width:200px"/>
+
+        <span>
+            set id here
+        </span>
+        <input type="number" id = "userId">
+
+        <button onclick = "setImage()">
+            Показать аву
+        </button>
 
         <script>
-            document.getElementById("userAvatar").src = "http://localhost:5000/personal/getAvatar?id=2";
+            function setImage() {
+                let request = new XMLHttpRequest();
+                request.onload = () => {
+                    document.getElementById("userAvatar").src = request.responseText;
+                };
+
+                let id = parseInt(document.getElementById("userId").value);
+                request.open("GET", "http://localhost:5000/personal/getAvatar?id=" + id, true);
+                request.send();
+            }
         </script>
 
     </body>

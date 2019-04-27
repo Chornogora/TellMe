@@ -5,18 +5,37 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" action="http://localhost:5000/registration/register" onsubmit="showAnswer(this)">
+<iframe name = "result" style="visibility: hidden">
+
+</iframe>
+
+<form method="POST" action="registration/register" onsubmit="showAnswer(this)" target="result">
     <div id="registerDiv">
-        <input type="text" name="login">
-        <input type="password" name="password">
-        <input type="text" name="email">
-        <input type="date" name = "birthday">
+        <label>
+            <span>login</span>
+            <input type="text" name="login">
+        </label>
+        <br/>
+        <label>
+            <span>password</span>
+            <input type="password" name="password">
+        </label>
+        <br/>
+        <label>
+            <span>email</span>
+            <input type="text" name="email">
+        </label>
+        <br/>
+        <label>
+            <span>birthday (можно не писать)</span>
+            <input type="date" name = "birthday">
+        </label>
+        <br/>
         <input type="submit">
     </div>
 </form>
 
-
-<form method="POST" action="http://localhost:5000/registration/confirm" onsubmit="showCodeAnswer(this)">
+<form method="POST" action="registration/confirm" onsubmit="showCodeAnswer(this)">
     <div id = "codeDiv" style="visibility: hidden">
         <input type="text" name = "code" placeholder="Enter your code from email here">
         <input type="submit">
