@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Collection;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +37,7 @@ public class Personal{
     }
 
     @PostMapping("/setAvatar")
-    public String setAvatar(HttpServletRequest request, @RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
+    public String setAvatar(@RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
         Optional<SimpleUser> opt = simpleUserRepo.findById(id);
         if(!opt.isPresent()){
             return "Incorrect id";
@@ -46,7 +51,7 @@ public class Personal{
         String extension = imageName.substring(place).toLowerCase();
 
         try {
-            Path path = Paths.get("" + user.getId() + extension);
+            Path path = Paths.get(STATIC_IMAGES_ROOT + user.getId() + extension);
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
         }catch(IOException e){
             try {
@@ -62,21 +67,21 @@ public class Personal{
         }
 
         try {
-            Files.copy(image.getInputStream(), Paths.get( + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(image.getInputStream(), Paths.get( "target/classes/static/" + DYNAMIC_IMAGES_ROOT + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
         }catch(IOException e){
             try {
-                File file = new File("target/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension);
+                File file = new File("target/classes/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension);
                 boolean isCreated = file.createNewFile();
                 if(!isCreated){
                     throw new IOException();
                 }
-                Files.copy(image.getInputStream(), Paths.get("target/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(image.getInputStream(), Paths.get("target/classes/static/" + DYNAMIC_IMAGES_ROOT  + user.getId() + extension), StandardCopyOption.REPLACE_EXISTING);
             }catch(IOException e2){
                 return "Error";
             }
         }
 
-        user.setAvatar(getImagePath(request, user.getId() + extension));
+        user.setAvatar(DYNAMIC_IMAGES_ROOT + user.getId() + extension);
         simpleUserRepo.save(user);
         return user.getAvatar();
     }
@@ -90,13 +95,5 @@ public class Personal{
         }
         SimpleUser user = opt.get();
         return user.getAvatar();
-    }
-
-    private String getImagePath(HttpServletRequest request, String uniqueName){
-        String address = request.getRequestURL().toString();
-        int port = request.getServerPort();
-
-        String hostAndPort = address.substring(0, address.indexOf(String.valueOf(port)) + String.valueOf(port).length()+1);
-        return hostAndPort + DYNAMIC_IMAGES_ROOT + uniqueName;
     }
 }
