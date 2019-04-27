@@ -19,14 +19,11 @@ public class EmailSender {
 
         String fileName = "target/classes/mailproperties.txt";
         File file = new File(fileName);
-        String way = file.getAbsolutePath();
-
-        /*ClassLoader classLoader = EmailSender.class.getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());*/
 
         try {
             properties.load(new FileInputStream(file));
             Session session = Session.getDefaultInstance(properties);
+            System.out.println(properties.getProperty("mail.smtp.socketFactory.port"));
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(sender));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
