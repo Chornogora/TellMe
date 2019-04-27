@@ -19,10 +19,6 @@ public class EmailSender {
 
         String fileName = "target/classes/mailproperties.txt";
         File file = new File(fileName);
-        String way = file.getAbsolutePath();
-
-        /*ClassLoader classLoader = EmailSender.class.getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());*/
 
         try {
             properties.load(new FileInputStream(file));
