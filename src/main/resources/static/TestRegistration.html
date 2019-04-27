@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<iframe name = "result" style="visibility: hidden">
+
+</iframe>
+
+<form method="POST" action="registration/register" onsubmit="showAnswer(this)" target="result">
+    <div id="registerDiv">
+        <label>
+            <span>login</span>
+            <input type="text" name="login">
+        </label>
+        <br/>
+        <label>
+            <span>password</span>
+            <input type="password" name="password">
+        </label>
+        <br/>
+        <label>
+            <span>email</span>
+            <input type="text" name="email">
+        </label>
+        <br/>
+        <label>
+            <span>birthday (можно не писать)</span>
+            <input type="date" name = "birthday">
+        </label>
+        <br/>
+        <input type="submit">
+    </div>
+</form>
+
+<form method="POST" action="registration/confirm" onsubmit="showCodeAnswer(this)">
+    <div id = "codeDiv" style="visibility: hidden">
+        <input type="text" name = "code" placeholder="Enter your code from email here">
+        <input type="submit">
+    </div>
+</form>
+
+<script>
+    function showAnswer(form){
+        let request = new XMLHttpRequest();
+        request.onload = () => {
+            if(request.responseText == "OK") {
+                document.getElementById("codeDiv").style.visibility = "visible";
+                document.getElementById("registerDiv").style.visibility = "hidden";
+            }
+            else
+                alert(request.responseText);
+        };
+
+        request.open(form.method, form.action, true);
+        request.send(new FormData(form));
+    }
+
+    function showCodeAnswer(form){
+        let request = new XMLHttpRequest();
+        request.onload = () => {alert(request.responseText)};
+        request.open(form.method, form.action, true);
+        request.send(new FormData(form));
+    }
+</script>
+
+</body>
+</html>

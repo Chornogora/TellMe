@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <!-- test setter -->
+
+        <form method="POST" action="personal/setAvatar" enctype="multipart/form-data">
+            <div id = "imageDiv" style="visibility: visible">
+                <input type="number" name = "id">
+                <input type="file" name = "avatar" width="70">
+                <input type="submit">
+            </div>
+        </form>
+
+        <!-- test getter -->
+        <br />
+        <span>~~~~~~~~~~~~~</span>
+        <br />
+
+        <img id = "userAvatar" style="position: absolute; left: 400px; width:200px"/>
+
+        <span>
+            set id here
+        </span>
+        <input type="number" id = "userId">
+
+        <button onclick = "setImage()">
+            Показать аву
+        </button>
+
+        <script>
+            function setImage() {
+                let request = new XMLHttpRequest();
+                request.onload = () => {
+                    document.getElementById("userAvatar").src = request.responseText;
+                };
+
+                let id = parseInt(document.getElementById("userId").value);
+                request.open("GET", "http://localhost:5000/personal/getAvatar?id=" + id, true);
+                request.send();
+            }
+        </script>
+
+    </body>
+</html>
