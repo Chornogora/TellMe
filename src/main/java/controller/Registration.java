@@ -33,7 +33,7 @@ public class Registration {
             @RequestParam("email") String email,
             @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday
     ) {
-        Properties properties = util.Property.getProperties("src/main/resources/mailBoxSecondConfig.properties");
+        Properties properties = util.Property.getInstance().getProperties("src/main/resources/mailBoxSecondConfig.properties");
         String sender = properties.getProperty("mailBox.Email");
         String pass = properties.getProperty("mailBox.Password");
 
