@@ -1,27 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="POST" action="administration/authorization/authorize" target="tgt" onsubmit="showAnswer(this)">
-    <input type="text" name="login">
-    <input type="password" name="password">
-    <input type="submit">
-</form>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
 
-<script>
-    function showAnswer(form){
-        let request = new XMLHttpRequest();
-        request.onload = () => {alert(request.responseText)};
-        request.open(form.method, form.action, true);
-        request.send(new FormData(form));
-    }
-</script>
+        <iframe name="tgt">
 
-<iframe name="tgt">
+        </iframe>
 
-</iframe>
-</body>
+        <!-- Admin authorization -->
+
+        <form method="POST" action="administration/authorization/authorize" target="tgt">
+            <input type="text" name="login">
+            <input type="password" name="password">
+            <input type="submit">
+        </form>
+
+
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Adding lesson -->
+
+        <h4>
+            Добавление урока
+        </h4>
+
+        <form method="POST" action="/administration/lesson/add" target="tgt">
+            <label>
+                <span>name</span>
+                <input type="text" name="name" />
+                <br/>
+            </label>
+            <label>
+                <span>points</span>
+                <input type="number" name="points" />
+                <br/>
+            </label>
+            <label>
+                <span>level</span>
+                <select name="level">
+                    <option>
+                        ELEMENTARY
+                    </option>
+                    <option>
+                        BEGINNER
+                    </option>
+                    <option>
+                        ELEMENTARY
+                    </option>
+                    <option>
+                        PREINTERMEDIATE
+                    </option>
+                    <option>
+                        INTERMEDIATE
+                    </option>
+                    <option>
+                        UPPERINTERMEDIATE
+                    </option>
+                    <option>
+                        ADVANCED
+                    </option>
+                    <option>
+                        MASTER
+                    </option>
+                </select>
+                <br/>
+            </label>
+            <label>
+                <input type="submit" />
+            </label>
+        </form>
+
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Updating lesson -->
+
+        <h4>
+            Обновление урока
+        </h4>
+        <form method="POST" action="/administration/lesson/update" target="tgt">
+            <label>
+                <span>name</span>
+                <input type="text" name="name" />
+                <br/>
+            </label>
+            <label>
+                <span>points</span>
+                <input type="number" name="points" />
+                <br/>
+            </label>
+            <label>
+                <span>level</span>
+                <select name="level">
+                    <option>
+                        ELEMENTARY
+                    </option>
+                    <option>
+                        BEGINNER
+                    </option>
+                    <option>
+                        ELEMENTARY
+                    </option>
+                    <option>
+                        PREINTERMEDIATE
+                    </option>
+                    <option>
+                        INTERMEDIATE
+                    </option>
+                    <option>
+                        UPPERINTERMEDIATE
+                    </option>
+                    <option>
+                        ADVANCED
+                    </option>
+                    <option>
+                        MASTER
+                    </option>
+                </select>
+                <br/>
+            </label>
+            <label>
+                <input type="submit" />
+            </label>
+        </form>
+
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Deleting lesson -->
+
+        <h4>
+            Удаление урока
+        </h4>
+        <form method="POST" action="/administration/lesson/delete" target="tgt">
+            <label>
+                <span>name</span>
+                <input type="text" name="name" />
+                <br/>
+            </label>
+            <input type = "submit">
+        </form>
+    </body>
 </html>
