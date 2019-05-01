@@ -1,4 +1,4 @@
-package controller;
+package controller.personal;
 
 import dao.SimpleUserRepo;
 import model.SimpleUser;

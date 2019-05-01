@@ -1,4 +1,4 @@
-package controller;
+package controller.personal;
 
 import dao.SimpleUserRepo;
 import model.SimpleUser;
@@ -94,6 +94,9 @@ public class Personal{
             throw new IllegalArgumentException("Invalid id");
         }
         SimpleUser user = opt.get();
+        if(user.getAvatar() == null){
+            return "images/anonymous.jpg";
+        }
         return user.getAvatar();
     }
 }

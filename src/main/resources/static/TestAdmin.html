@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="administration/authorization/authorize" target="tgt" onsubmit="showAnswer(this)">
+    <input type="text" name="login">
+    <input type="password" name="password">
+    <input type="submit">
+</form>
+
+<script>
+    function showAnswer(form){
+        let request = new XMLHttpRequest();
+        request.onload = () => {alert(request.responseText)};
+        request.open(form.method, form.action, true);
+        request.send(new FormData(form));
+    }
+</script>
+
+<iframe name="tgt">
+
+</iframe>
+</body>
+</html>
