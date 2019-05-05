@@ -1,0 +1,12 @@
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.csprojAssemblyReference.cache
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.csproj.CoreCompileInputs.cache
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.AssemblyInfoInputs.cache
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.AssemblyInfo.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.pdb
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.deps.json
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.pdb
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\XamlC.stamp
