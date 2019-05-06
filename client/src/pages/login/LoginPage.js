@@ -20,7 +20,7 @@ export const ComponentType = {
 Object.freeze(ComponentType);
 
 class LoginPage extends Component {
-  state = { componentType: ComponentType.forgetPassword };
+  state = { componentType: ComponentType.login };
 
   changeComponentType = componentType => {
     this.setState({ ...this.state, componentType });
@@ -31,7 +31,7 @@ class LoginPage extends Component {
       return (
         <div>
           {
-            
+            <LecturePage/>
             /* <SideBar />
           <Container className="main">
           <EditeProfileForm/>

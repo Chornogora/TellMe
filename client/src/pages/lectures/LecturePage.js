@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FirstSectionLecture from "./FifthSectionLection";
+import FirstSectionLecture from "./FirstSectionLecture";
 import SecondSectionLecture from "./SecondSectionLecture";
 import ThirdSectionLecture from "./ThirdSectionLecture";
 import ForthSectionLecture from "./ForthSectionLecture";
@@ -45,27 +45,27 @@ class LecturePage extends Component {
   render() {
     return (
       <div>
-        <div onClickFirstSectionLecture={this.onClickFirstSectionLecture.bind(this)}>
-          <h1>First section lecture</h1>
+        <div onClick={this.onClickFirstSectionLecture.bind(this)}>
+          <h1>First section lecture(click here)</h1>
         </div>
-        {this.state.showReplyFirst && <FifthSectionLecture />}
+        <div>{this.state.showReplyFirst && <FirstSectionLecture />}</div>
 
-        <div onSecondSectionLecture={this.onSecondSectionLecture.bind(this)}>
+        <div onClick={this.onSecondSectionLecture.bind(this)}>
           <h1>Second section lecture</h1>
         </div>
         {this.state.showReplySecond && <SecondSectionLecture />}
 
-        <div onThirdSectionLecture={this.onThirdSectionLecture.bind(this)}>
+        <div onClick={this.onThirdSectionLecture.bind(this)}>
           <h1>Third section lecture</h1>
         </div>
         {this.state.showReplyThird && <ThirdSectionLecture />}
 
-        <div onClickForthSectionLecture={this.onClickForthSectionLecture.bind(this)}>
+        <div onClick={this.onClickForthSectionLecture.bind(this)}>
           <h1>Forth section lecture</h1>
         </div>
         {this.state.showReplyForth && <ForthSectionLecture />}
 
-        <div onClickFifthSectionLecture={this.onClickFifthSectionLecture.bind(this)}>
+        <div onClick={this.onClickFifthSectionLecture.bind(this)}>
           <h1>Fifth section lecture</h1>
         </div>
         {this.state.showReplyFifth && <FifthSectionLecture />}
