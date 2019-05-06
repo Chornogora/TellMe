@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TellMe.SignUpPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Name="Header" BasedOn="{StaticResource SignSegoe}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"></Setter>
+                <Setter Property="FontSize" Value="26.18"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"></Setter>
+            </Style>
+            
+            
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout Style="{StaticResource MenuPage}">
+        <Button Text="Registration" Style="{StaticResource Header}"></Button>
+    </StackLayout>
+    
+</ContentPage>

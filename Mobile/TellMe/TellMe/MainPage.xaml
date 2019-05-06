@@ -7,24 +7,14 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <OnPlatform x:Key="SegoePrint" x:TypeArguments="x:String" Android="Fonts/segoeprb.ttf#Segoe Print"/>
-
-            <Style x:Key="HelloPage" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="#00CC99"></Setter>
-            </Style>
-
-            <Style x:Key="SignSegoe" TargetType="Button">
-                <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"></Setter>
-            </Style>
-
             <Style x:Key="HelloPageSign" BasedOn="{StaticResource SignSegoe}" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#CC0000"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
             </Style>
 
             <Style x:Key="HelloSign" BasedOn="{StaticResource HelloPageSign}" TargetType="Button">
-                <Setter Property="TextColor" Value="#FFFF00"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"></Setter>
                 <Setter Property="FontSize" Value="28"></Setter>
                 <Setter Property="Margin" Value="10.9, 52.7, 10.9, 0"></Setter>
                 <Setter Property="HeightRequest" Value="100"></Setter>
@@ -35,7 +25,7 @@
             </Style>
 
             <Style x:Key="AutorizationButton" BasedOn="{StaticResource SignSegoe, HelloPageSign}" TargetType="Button">
-                <Setter Property="TextColor" Value="#FFFFFF"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
                 <Setter Property="FontSize" Value="24"></Setter>
                 <Setter Property="Margin" Value="10.9, 0, 10.9, 0"></Setter>
                 <Setter Property="HorizontalOptions" Value="Fill"></Setter>
@@ -56,7 +46,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Style="{StaticResource HelloPage}">
+    <StackLayout Style="{StaticResource MenuPage}">
 
         <Button Text="Welcome to TellMe!" Style="{StaticResource HelloSign}"></Button>
 
@@ -66,7 +56,7 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
             
-            <Button Text="Sign Up" Style="{StaticResource AutorizationButton}" Grid.Column="0"></Button>
+            <Button x:Name="SignUpButton" Text="Sign Up" Style="{StaticResource AutorizationButton}" Grid.Column="0"></Button>
             <Button Text="Log In" Style="{StaticResource AutorizationButton}" Grid.Column="1"></Button>
         </Grid>
 

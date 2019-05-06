@@ -6,16 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace TellMe
-{
+namespace TellMe {
+
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(true)]
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
+    public partial class MainPage : ContentPage {
+
+        public MainPage() {
+
             InitializeComponent();
+            SignUpButton.Clicked += SignUpButton_Clicked;
+        }
+
+        private void SignUpButton_Clicked(object sender, EventArgs e) {
+
+            App.Current.MainPage = new SignUpPage();//make DI-container
         }
     }
 }

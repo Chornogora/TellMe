@@ -10,3 +10,4 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\Tel
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.pdb
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\SignUpPage.xaml.g.cs

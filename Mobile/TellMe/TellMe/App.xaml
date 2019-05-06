@@ -3,6 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TellMe.App">
     <Application.Resources>
+        <ResourceDictionary>
 
+            <OnPlatform x:Key="SegoePrint" x:TypeArguments="x:String" Android="Fonts/segoeprb.ttf#Segoe Print"/>
+            
+            <Color x:Key="RedBrown">#CC0000</Color>
+            <Color x:Key="Yellow">#FFFF00</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="BackgroundGreen">#00CC99</Color>
+            
+
+            <Style x:Key="MenuPage" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundGreen}"></Setter>
+            </Style>
+
+            <Style x:Key="SignSegoe" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"></Setter>
+            </Style>
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
