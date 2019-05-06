@@ -200,3 +200,5 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_ResolveLibraryProjectImports.stamp
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_CompileToDalvik.stamp
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_GeneratePackageManagerJava.stamp
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\res\drawable\help.png
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\res\drawable\info.png
