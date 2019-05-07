@@ -4,16 +4,20 @@ import SecondSectionLecture from "./SecondSectionLecture";
 import ThirdSectionLecture from "./ThirdSectionLecture";
 import ForthSectionLecture from "./ForthSectionLecture";
 import FifthSectionLecture from "./FifthSectionLection";
+import { ComponentTypeMenu } from "../profile/ProfilePage";
+// import SideBar from "../nav/SideBar";
+
 
 class LecturePage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showReplyFirst: false,
       showReplySecond: false,
       showReplyThird: false,
       showReplyForth: false,
-      showReplyFifth: false
+      showReplyFifth: false,
+      componentTypeMenu: "lectures"
     };
   }
 
@@ -44,7 +48,31 @@ class LecturePage extends Component {
 
   render() {
     return (
+      
       <div>
+        
+        <div
+          onClick={() =>
+            this.props.onChangeComponentType(ComponentTypeMenu.lectures)
+          }
+        >
+          <h1>Lectures(click here)</h1>
+        </div>
+        <div
+          onClick={() =>
+            this.props.onChangeComponentType(ComponentTypeMenu.profile)
+          }
+        >
+          <h1>Profile(click here)</h1>
+        </div>
+        <div
+          onClick={() =>
+            this.props.onChangeComponentType(ComponentTypeMenu.tournaments)
+          }
+        >
+          <h1>Tournaments(click here)</h1>
+        </div>
+
         <div onClick={this.onClickFirstSectionLecture.bind(this)}>
           <h1>First section lecture(click here)</h1>
         </div>

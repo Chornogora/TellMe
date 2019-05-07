@@ -57,6 +57,7 @@ class Login extends Component {
       .then(response => {
         console.log(response);
       });
+      this.props.onChangeComponentType(ComponentType.profile)
   }
 
   render() {

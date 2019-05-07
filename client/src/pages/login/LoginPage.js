@@ -5,7 +5,9 @@ import SignUp from "./SignUp";
 import ForgetPassword from "./ForgetPassword";
 import AuthorizationPage from "./AuthorizationPage";
 import LecturePage from "../lectures/LecturePage";
-// import SideBar from "../nav/SideBar";
+//import Menu from "../nav/Menu";
+import ProfilePage from "../profile/ProfilePage";
+import SideBar from "../nav/SideBar";
 // import { Container } from "semantic-ui-react";
 // import EventDashboard from "../../events/EventDashboard";
 // import EditeProfileForm from "../profile/EditeProfileForm";
@@ -15,7 +17,8 @@ export const ComponentType = {
   login: 1,
   signUp: 2,
   forgetPassword: 3,
-  authorization: 4
+  authorization: 4,
+  profile: 5
 };
 Object.freeze(ComponentType);
 
@@ -30,13 +33,6 @@ class LoginPage extends Component {
     if (this.state.componentType === ComponentType.login) {
       return (
         <div>
-          {
-            <LecturePage/>
-            /* <SideBar />
-          <Container className="main">
-          <EditeProfileForm/>
-          <PhotosPage/>
-          </Container> */}
           <Login onChangeComponentType={this.changeComponentType} />
         </div>
       );
@@ -47,8 +43,10 @@ class LoginPage extends Component {
         <ForgetPassword onChangeComponentType={this.changeComponentType} />
       );
     } else if (this.state.componentType === ComponentType.authorization) {
-      return <AuthorizationPage />;
-    }
+    return <AuthorizationPage />;
+    } else if (this.state.componentType === ComponentType.profile) {
+      return <ProfilePage />;
+    } 
   }
 }
 

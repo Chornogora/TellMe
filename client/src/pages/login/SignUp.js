@@ -14,7 +14,8 @@ class SignUp extends Component {
       email: "",
       password: "",
       login: "",
-      birthday: ""
+      birthday: "",
+      componentType: 'login'
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);

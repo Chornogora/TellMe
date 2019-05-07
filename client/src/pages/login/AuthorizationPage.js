@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Input from "../../components/Input";
 import Submit from "../../components/Submit";
 import axios from "axios";
+//         import Cookies from "universal-cookie";
+// import { useCookies } from "react-cookie";
 
 class AuthorizationPage extends Component {
   constructor(props) {
@@ -27,6 +29,8 @@ class AuthorizationPage extends Component {
       .then(response => {
         debugger;
         console.log(response);
+        //         import Cookies from "universal-cookie";
+        // import { useCookies } from "react-cookie";
       })
       .catch(r => {
         debugger;

@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-//import "./Login.css";
-import ProfilePage from "../profile/ProfilePage";
-import LecturePage from "../lectures/LecturePage";
-import TournamentPage from "../tournaments/TournamentPage";
+import Profile from "../profile/Profile";
 import { ComponentTypeMenu } from "../profile/ProfilePage";
 
-class SideBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      componentTypeMenu: "lectures"
-    };
-  }
-
+class TournamentPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          componentTypeMenu: "lectures"
+        };
+      }
   render() {
     return (
+        
       <div>
+         
+        <div>
         <div
           onClick={() =>
             this.props.onChangeComponentType(ComponentTypeMenu.lectures)
@@ -38,8 +37,10 @@ class SideBar extends Component {
           <h1>Tournaments(click here)</h1>
         </div>
       </div>
+        nkljhboihoih
+      </div>
     );
   }
 }
 
-export default SideBar;
+export default TournamentPage;

@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
-import './Login.css';
-import Login from './Login';
-import SignUp from './SignUp';
-import ForgetPassword from './ForgetPassword';
+import React, { Component } from "react";
+import LecturePage from "../lectures/LecturePage";
+import TournamentPage from "../tournaments/TournamentPage";
+import Profile from "./Profile";
 
-export const ComponentType = { "login": 1, "signUp": 2, "forgetPassword": 3 }
-Object.freeze(ComponentType);
+export const ComponentTypeMenu = {
+  profile: 1,
+  lectures: 2,
+  tournaments: 3
+};
+Object.freeze(ComponentTypeMenu);
 
 class ProfilePage extends Component {
-  state = { componentType: ComponentType.forgetPassword };
+  state = { componentTypeMenu: ComponentTypeMenu.profile };
 
-  changeComponentType = (componentType) => {
-    this.setState({ ...this.state, componentType });
-  }
+  changeComponentTypeMenu = componentTypeMenu => {
+    this.setState({ ...this.state, componentTypeMenu });
+  };
 
   render() {
-    
-    if (this.state.componentType === ComponentType.login) {
+    if (this.state.componentTypeMenu === ComponentTypeMenu.profile) {
       return (
-        <Login onChangeComponentType={this.changeComponentType}/>
-      )
-    }
-    else if (this.state.componentType === ComponentType.signUp) {
+        <div>
+          <Profile onChangeComponentType={this.changeComponentTypeMenu} />
+        </div>
+      );
+    } else if (this.state.componentTypeMenu === ComponentTypeMenu.lectures) {
+      return <LecturePage onChangeComponentType={this.changeComponentTypeMenu} />;
+    } else if (this.state.componentTypeMenu === ComponentTypeMenu.tournaments) {
       return (
-        <SignUp onChangeComponentType={this.changeComponentType}/>
-      )
+        <TournamentPage onChangeComponentType={this.changeComponentTypeMenu} />
+      );
     }
-    else if (this.state.componentType === ComponentType.forgetPassword) {
-      return (
-        <ForgetPassword  onChangeComponentType={this.changeComponentType}/>
-      )
-    }
-  
-}
+  }
 }
 
 export default ProfilePage;
