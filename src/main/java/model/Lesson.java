@@ -72,6 +72,10 @@ public class Lesson {
         this.tasks = tasks;
     }
 
+    public void addTask(Task task){
+        tasks.add(task);
+    }
+
     public Levels getLevel() {
         return level;
     }
@@ -90,5 +94,9 @@ public class Lesson {
 
     public boolean isOpened() {
         return isOpened;
+    }
+
+    public int getMax(){
+        return tasks.size();
     }
 }

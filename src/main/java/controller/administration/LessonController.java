@@ -3,10 +3,7 @@ package controller.administration;
 import dao.LessonRepo;
 import model.Lesson;
 import model.Levels;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/administration/lesson")
@@ -71,6 +68,32 @@ public class LessonController {
         return "OK";
     }
 
+    @PostMapping("/open")
+    private String openLesson(@RequestParam("name") String name){
+        Lesson existLesson = lessonRepo.findByName(name);
+        String status = getStatus(existLesson);
+        if(!status.equals("OK")){
+            return status;
+        }
+
+        existLesson.open();
+        lessonRepo.save(existLesson);
+        return("OK");
+    }
+
+    @PostMapping("/close")
+    private String closeLesson(@RequestParam("name") String name){
+        Lesson existLesson = lessonRepo.findByName(name);
+        String status = getStatus(existLesson);
+        if(!status.equals("OK")){
+            return status;
+        }
+
+        existLesson.close();
+        lessonRepo.save(existLesson);
+        return("OK");
+    }
+
     private String getStatus(Lesson existLesson){
         if(existLesson == null){
             return "Not exists";
@@ -81,4 +104,5 @@ public class LessonController {
         }
         return "OK";
     }
+
 }

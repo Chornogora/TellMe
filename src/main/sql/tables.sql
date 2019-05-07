@@ -184,4 +184,7 @@ alter table notifications
 
 alter table lessons
   add lesson_opened boolean default false not null;
+
+alter table tests
+  add test_type varchar(20) not null;
 -- </Tables creating>
