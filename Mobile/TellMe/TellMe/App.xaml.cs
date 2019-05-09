@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Android.Content.Res;
+
 namespace TellMe
 {
     public partial class App : Application {

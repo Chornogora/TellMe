@@ -33,6 +33,7 @@ namespace TellMe.Droid {
                 DependencyService.Register<LessonsPage>();
 
                 DependencyService.Register<DataProvider>();
+                DependencyService.Register<Config>();
             });
 
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -42,6 +43,7 @@ namespace TellMe.Droid {
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             LoadApplication(new App());
         }
 

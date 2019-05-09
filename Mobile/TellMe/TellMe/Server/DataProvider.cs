@@ -15,14 +15,15 @@ namespace TellMe.Server {
 
     public class DataProvider : IDataProvider {
 
-        UTF8Encoding UTF8Enc = DependencyService.Get<UTF8Encoding>();
-        ASCIIEncoding ASCIIEnc = DependencyService.Get<ASCIIEncoding>();
-
+        private static UTF8Encoding UTF8Enc = DependencyService.Get<UTF8Encoding>();
+        private static ASCIIEncoding ASCIIEnc = DependencyService.Get<ASCIIEncoding>();
+        private static Config Configuration = DependencyService.Get<Config>();
+        
         private const string StrNull = "null";
         private const string QueryContentType = "application/x-www-form-urlencoded";
 
         //<REGISTRATION>
-        private const string SignUpPath = "https://tellmeprod.herokuapp.com/registration/register";
+        private readonly string SignUpPath = Configuration["SignUpPath"];
         private const string LoginKey = "login";
         private const string PasswordKey = "password";
         private const string EmailKey = "email";
@@ -31,13 +32,13 @@ namespace TellMe.Server {
         //</REGISTRATION>
 
         //<ACTIVATION>
-        private const string ActivatePath = "https://tellmeprod.herokuapp.com/registration/confirm";
+        private readonly string ActivatePath = Configuration["ActivatePath"];
         private const string CodeKey = "code";
         private const string InvalidCodeResponse = "Invalid code";
         //</ACTIVATION>
 
         //<AUTORIZATION>
-        private const string LogInPath = "https://tellmeprod.herokuapp.com/authorization/authorize";
+        private readonly string LogInPath = Configuration["LogInPath"];
         private const string InvalidLoginResponse = "Invalid login";
         private const string InvalidPasswordResponse = "Invalid password";
         //</AUTORIZATION>

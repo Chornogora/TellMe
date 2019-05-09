@@ -1,0 +1,5 @@
+﻿{
+  "ActivatePath": "https://tellmeprod.herokuapp.com/registration/confirm",
+  "LogInPath": "https://tellmeprod.herokuapp.com/authorization/authorize",
+  "SignUpPath": "https://tellmeprod.herokuapp.com/registration/register"
+}
