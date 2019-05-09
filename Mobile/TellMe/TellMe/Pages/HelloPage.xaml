@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TellMe"
+             x:Class="TellMe.HelloPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="HelloPageSign" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="HelloSign" BasedOn="{StaticResource HelloPageSign}" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="Margin" Value="10.9, 52.7, 10.9, 0"/>
+                <Setter Property="HeightRequest" Value="100"/>
+            </Style>
+
+            <Style x:Key="AutorizationButtonGrid" TargetType="Grid">
+                <Setter Property="Margin" Value="0, 40, 0, 0"/>
+            </Style>
+
+            <Style x:Key="AutorizationButton" BasedOn="{StaticResource SignSegoeButton, HelloPageSign}" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Margin" Value="10.9, 0, 10.9, 0"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="HeightRequest" Value="100"/>
+            </Style>
+
+            <Style x:Key="HelpInfoButtonGrid" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="Margin" Value="10.9, 12.72, 10.9, 12.72"/>
+            </Style>
+
+            <Style x:Key="HelpInfoButton" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Style="{StaticResource MenuPage}">
+
+        <Button Text="Welcome to TellMe!" Style="{StaticResource HelloSign}"></Button>
+
+        <Grid Style="{StaticResource AutorizationButtonGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="SignUpButton" Text="Sign Up" Style="{StaticResource AutorizationButton}" Grid.Column="0"/>
+            <Button x:Name="LogInButton" Text="Log In" Style="{StaticResource AutorizationButton}" Grid.Column="1"/>
+        </Grid>
+
+        <Grid Style="{StaticResource HelpInfoButtonGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="help.png" Grid.Row="0" Grid.Column="0" Style="{StaticResource HelpInfoButton}" 
+                         WidthRequest="86.54" HorizontalOptions="Start"/>
+            <ImageButton Source="info.png" Grid.Row="0" Grid.Column="1" Style="{StaticResource HelpInfoButton}" 
+                         WidthRequest="61.81" HorizontalOptions="End"/>
+        </Grid>
+        
+    </StackLayout>
+    
+</ContentPage>
+    

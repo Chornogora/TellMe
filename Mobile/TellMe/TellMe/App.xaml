@@ -6,21 +6,25 @@
         <ResourceDictionary>
 
             <OnPlatform x:Key="SegoePrint" x:TypeArguments="x:String" Android="Fonts/segoeprb.ttf#Segoe Print"/>
-            
+
             <Color x:Key="RedBrown">#CC0000</Color>
             <Color x:Key="Yellow">#FFFF00</Color>
             <Color x:Key="White">#FFFFFF</Color>
             <Color x:Key="BackgroundGreen">#00CC99</Color>
-            
+
 
             <Style x:Key="MenuPage" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundGreen}"></Setter>
             </Style>
 
-            <Style x:Key="SignSegoe" TargetType="Button">
+            <Style x:Key="SignSegoeButton" TargetType="Button">
                 <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"></Setter>
             </Style>
-            
+
+            <Style x:Key="SignSegoeLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"></Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

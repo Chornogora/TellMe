@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TellMe.SignUpPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SignUpGrid" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"/>
+                <Setter Property="RowSpacing" Value="0"/>
+            </Style>
+
+            <Style x:Key="Form" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"/>
+                <Setter Property="RowSpacing" Value="5"/>
+                <Setter Property="Margin" Value="10.9, 10, 10.9, 10"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+
+            <Style x:Key="Label" BasedOn="{StaticResource SignSegoeLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="14.54"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+            </Style>
+
+            <Style x:Key="Input" TargetType="Entry">
+                <Setter Property="FontSize" Value="17.45"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Margin" Value="12.36, 0, 0, 0"/>
+            </Style>
+
+            <Style x:Key="DateInput" TargetType="DatePicker">
+                <Setter Property="FontSize" Value="17.45"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Margin" Value="12.36, 0, 0, 0"/>
+            </Style>
+
+            <Style x:Key="Required" TargetType="Label">
+                <Setter Property="FontSize" Value="26.18"/>
+                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="Margin" Value="5, 0, 0, 0"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Header" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="FontSize" Value="26.18"/>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+                <Setter Property="HeightRequest" Value="72.72"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="CornerRadius" Value="0"/>
+            </Style>
+
+            <Style x:Key="ReturnButton" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="HeightRequest" Value="72.72"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Padding" Value="12.36, 22.9, 12.36, 22.9"/>
+                <Setter Property="CornerRadius" Value="0"/>
+            </Style>
+
+            <Style x:Key="SignUpButton" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="CornerRadius" Value="0"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout Style="{StaticResource MenuPage}">
+        <Grid x:Name="HeaderGrid" Style="{StaticResource SignUpGrid}">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13.148*"/>
+                <ColumnDefinition Width="86.852*"/>
+            </Grid.ColumnDefinitions>
+
+            <ImageButton x:Name="ReturnButton" Source="returnArrow.png" 
+                         Style="{StaticResource ReturnButton}" Grid.Column="0"/>
+
+            <Button Text="Registration" Style="{StaticResource Header}" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid x:Name="Form" Style="{StaticResource Form}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40.57*"/>
+                <ColumnDefinition Width="50.37*"/>
+                <ColumnDefinition Width="5.92*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Style="{StaticResource Label}" Text="Login:" Grid.Row="0" Grid.Column="0"/>
+            <Entry x:Name="Login" Style="{StaticResource Input}" Grid.Row="0" Grid.Column="1"/>
+            <Label Style="{StaticResource Required}" Text="*" Grid.Row="0" Grid.Column="2"/>
+            
+            <Label Style="{StaticResource Label}" Text="Password:" Grid.Row="1" Grid.Column="0"/>
+            <Entry x:Name="Password" Style="{StaticResource Input}" IsPassword="True" Grid.Row="1" Grid.Column="1"/>
+            <Label Style="{StaticResource Required}" Text="*" Grid.Row="1" Grid.Column="2"/>
+
+            <Label Style="{StaticResource Label}" Text="Confirm password:" Grid.Row="2" Grid.Column="0"/>
+            <Entry x:Name="PasswordConfirm" Style="{StaticResource Input}" IsPassword="True" Grid.Row="2" Grid.Column="1"/>
+            <Label Style="{StaticResource Required}" Text="*" Grid.Row="2" Grid.Column="2"/>
+
+            <Label Style="{StaticResource Label}" Text="Email:" Grid.Row="3" Grid.Column="0"/>
+            <Entry x:Name="Email" Style="{StaticResource Input}" Grid.Row="3" Grid.Column="1"/>
+            <Label Style="{StaticResource Required}" Text="*" Grid.Row="3" Grid.Column="2"/>
+
+            <Label Style="{StaticResource Label}" Text="Birth date:" Grid.Row="4" Grid.Column="0"/>
+            <DatePicker x:Name="Birth" Style="{StaticResource DateInput}" Grid.Row="4" Grid.Column="1"/>
+
+        </Grid>
+
+        <Button x:Name="SignUpButton" Text="Sign Up" Style="{StaticResource SignUpButton}" />
+    </StackLayout>
+    
+</ContentPage>

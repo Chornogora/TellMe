@@ -11,13 +11,15 @@
     <item name="windowActionBar">false</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
     <!-- colorPrimary is used for the default action bar background -->
-    <item name="colorPrimary">#2196F3</item>
-    <!-- colorPrimaryDark is used for the status bar -->
-    <item name="colorPrimaryDark">#1976D2</item>
-    <!-- colorAccent is used as the default value for colorControlActivated
+    <item name="colorPrimary">#FFFFFF</item>
+    <!-- colorPrimaryDark is used for the status bar #2196F3 -->
+    <item name="colorPrimaryDark">#CC0000</item>
+    <!-- colorAccent is used as the default value for colorControlActivated #1976D2
          which is used to tint widgets -->
-    <item name="colorAccent">#FF4081</item>
-    <!-- You can also set colorControlNormal, colorControlActivated
+    <item name="colorAccent">#FF0000</item>
+
+    <item name="colorControlNormal">#000000</item>
+    <!-- You can also set colorControlNormal, colorControlActivated #FF4081
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
 
@@ -26,6 +28,7 @@
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">#FF4081</item>
+    <item name="colorAccent">#CC0000</item>
+    <!--#FF4081-->
   </style>
 </resources>

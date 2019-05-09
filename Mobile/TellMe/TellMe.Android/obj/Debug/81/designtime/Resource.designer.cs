@@ -4953,6 +4953,12 @@ namespace TellMe.Droid
 			// aapt resource value: 0x7F09000C
 			public const int notify_panel_notification_icon_bg = 2131296268;
 			
+			// aapt resource value: 0x7F010004
+			public const int @return = 2130771972;
+			
+			// aapt resource value: 0x7F010005
+			public const int returnArrow = 2130771973;
+			
 			// aapt resource value: 0x7F090069
 			public const int tooltip_frame_dark = 2131296361;
 			
