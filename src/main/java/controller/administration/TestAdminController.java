@@ -2,8 +2,10 @@ package controller.administration;
 
 import dao.LessonRepo;
 import dao.TestRepo;
+import dao.VariantRepo;
 import model.Lesson;
 import model.Test;
+import model.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +18,13 @@ import java.util.Optional;
 @RequestMapping("/administration/test")
 public class TestAdminController extends TaskAdminController{
     private final TestRepo testRepo;
+    private final VariantRepo variantRepo;
 
     @Autowired
-    public TestAdminController(LessonRepo lesRep, TestRepo rep){
+    public TestAdminController(LessonRepo lesRep, TestRepo rep, VariantRepo vRep){
         super(lesRep);
         testRepo = rep;
+        variantRepo = vRep;
     }
 
     @Override
@@ -62,5 +66,23 @@ public class TestAdminController extends TaskAdminController{
     @Override
     public String add(@RequestParam("lessonName") long lessonId) {
         return null;
+    }
+
+    @PostMapping("/addVariant")
+    public String addVariant(@RequestParam("lessonName") long grTheoryId,
+                             @RequestParam("number") int num,
+                             @RequestParam("rightVariant") String right,
+                             @RequestParam("text") String text){
+        Optional<Test> opt = testRepo.findById(grTheoryId);
+        if(!opt.isPresent()){
+            return "Incorrect id";
+        }
+
+        Test test = opt.get();
+        Variant variant = new Variant(num, right, text);
+        test.addVariant(variant);
+        variantRepo.save(variant);
+
+        return "OK";
     }
 }
