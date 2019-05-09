@@ -7,6 +7,8 @@ import model.LexicalTheory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/administration/lexical")
 public class LexicalTheoryAdminController extends TaskAdminController{
@@ -19,8 +21,9 @@ public class LexicalTheoryAdminController extends TaskAdminController{
         LexicalRepo = rep;
     }
 
+    @Override
     @PostMapping("/add")
-    public String addLexicalTheory(@RequestParam("lessonName") long lessonId, @RequestParam("name") String name){
+    public String add(@RequestParam("lessonName") long lessonId){
         Lesson lesson;
         try {
             lesson = getLesson(lessonId);
@@ -31,6 +34,18 @@ public class LexicalTheoryAdminController extends TaskAdminController{
         LexicalTheory lt = new LexicalTheory(lesson.getMax()+1);
         lesson.addTask(lt);
         LexicalRepo.save(lt);
+        return "OK";
+    }
+
+    @Override
+    @PostMapping("/delete")
+    public String delete(@RequestParam("lessonName") long taskId){
+        Optional<LexicalTheory> opt = LexicalRepo.findById(taskId);
+        if(!opt.isPresent()){
+            return "Incorrect id";
+        }
+
+        LexicalRepo.delete(opt.get());
         return "OK";
     }
 }

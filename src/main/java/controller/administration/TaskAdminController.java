@@ -2,23 +2,31 @@ package controller.administration;
 
 import dao.LessonRepo;
 import model.Lesson;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/administration/grammar")
 public abstract class TaskAdminController {
 
-    protected final LessonRepo lessonRepo;
+    private final LessonRepo lessonRepo;
 
     public TaskAdminController(LessonRepo rp){
         lessonRepo = rp;
     }
 
-    public Lesson getLesson(long lessonId){
+    Lesson getLesson(long lessonId){
         Optional<Lesson> opt = lessonRepo.findById(lessonId);
         if(!opt.isPresent()){
             throw new IllegalArgumentException();
         }
         return opt.get();
     }
+
+    public abstract String add(long lessonId);
+
+    public abstract String delete(long taskId);
 
 }
