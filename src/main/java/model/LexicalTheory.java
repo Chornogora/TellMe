@@ -24,7 +24,7 @@ public class LexicalTheory extends Task{
         return words;
     }
 
-    public void setWords(List<Word> words) {
-        this.words = words;
+    public void addWord(Word word) {
+        this.words.add(word);
     }
 }

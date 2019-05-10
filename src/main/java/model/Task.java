@@ -26,6 +26,7 @@ public abstract class Task {
     public Task(int number){
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }

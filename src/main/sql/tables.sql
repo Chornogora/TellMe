@@ -182,4 +182,10 @@ alter table notifications
   add constraint notifications_users_user_id_fk
     foreign key (user_id) references users;
 
+alter table lessons
+  add lesson_opened boolean default false not null;
+
+alter table tests
+  add test_type varchar(20) not null;
+
 -- </Tables creating>
