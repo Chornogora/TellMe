@@ -29,7 +29,7 @@ public class TestAdminController extends TaskAdminController{
 
     @Override
     @PostMapping("/delete")
-    public String delete(@RequestParam("lessonName") long taskId) {
+    public String delete(@RequestParam("lessonId") long taskId) {
         Optional<Test> opt = testRepo.findById(taskId);
         if(!opt.isPresent()){
             return "Incorrect id";
@@ -40,7 +40,7 @@ public class TestAdminController extends TaskAdminController{
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("lessonName") long lessonId,
+    public String add(@RequestParam("lessonId") long lessonId,
                       @RequestParam("picture") String picture,
                       @RequestParam("text") String text,
                       @RequestParam("type") String type){
@@ -69,7 +69,7 @@ public class TestAdminController extends TaskAdminController{
     }
 
     @PostMapping("/addVariant")
-    public String addVariant(@RequestParam("lessonName") long grTheoryId,
+    public String addVariant(@RequestParam("taskId") long grTheoryId,
                              @RequestParam("number") int num,
                              @RequestParam("rightVariant") String right,
                              @RequestParam("text") String text){

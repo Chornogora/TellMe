@@ -27,7 +27,7 @@ public class LexicalTheoryAdminController extends TaskAdminController{
 
     @Override
     @PostMapping("/add")
-    public String add(@RequestParam("lessonName") long lessonId){
+    public String add(@RequestParam("lessonId") long lessonId){
         Lesson lesson;
         try {
             lesson = getLesson(lessonId);
@@ -43,7 +43,7 @@ public class LexicalTheoryAdminController extends TaskAdminController{
 
     @Override
     @PostMapping("/delete")
-    public String delete(@RequestParam("lessonName") long taskId){
+    public String delete(@RequestParam("taskId") long taskId){
         Optional<LexicalTheory> opt = LexicalRepo.findById(taskId);
         if(!opt.isPresent()){
             return "Incorrect id";
@@ -54,7 +54,7 @@ public class LexicalTheoryAdminController extends TaskAdminController{
     }
 
     @PostMapping("/addWord")
-    public String addWord(@RequestParam("lessonName") long lexTheoryId,
+    public String addWord(@RequestParam("taskId") long lexTheoryId,
                           @RequestParam("wordName") String name,
                           @RequestParam("description") String desc,
                           @RequestParam("translation") String trans,

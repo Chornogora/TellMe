@@ -20,6 +20,6 @@ public class PersonalAuthorization extends AbstractAuthorization {
     @PostMapping("/authorize")
     public String authorize(@RequestParam("login") String login, @RequestParam("password") String password){
         SimpleUser user = simpleUserRepo.findByLogin(login);
-        return authorize(user, password);
+        return super.authorize(user, password);
     }
 }
