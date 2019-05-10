@@ -24,8 +24,25 @@ public class GrammarTheoryAdminController extends TaskAdminController {
     }
 
     @Override
+
+    public String add(long lessonId) {
+        return null;
+    }
+
+    @Override
+    @PostMapping("/delete")
+    public String delete(@RequestParam("taskId") long taskId){
+        Optional<GrammarTheory> opt = GrammarRepo.findById(taskId);
+        if(!opt.isPresent()){
+            return "Incorrect id";
+        }
+
+        GrammarRepo.delete(opt.get());
+        return "OK";
+    }
+
     @PostMapping("/add")
-    public String add(@RequestParam("lessonName") long lessonId) {
+    public String add(@RequestParam("lessonId") long lessonId, @RequestParam("content") String content){
         Lesson lesson;
         try {
             lesson = getLesson(lessonId);
@@ -33,21 +50,9 @@ public class GrammarTheoryAdminController extends TaskAdminController {
             return "Incorrect id";
         }
 
-        GrammarTheory gr = new GrammarTheory(lesson.getMax() + 1);
+        GrammarTheory gr = new GrammarTheory(lesson.getMax() + 1, content);
         lesson.addTask(gr);
         GrammarRepo.save(gr);
-        return "OK";
-    }
-
-    @Override
-    @PostMapping("/delete")
-    public String delete(@RequestParam("lessonName") long taskId){
-        Optional<GrammarTheory> opt = GrammarRepo.findById(taskId);
-        if(!opt.isPresent()){
-            return "Incorrect id";
-        }
-
-        GrammarRepo.delete(opt.get());
         return "OK";
     }
 }

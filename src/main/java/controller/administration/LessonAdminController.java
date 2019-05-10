@@ -62,6 +62,10 @@ public class LessonAdminController {
             return status;
         }
 
+        if(existLesson.isOpened()){
+            return "Opened";
+        }
+
         existLesson.setLevel(Levels.valueOf(level));
         existLesson.setPoints(points);
         lessonRepo.save(existLesson);
@@ -99,9 +103,6 @@ public class LessonAdminController {
             return "Not exists";
         }
 
-        if(existLesson.isOpened()){
-            return "Opened";
-        }
         return "OK";
     }
 

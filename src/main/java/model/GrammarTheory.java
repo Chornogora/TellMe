@@ -12,7 +12,7 @@ public class GrammarTheory extends Task{
     @Column(name = "grtheory_content")
     private String content;
 
-    public GrammarTheory(int number){
+    public GrammarTheory(int number, String content){
         super(number);
         this.content = content;
     }
