@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/levels")
-public class Levels {
+@RequestMapping("/level")
+public class LevelsController {
 
     @GetMapping("/get")
     public String getLevels(){

@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/administration/lesson")
-public class LessonController {
+public class LessonAdminController {
 
     private LessonRepo lessonRepo;
 
-    public LessonController(LessonRepo repo){
+    public LessonAdminController(LessonRepo repo){
         this.lessonRepo = repo;
     }
 

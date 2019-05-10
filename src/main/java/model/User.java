@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -13,6 +15,7 @@ public abstract class User {
     @Column(name="user_login")
     private String login;
 
+    @Expose
     @Column(name="user_password")
     private String password;
 

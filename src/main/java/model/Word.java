@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,6 +26,7 @@ public class Word {
     @Column(name = "word_translation")
     private String translation;
 
+    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private LexicalTheory theory;
