@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Android.App;
@@ -19,22 +20,26 @@ namespace TellMe.Droid {
     [Activity(Label = "TellMe", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
+
+        private void InitServices() {
+
+            DependencyService.Register<DataProvider>();
+            DependencyService.Register<ASCIIEncoding>();
+            DependencyService.Register<UTF8Encoding>();
+
+            DependencyService.Register<HelloPage>();
+            DependencyService.Register<SignUpPage>();
+            DependencyService.Register<LogInPage>();
+            DependencyService.Register<ActivationPage>();
+            DependencyService.Register<LessonsPage>();
+
+            DependencyService.Register<Config>();
+        }
+
         protected override void OnCreate(Bundle savedInstanceState) {
 
-            Task.Run(() => {
-
-                DependencyService.Register<ASCIIEncoding>();
-                DependencyService.Register<UTF8Encoding>();
-
-                DependencyService.Register<HelloPage>();
-                DependencyService.Register<SignUpPage>();
-                DependencyService.Register<LogInPage>();
-                DependencyService.Register<ActivationPage>();
-                DependencyService.Register<LessonsPage>();
-
-                DependencyService.Register<DataProvider>();
-                DependencyService.Register<Config>();
-            });
+            Thread Init = new Thread(InitServices);
+            Init.Start();
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;

@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Threading;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Android.Content.Res;
 
+using TellMe.Server;
+
 namespace TellMe
 {
     public partial class App : Application {
+
+        public static void Close()
+        {
+            Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+        }
 
         public App()
         {

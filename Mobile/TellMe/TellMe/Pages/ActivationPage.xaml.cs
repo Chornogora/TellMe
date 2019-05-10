@@ -17,21 +17,33 @@ namespace TellMe
         public ActivationPage()
         {            
             InitializeComponent();
-
+            
             ActivationButton.Clicked += ActivationButton_Clicked;
         }
 
-        private void ActivationButton_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                DependencyService.Get<DataProvider>().ActivateAccount(Code.Text);
-                DisplayAlert("Activation successful", "Please, log in", "OK");
-                App.Current.MainPage = DependencyService.Get<HelloPage>();
+        protected override void OnAppearing() => DisplayAlert("Registration successful!", "Please check your email for an activation code", "OK");
+
+        private void ActivationButton_Clicked(object sender, EventArgs e) => ActivateAsync(Code.Text);
+
+        private async void ActivateAsync(string Code) {
+
+            LoadingHole.IsRunning = true;
+
+            try {
+
+                await Task.Run(() => {
+
+                    DependencyService.Get<DataProvider>().ActivateAccount(Code);
+                    App.Current.MainPage = DependencyService.Get<HelloPage>();
+                });
             }
-            catch(InvalidCodeException)
-            {
-                DisplayAlert("Activation failed", "Activation code was wrong", "OK");
+            catch (InvalidCodeException) {
+
+                await DisplayAlert("Activation failed", "Activation code was wrong", "OK");
+            }
+            finally {
+
+                LoadingHole.IsRunning = false;
             }
         }
 

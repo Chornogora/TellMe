@@ -23,12 +23,12 @@ namespace TellMe
 {
     public class Config {
 
-        public string this[string key]
+        public string this[params string[] keys]
         {
             get
             {
                 string temp = "";
-                JCP.TryGet(key, out temp);
+                JCP.TryGet(String.Join(":", keys), out temp);
                 return temp;
             }
         }

@@ -3103,13 +3103,13 @@ containing a value of this type.
         public static int abc_textfield_search_material=0x7f020051;
         public static int abc_vector_test=0x7f020052;
         public static int avd_hide_password=0x7f020053;
-        public static int avd_hide_password_1=0x7f020132;
-        public static int avd_hide_password_2=0x7f020133;
-        public static int avd_hide_password_3=0x7f020134;
+        public static int avd_hide_password_1=0x7f020133;
+        public static int avd_hide_password_2=0x7f020134;
+        public static int avd_hide_password_3=0x7f020135;
         public static int avd_show_password=0x7f020054;
-        public static int avd_show_password_1=0x7f020135;
-        public static int avd_show_password_2=0x7f020136;
-        public static int avd_show_password_3=0x7f020137;
+        public static int avd_show_password_1=0x7f020136;
+        public static int avd_show_password_2=0x7f020137;
+        public static int avd_show_password_3=0x7f020138;
         public static int design_bottom_navigation_item_background=0x7f020055;
         public static int design_fab_background=0x7f020056;
         public static int design_ic_visibility=0x7f020057;
@@ -3324,13 +3324,14 @@ containing a value of this type.
         public static int notification_bg_normal=0x7f020128;
         public static int notification_bg_normal_pressed=0x7f020129;
         public static int notification_icon_background=0x7f02012a;
-        public static int notification_template_icon_bg=0x7f020130;
-        public static int notification_template_icon_low_bg=0x7f020131;
+        public static int notification_template_icon_bg=0x7f020131;
+        public static int notification_template_icon_low_bg=0x7f020132;
         public static int notification_tile_bg=0x7f02012b;
         public static int notify_panel_notification_icon_bg=0x7f02012c;
-        public static int returnarrow=0x7f02012d;
-        public static int tooltip_frame_dark=0x7f02012e;
-        public static int tooltip_frame_light=0x7f02012f;
+        public static int preload=0x7f02012d;
+        public static int returnarrow=0x7f02012e;
+        public static int tooltip_frame_dark=0x7f02012f;
+        public static int tooltip_frame_light=0x7f020130;
     }
     public static final class id {
         public static int ALT=0x7f090032;
@@ -3887,6 +3888,10 @@ containing a value of this type.
         public static int CardView_Light=0x7f0c000e;
         public static int MainTheme=0x7f0c018f;
         /**  Base theme applied no matter what API 
+<item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:backgroundDimEnabled">true</item>
          */
         public static int MainTheme_Base=0x7f0c0190;
         public static int Platform_AppCompat=0x7f0c002d;

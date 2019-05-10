@@ -4,7 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+
 using Xamarin.Forms;
+
+using TellMe.Server;
+
 using Android.App;
 
 namespace TellMe {
@@ -17,7 +22,18 @@ namespace TellMe {
         public HelloPage() {
 
             InitializeComponent();
-            
+
+            try
+            {
+                Thread T = new Thread(() => DependencyService.Get<DataProvider>().Init());
+                T.Start();
+            }
+            catch (InitFailedException)
+            {
+                DisplayAlert("Error", "Server is not responding", "OK");
+                App.Close();
+            }
+
             SignUpButton.Clicked += SignUpButton_Clicked;
             LogInButton.Clicked += LogInButton_Clicked;
         }

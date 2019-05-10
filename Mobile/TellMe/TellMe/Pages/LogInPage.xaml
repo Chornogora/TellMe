@@ -105,6 +105,7 @@
 
         </Grid>
 
+        <ActivityIndicator x:Name="LoadingHole" Color="{StaticResource RedBrown}" HorizontalOptions="CenterAndExpand" IsRunning="False"/>
         <Button x:Name="LogInButton" Text="Log In" Style="{StaticResource LogInButton}" />
     </StackLayout>
     

@@ -74,7 +74,7 @@
             <ImageButton Source="info.png" Grid.Row="0" Grid.Column="1" Style="{StaticResource HelpInfoButton}" 
                          WidthRequest="61.81" HorizontalOptions="End"/>
         </Grid>
-        
+
     </StackLayout>
     
 </ContentPage>

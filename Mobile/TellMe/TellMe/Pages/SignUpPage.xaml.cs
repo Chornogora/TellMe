@@ -9,13 +9,13 @@ using Xamarin.Forms.Xaml;
 
 using TellMe.Server;
 
-namespace TellMe
-{
+namespace TellMe {
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignUpPage : ContentPage
-    {
-        public SignUpPage()
-        {            
+    public partial class SignUpPage : ContentPage {
+
+        public SignUpPage() {
+
             InitializeComponent();
 
             ReturnButton.Clicked += ReturnButton_Clicked;
@@ -24,21 +24,43 @@ namespace TellMe
 
         private void SignUpButton_Clicked(object sender, EventArgs e) {
 
+            if(Login.Text == "")
+                DisplayAlert("Registration failed", "Login mustn't be empty", "OK");
+
+            if (Password.Text == "")
+                DisplayAlert("Registration failed", "Password mustn't be empty", "OK");
+
+            if (Email.Text == "")
+                DisplayAlert("Registration failed", "Email mustn't be empty", "OK");
+
             if (Password.Text != PasswordConfirm.Text) {
 
-                DisplayAlert("Registration failed", "Your passwords don't match", "Fuck");
+                DisplayAlert("Registration failed", "Your passwords don't match", "OK");
                 return;
             }
 
-            try
-            {
-                DependencyService.Get<DataProvider>().SignUp(Login.Text, Password.Text, Email.Text, Birth.Date);
-                DisplayAlert("Registration successful!", "Please check your email for an activation code", "OK");
-                App.Current.MainPage = DependencyService.Get<ActivationPage>();
+            SignUpAsync(Login.Text, Password.Text, Email.Text, Birth.Date);
+        }
+
+        private async void SignUpAsync(string Login, string Password, string Email, DateTime Birth) {
+
+            LoadingHole.IsRunning = true;
+
+            try {
+
+                await Task.Run(() => {
+
+                    DependencyService.Get<DataProvider>().SignUp(Login, Password, Email, Birth);
+                    App.Current.MainPage = DependencyService.Get<ActivationPage>();
+                });
             }
-            catch (UserExistsException)
-            {
-                DisplayAlert("Registration failed", "User with such login already exists", "Fuck");
+            catch (UserExistsException) {
+
+                await DisplayAlert("Registration failed", "User with such login already exists", "OK");
+            }
+            finally {
+
+                LoadingHole.IsRunning = false;
             }
         }
 

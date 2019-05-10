@@ -73,6 +73,7 @@
 
         </Grid>
 
+        <ActivityIndicator x:Name="LoadingHole" Color="{StaticResource RedBrown}" HorizontalOptions="CenterAndExpand" IsRunning="False"/>
         <Button x:Name="ActivationButton" Text="Activate" Style="{StaticResource ActivationButton}" />
     </StackLayout>
     
