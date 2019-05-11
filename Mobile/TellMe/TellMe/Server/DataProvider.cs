@@ -69,16 +69,18 @@ namespace TellMe.Server {
                 throw new UserExistsException();
         }
 
-        public void ActivateAccount(string Code) {
+        public string ActivateAccount(string Code) {
 
             string dataString = $"{CodeKey}={Code}";
             string response = QueryPOST(ActivatePath, dataString);
 
             if (response.StartsWith(InvalidCodeResponse))
                 throw new InvalidCodeException();
+
+            return response;
         }
 
-        public void LogIn(string Login, string Password) {
+        public string LogIn(string Login, string Password) {
 
             string dataString = $"{LoginKey}={Login}&{PasswordKey}={Password}";
             string response = QueryPOST(LogInPath, dataString);
@@ -88,6 +90,8 @@ namespace TellMe.Server {
 
             if (response.StartsWith(InvalidPasswordResponse))
                 throw new InvalidPasswordException();
+
+            return response;
         }
 
         private string QueryPOST(string path, string dataString) {

@@ -32,6 +32,7 @@ namespace TellMe.Droid {
             DependencyService.Register<LogInPage>();
             DependencyService.Register<ActivationPage>();
             DependencyService.Register<LessonsPage>();
+            DependencyService.Register<ProfilePage>();
 
             DependencyService.Register<Config>();
         }

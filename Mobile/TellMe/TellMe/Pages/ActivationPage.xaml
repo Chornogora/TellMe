@@ -68,12 +68,13 @@
                 <ColumnDefinition Width="5.92*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Style="{StaticResource Label}" Text="Activation code:" Grid.Column="0"/>
-            <Entry x:Name="Code" Style="{StaticResource Input}" Grid.Column="1"/>
+            <Label Style="{StaticResource Label}" Text="Activation code:" Grid.Row="0" Grid.Column="0"/>
+            <Entry x:Name="Code" Style="{StaticResource Input}" Grid.Row="0" Grid.Column="1"/>
+            
+            <ActivityIndicator x:Name="LoadingHole" Style="{StaticResource LoadingHole}" IsRunning="False" Grid.Row="1" Grid.ColumnSpan="2"/>
 
         </Grid>
-
-        <ActivityIndicator x:Name="LoadingHole" Color="{StaticResource RedBrown}" HorizontalOptions="CenterAndExpand" IsRunning="False"/>
+        
         <Button x:Name="ActivationButton" Text="Activate" Style="{StaticResource ActivationButton}" />
     </StackLayout>
     

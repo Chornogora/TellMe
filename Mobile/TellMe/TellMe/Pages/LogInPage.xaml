@@ -102,10 +102,9 @@
 
             <Label Style="{StaticResource Label}" Text="Password:" Grid.Row="1" Grid.Column="0"/>
             <Entry x:Name="Password" Style="{StaticResource Input}" IsPassword="True" Grid.Row="1" Grid.Column="1"/>
-
+            <ActivityIndicator x:Name="LoadingHole" Style="{StaticResource LoadingHole}" IsRunning="False" Grid.Row="2" Grid.ColumnSpan="2"/>
         </Grid>
-
-        <ActivityIndicator x:Name="LoadingHole" Color="{StaticResource RedBrown}" HorizontalOptions="CenterAndExpand" IsRunning="False"/>
+        
         <Button x:Name="LogInButton" Text="Log In" Style="{StaticResource LogInButton}" />
     </StackLayout>
     

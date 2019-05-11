@@ -25,6 +25,12 @@
                 <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"></Setter>
             </Style>
 
+            <Style x:Key="LoadingHole" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource RedBrown}"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -8,6 +8,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using TellMe.Server;
+using TellMe.Model;
+
+using Newtonsoft.Json;
 
 namespace TellMe
 {
@@ -23,7 +26,16 @@ namespace TellMe
 
         protected override void OnAppearing() => DisplayAlert("Registration successful!", "Please check your email for an activation code", "OK");
 
-        private void ActivationButton_Clicked(object sender, EventArgs e) => ActivateAsync(Code.Text);
+        private void ActivationButton_Clicked(object sender, EventArgs e) {
+
+            if(Code.Text == null || Code.Text.Length != 5) {
+
+                DisplayAlert("Activation failed", "Activation code is invalid", "OK");
+                return;
+            }
+
+            ActivateAsync(Code.Text);
+        }
 
         private async void ActivateAsync(string Code) {
 
@@ -33,8 +45,11 @@ namespace TellMe
 
                 await Task.Run(() => {
 
-                    DependencyService.Get<DataProvider>().ActivateAccount(Code);
-                    App.Current.MainPage = DependencyService.Get<HelloPage>();
+                    string userJSON = DependencyService.Get<DataProvider>().ActivateAccount(Code);
+                    User user = JsonConvert.DeserializeObject<User>(userJSON.Substring(0, userJSON.Length - 1));
+                    ProfilePage profile = DependencyService.Get<ProfilePage>(DependencyFetchTarget.NewInstance);
+                    profile.CurrentUser = user;
+                    App.Current.MainPage = profile;
                 });
             }
             catch (InvalidCodeException) {

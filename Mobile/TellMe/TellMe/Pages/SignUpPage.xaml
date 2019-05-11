@@ -130,10 +130,9 @@
 
             <Label Style="{StaticResource Label}" Text="Birth date:" Grid.Row="4" Grid.Column="0"/>
             <DatePicker x:Name="Birth" Style="{StaticResource DateInput}" Grid.Row="4" Grid.Column="1"/>
-
+            <ActivityIndicator x:Name="LoadingHole" Style="{StaticResource LoadingHole}" IsRunning="False" Grid.Row="5" Grid.ColumnSpan="2"/>
         </Grid>
 
-        <ActivityIndicator x:Name="LoadingHole" Color="{StaticResource RedBrown}" HorizontalOptions="CenterAndExpand" IsRunning="False"/>
         <Button x:Name="SignUpButton" Text="Sign Up" Style="{StaticResource SignUpButton}" />
     </StackLayout>
     

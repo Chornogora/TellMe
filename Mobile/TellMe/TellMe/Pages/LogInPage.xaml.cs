@@ -9,6 +9,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using TellMe.Server;
+using TellMe.Model;
+
+using Newtonsoft.Json;
 
 namespace TellMe {
 
@@ -23,7 +26,22 @@ namespace TellMe {
             LogInButton.Clicked += LogInButton_Clicked;
         }
 
-        private void LogInButton_Clicked(object sender, EventArgs e) => LogInAsync(Login.Text, Password.Text);
+        private void LogInButton_Clicked(object sender, EventArgs e)
+        {
+            if(Login.Text == null) {
+
+                DisplayAlert("Autorization failed", "Login mustn't be empty", "OK");
+                return;
+            }
+
+            if (Password.Text == null) {
+
+                DisplayAlert("Autorization failed", "Password mustn't be empty", "OK");
+                return;
+            }
+
+            LogInAsync(Login.Text, Password.Text);
+        }
         
 
         private async void LogInAsync(string Login, string Password) {
@@ -34,8 +52,11 @@ namespace TellMe {
 
                 await Task.Run(() => {
 
-                    DependencyService.Get<DataProvider>().LogIn(Login, Password);
-                    App.Current.MainPage = DependencyService.Get<LessonsPage>();
+                    string userJSON = DependencyService.Get<DataProvider>().LogIn(Login, Password);
+                    User user = JsonConvert.DeserializeObject<User>(userJSON.Substring(0, userJSON.Length - 1));
+                    ProfilePage profile = DependencyService.Get<ProfilePage>(DependencyFetchTarget.NewInstance);
+                    profile.CurrentUser = user;
+                    App.Current.MainPage = profile;
                 });
             }
             catch (InvalidLoginException) {

@@ -24,14 +24,23 @@ namespace TellMe {
 
         private void SignUpButton_Clicked(object sender, EventArgs e) {
 
-            if(Login.Text == "")
+            if (Login.Text == null) {
+
                 DisplayAlert("Registration failed", "Login mustn't be empty", "OK");
+                return;
+            }
 
-            if (Password.Text == "")
+            if (Password.Text == null) {
+
                 DisplayAlert("Registration failed", "Password mustn't be empty", "OK");
+                return;
+            }
 
-            if (Email.Text == "")
+            if (Email.Text == null) {
+
                 DisplayAlert("Registration failed", "Email mustn't be empty", "OK");
+                return;
+            }
 
             if (Password.Text != PasswordConfirm.Text) {
 

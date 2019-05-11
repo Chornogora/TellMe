@@ -1,0 +1,21 @@
+﻿{
+  "Activate": {
+    "Path": "https://tellmeprod.herokuapp.com/registration/confirm",
+    "Method": "POST"
+  },
+
+  "LogIn": {
+    "Path": "https://tellmeprod.herokuapp.com/authorization/authorize",
+    "Method": "POST"
+  },
+
+  "SignUp": {
+    "Path": "https://tellmeprod.herokuapp.com/registration/register",
+    "Method": "POST"
+  },
+
+  "Init": {
+    "Path": "https://tellmeprod.herokuapp.com/init",
+    "Method":  "GET"
+  }
+}

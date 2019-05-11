@@ -8,7 +8,7 @@ namespace TellMe.Server {
 
         void Init();
         void SignUp(string Login, string Password, string Email, DateTime Birth);
-        void ActivateAccount(string code);
-        void LogIn(string Login, string Password);
+        string ActivateAccount(string code);
+        string LogIn(string Login, string Password);
     }
 }

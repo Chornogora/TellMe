@@ -21,4 +21,5 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Tel
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\ActivationPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\LogInPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\LessonsPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\ProfilePage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\XamlC.stamp
