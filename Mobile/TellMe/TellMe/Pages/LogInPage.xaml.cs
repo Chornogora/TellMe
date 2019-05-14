@@ -13,6 +13,8 @@ using TellMe.Model;
 
 using Newtonsoft.Json;
 
+using Autofac;
+
 namespace TellMe {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -26,8 +28,8 @@ namespace TellMe {
             LogInButton.Clicked += LogInButton_Clicked;
         }
 
-        private void LogInButton_Clicked(object sender, EventArgs e)
-        {
+        private void LogInButton_Clicked(object sender, EventArgs e) {
+
             if(Login.Text == null) {
 
                 DisplayAlert("Autorization failed", "Login mustn't be empty", "OK");
@@ -52,11 +54,10 @@ namespace TellMe {
 
                 await Task.Run(() => {
 
-                    string userJSON = DependencyService.Get<DataProvider>().LogIn(Login, Password);
+                    string userJSON = App.ObjectManager.Resolve<DataProvider>().LogIn(Login, Password);
                     User user = JsonConvert.DeserializeObject<User>(userJSON.Substring(0, userJSON.Length - 1));
-                    ProfilePage profile = DependencyService.Get<ProfilePage>(DependencyFetchTarget.NewInstance);
-                    profile.CurrentUser = user;
-                    App.Current.MainPage = profile;
+                    App.RegistrateUserConfig(user);
+                    App.Current.MainPage = App.ObjectManager.Resolve<ProfilePage>(new TypedParameter(typeof(User), user)); 
                 });
             }
             catch (InvalidLoginException) {

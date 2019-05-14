@@ -4,6 +4,8 @@ using System.Text;
 using System.Net;
 using System.IO;
 
+using Autofac;
+
 using Xamarin.Forms;
 
 namespace TellMe.Server {
@@ -13,24 +15,23 @@ namespace TellMe.Server {
     public class InvalidCodeException : Exception { }
     public class InvalidLoginException : Exception { }
     public class InvalidPasswordException : Exception { }
-
+    public class UnAutorizedUserException : Exception { }
 
     public class DataProvider : IDataProvider {
 
-        private static UTF8Encoding UTF8Enc = DependencyService.Get<UTF8Encoding>();
-        private static ASCIIEncoding ASCIIEnc = DependencyService.Get<ASCIIEncoding>();
-        private static Config Configuration = DependencyService.Get<Config>();
+        private static UTF8Encoding UTF8Enc = App.ObjectManager.Resolve<UTF8Encoding>();
+        private static ASCIIEncoding ASCIIEnc = App.ObjectManager.Resolve<ASCIIEncoding>();
         
         private const string StrNull = "null";
         private const string QueryContentType = "application/x-www-form-urlencoded";
 
         //<INIT>
-        private static readonly string InitPath = Configuration["Init", "Path"];
+        private static readonly string InitPath = App.QueryPathes["Init", "Path"];
         private const string InitOK = "OK";
         //</INIT>
 
         //<REGISTRATION>
-        private static readonly string SignUpPath = Configuration["SignUp", "Path"];
+        private static readonly string SignUpPath = App.QueryPathes["SignUp", "Path"];
         private const string LoginKey = "login";
         private const string PasswordKey = "password";
         private const string EmailKey = "email";
@@ -39,13 +40,13 @@ namespace TellMe.Server {
         //</REGISTRATION>
 
         //<ACTIVATION>
-        private static readonly string ActivatePath = Configuration["Activate", "Path"];
+        private static readonly string ActivatePath = App.QueryPathes["Activate", "Path"];
         private const string CodeKey = "code";
         private const string InvalidCodeResponse = "Invalid code";
         //</ACTIVATION>
 
         //<AUTORIZATION>
-        private static readonly string LogInPath = Configuration["LogIn", "Path"];
+        private static readonly string LogInPath = App.QueryPathes["LogIn", "Path"];
         private const string InvalidLoginResponse = "Invalid login";
         private const string InvalidPasswordResponse = "Invalid password";
         //</AUTORIZATION>
@@ -125,6 +126,11 @@ namespace TellMe.Server {
                 responseData = responseStream.ReadToEnd();
 
             return responseData;
+        }
+
+        public string GetUserInfo(int id) {
+
+            throw new NotImplementedException();
         }
     }
 }

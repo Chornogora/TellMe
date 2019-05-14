@@ -8,9 +8,11 @@ using System.Threading;
 
 using Xamarin.Forms;
 
-using TellMe.Server;
-
 using Android.App;
+
+using Autofac;
+
+using TellMe.Server;
 
 namespace TellMe {
 
@@ -23,13 +25,13 @@ namespace TellMe {
 
             InitializeComponent();
 
-            try
-            {
-                Thread T = new Thread(() => DependencyService.Get<DataProvider>().Init());
+            try {
+
+                Thread T = new Thread(() => App.ObjectManager.Resolve<DataProvider>().Init());
                 T.Start();
             }
-            catch (InitFailedException)
-            {
+            catch (InitFailedException) {
+
                 DisplayAlert("Error", "Server is not responding", "OK");
                 App.Close();
             }
@@ -38,14 +40,14 @@ namespace TellMe {
             LogInButton.Clicked += LogInButton_Clicked;
         }
 
-        private void LogInButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = DependencyService.Get<LogInPage>();
+        private void LogInButton_Clicked(object sender, EventArgs e) {
+
+            App.Current.MainPage = App.ObjectManager.Resolve<LogInPage>();
         }
 
         private void SignUpButton_Clicked(object sender, EventArgs e) {
 
-            App.Current.MainPage = DependencyService.Get<SignUpPage>();
+            App.Current.MainPage = App.ObjectManager.Resolve<SignUpPage>();
         }
     }
 }

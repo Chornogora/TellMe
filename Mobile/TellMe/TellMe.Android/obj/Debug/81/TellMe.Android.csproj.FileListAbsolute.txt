@@ -258,6 +258,11 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\res\dra
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\bin\Debug\com.TellMe.apk
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\bin\Debug\com.TellMe-Signed.apk
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\bin\com.TellMe.apk
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\bin\Debug\Autofac.pdb
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\linksrc\Autofac.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\linksrc\Autofac.pdb
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\Autofac.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\Autofac.pdb
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\machine.config
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_CompileToDalvik.stamp
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\stamp\_GeneratePackageManagerJava.stamp

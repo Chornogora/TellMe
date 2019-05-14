@@ -111,6 +111,7 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "TellMe.Android.dll" comes first in this list. */
 		"TellMe.Android.dll",
+		"Autofac.dll",
 		"FormsViewGroup.dll",
 		"Microsoft.Extensions.Configuration.Abstractions.dll",
 		"Microsoft.Extensions.Configuration.dll",

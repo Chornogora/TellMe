@@ -1,4 +1,5 @@
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\TellMe.Android.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\Autofac.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\FormsViewGroup.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\Java.Interop.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Debug\81\android\assets\Microsoft.Extensions.Configuration.Abstractions.dll

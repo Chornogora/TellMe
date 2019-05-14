@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Autofac;
+
 namespace TellMe
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -19,7 +21,7 @@ namespace TellMe
 
         protected override bool OnBackButtonPressed()
         {
-            App.Current.MainPage = DependencyService.Get<HelloPage>();
+            App.Current.MainPage = App.ObjectManager.Resolve<HelloPage>();
             return true;
         }
     }

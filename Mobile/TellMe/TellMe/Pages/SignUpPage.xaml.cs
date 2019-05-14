@@ -9,6 +9,8 @@ using Xamarin.Forms.Xaml;
 
 using TellMe.Server;
 
+using Autofac;
+
 namespace TellMe {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -59,8 +61,8 @@ namespace TellMe {
 
                 await Task.Run(() => {
 
-                    DependencyService.Get<DataProvider>().SignUp(Login, Password, Email, Birth);
-                    App.Current.MainPage = DependencyService.Get<ActivationPage>();
+                    App.ObjectManager.Resolve<DataProvider>().SignUp(Login, Password, Email, Birth);
+                    App.Current.MainPage = App.ObjectManager.Resolve<ActivationPage>();
                 });
             }
             catch (UserExistsException) {
@@ -81,7 +83,7 @@ namespace TellMe {
             return true;
         }
 
-        private void GoBack() => App.Current.MainPage = DependencyService.Get<HelloPage>();
+        private void GoBack() => App.Current.MainPage = App.ObjectManager.Resolve<HelloPage>();
 
         protected override void OnSizeAllocated(double width, double height) {
 

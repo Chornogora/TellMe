@@ -10,5 +10,6 @@ namespace TellMe.Server {
         void SignUp(string Login, string Password, string Email, DateTime Birth);
         string ActivateAccount(string code);
         string LogIn(string Login, string Password);
+        string GetUserInfo(int id);
     }
 }

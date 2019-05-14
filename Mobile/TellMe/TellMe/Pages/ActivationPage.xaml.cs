@@ -11,6 +11,8 @@ using TellMe.Server;
 using TellMe.Model;
 
 using Newtonsoft.Json;
+using Autofac;
+using Autofac.Core;
 
 namespace TellMe
 {
@@ -45,11 +47,10 @@ namespace TellMe
 
                 await Task.Run(() => {
 
-                    string userJSON = DependencyService.Get<DataProvider>().ActivateAccount(Code);
+                    string userJSON = App.ObjectManager.Resolve<DataProvider>().ActivateAccount(Code);
                     User user = JsonConvert.DeserializeObject<User>(userJSON.Substring(0, userJSON.Length - 1));
-                    ProfilePage profile = DependencyService.Get<ProfilePage>(DependencyFetchTarget.NewInstance);
-                    profile.CurrentUser = user;
-                    App.Current.MainPage = profile;
+                    App.RegistrateUserConfig(user);
+                    App.Current.MainPage = App.ObjectManager.Resolve<ProfilePage>(new TypedParameter(typeof(User), user));
                 });
             }
             catch (InvalidCodeException) {

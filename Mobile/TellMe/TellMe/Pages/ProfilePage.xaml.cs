@@ -14,15 +14,11 @@ namespace TellMe {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage {
 
-        private User user = null;
-        public User CurrentUser {
+        public User CurrentUser { get; private set; }
 
-            get { return user; }
-            set { if (value != null) user = value; UserInfo.Text = value.ToString(); }
-        }
+        public ProfilePage(User user) {
 
-        public ProfilePage() {
-
+            CurrentUser = user;
             InitializeComponent();
         }
     }
