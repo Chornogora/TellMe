@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequestMapping("/administration/grammar")
 public abstract class TaskAdminController {
 
-    private final LessonRepo lessonRepo;
+    protected final LessonRepo lessonRepo;
 
     public TaskAdminController(LessonRepo rp){
         lessonRepo = rp;
@@ -24,8 +24,6 @@ public abstract class TaskAdminController {
         }
         return opt.get();
     }
-
-    public abstract String add(long lessonId);
 
     public abstract String delete(long taskId);
 

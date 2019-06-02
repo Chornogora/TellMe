@@ -12,8 +12,12 @@ public class GrammarTheory extends Task{
     @Column(name = "grtheory_content")
     private String content;
 
-    public GrammarTheory(int number, String content){
-        super(number);
+    public GrammarTheory(){
+
+    }
+
+    public GrammarTheory(Lesson lesson, int number, String content){
+        super(lesson, number);
         this.content = content;
     }
 

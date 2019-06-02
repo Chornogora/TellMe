@@ -15,8 +15,8 @@ public class LexicalTheory extends Task{
 
     }
 
-    public LexicalTheory(int number){
-        super(number);
+    public LexicalTheory(Lesson lesson, int number){
+        super(lesson, number);
         this.words = new ArrayList<>();
     }
 

@@ -1,6 +1,8 @@
 package controller.administration;
 
 import dao.LessonRepo;
+import dao.ProgressRepo;
+import dao.SimpleUserRepo;
 import model.Lesson;
 import model.Levels;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/administration/lesson")
 public class LessonAdminController {
 
+    private final ProgressRepo prRepo;
+    private final SimpleUserRepo userRepo;
     private LessonRepo lessonRepo;
 
-    public LessonAdminController(LessonRepo repo){
+    public LessonAdminController(LessonRepo repo, SimpleUserRepo r2, ProgressRepo r3){
         this.lessonRepo = repo;
+        userRepo = r2;
+        prRepo = r3;
     }
 
     @PostMapping("/add")

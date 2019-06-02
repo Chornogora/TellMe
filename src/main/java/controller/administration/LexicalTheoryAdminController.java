@@ -25,7 +25,6 @@ public class LexicalTheoryAdminController extends TaskAdminController{
         wordRepo = wRepo;
     }
 
-    @Override
     @PostMapping("/add")
     public String add(@RequestParam("lessonId") long lessonId){
         Lesson lesson;
@@ -35,9 +34,10 @@ public class LexicalTheoryAdminController extends TaskAdminController{
             return "Incorrect id";
         }
 
-        LexicalTheory lt = new LexicalTheory(lesson.getMax()+1);
+        LexicalTheory lt = new LexicalTheory(lesson, lesson.getMax()+1);
         lesson.addTask(lt);
         LexicalRepo.save(lt);
+        lessonRepo.save(lesson);
         return "OK";
     }
 
