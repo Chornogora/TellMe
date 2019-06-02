@@ -38,7 +38,7 @@ public class LexicalTheoryAdminController extends TaskAdminController{
         lesson.addTask(lt);
         LexicalRepo.save(lt);
         lessonRepo.save(lesson);
-        return "OK";
+        return util.JSONparser.toJSON(lt);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class LessonAdminController {
         }
 
         lessonRepo.save(lesson);
-        return "OK";
+        return util.JSONparser.toJSON(lesson);
     }
 
     @PostMapping("/delete")

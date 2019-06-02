@@ -48,6 +48,6 @@ public class GrammarTheoryAdminController extends TaskAdminController {
         lesson.addTask(gr);
         GrammarRepo.save(gr);
         lessonRepo.save(lesson);
-        return "OK";
+        return util.JSONparser.toJSON(gr);
     }
 }
