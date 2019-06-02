@@ -42,6 +42,10 @@ public class Variant {
         return this.text.equals(this.rightEquivalent);
     }
 
+    public boolean isRight(String answer){
+        return rightEquivalent.equals(answer);
+    }
+
     public int getNumber() {
         return number;
     }

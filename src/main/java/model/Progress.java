@@ -65,4 +65,8 @@ public class Progress {
     public boolean isDone() {
         return isDone;
     }
+
+    public void setDone(){
+        isDone = true;
+    }
 }
