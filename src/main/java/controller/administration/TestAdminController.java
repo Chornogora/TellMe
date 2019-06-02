@@ -61,7 +61,7 @@ public class TestAdminController extends TaskAdminController{
         lesson.addTask(test);
         testRepo.save(test);
         lessonRepo.save(lesson);
-        return "OK";
+        return util.JSONparser.toJSON(test);
     }
 
     @PostMapping("/addVariant")
