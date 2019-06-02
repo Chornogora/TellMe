@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 @Entity
 @Table(name="tests")
@@ -82,9 +83,21 @@ public class Test extends Task{
     }
 
     public boolean isPassed(String answer){
-        if(type == TYPES.WRITE_WORD){
-            return variants.get(0).isRight(answer);
+        switch(this.type){
+            case ONE_CORRECT:
+            case SEVERAL_CORRECT:
+                try(Scanner sc = new Scanner(answer)) {
+                    List<Integer> lst = new ArrayList<>();
+                    while(sc.hasNextInt()){
+                        lst.add(sc.nextInt());
+                    }
+                    int[] numbers = lst.stream().mapToInt(x -> x).toArray();
+                    return isPassed(numbers);
+                }
+            case WRITE_WORD:
+                return variants.get(0).isRight(answer);
+            default:
+                return false;
         }
-        return false;
     }
 }

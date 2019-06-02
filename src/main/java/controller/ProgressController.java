@@ -3,10 +3,7 @@ package controller;
 import dao.LessonRepo;
 import dao.ProgressRepo;
 import dao.SimpleUserRepo;
-import model.Lesson;
-import model.Progress;
-import model.SimpleUser;
-import model.Test;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,41 +61,25 @@ public class ProgressController implements ElementGetter{
             return "Invalid id";
         }
         Progress progress = opt.get();
-
-        passTask(progress);
+        try {
+            Task task = (progress.getLesson().getTaskByNumber(progress.getTaskPassedNumber()+1));
+            task = (Test)task;
+            return "Task is a Test";
+        }catch (ClassCastException e){
+            passTask(progress);
+        }
         return  util.JSONparser.ProgresstoJSON(progress);
     }
 
     private void passTask(Progress progress){
-        progress.setTaskPassedNumber(progress.getTaskPassedNumber()+1);
-        if(progress.getTaskPassedNumber() == progress.getLesson().getTasks().size()){
+        progress.setTaskPassedNumber(progress.getTaskPassedNumber() + 1);
+        if (progress.getTaskPassedNumber()+1 == progress.getLesson().getTasks().size()) {
             progress.setDone();
         }
+        prRepo.save(progress);
     }
 
-    public String passTest(@RequestParam("progressId") long id,
-                           @RequestParam("numbers") int[] numbers){
-        Optional<Progress> opt = prRepo.findById(id);
-        if(!opt.isPresent()) {
-            return "Invalid id";
-        }
-        Progress progress = opt.get();
-
-        Test test;
-        try {
-            test = (Test) progress.getLesson().getTasks().get(progress.getTaskPassedNumber() + 1);
-        }catch(ClassCastException e){
-            return "Task is not a Test";
-        }
-
-        if(test.isPassed(numbers)){
-            passTask(progress);
-            return "Passed";
-        }
-
-        return "Failed";
-    }
-
+    @PostMapping("/passTest")
     public String passTest(@RequestParam("progressId") long id,
                            @RequestParam("answer") String answer){
         Optional<Progress> opt = prRepo.findById(id);
@@ -109,14 +90,14 @@ public class ProgressController implements ElementGetter{
 
         Test test;
         try {
-            test = (Test) progress.getLesson().getTasks().get(progress.getTaskPassedNumber() + 1);
+            test = (Test) progress.getLesson().getTaskByNumber(progress.getTaskPassedNumber()+1);
         }catch(ClassCastException e){
             return "Task is not a Test";
         }
 
         if(test.isPassed(answer)){
             passTask(progress);
-            return "Passed";
+            return util.JSONparser.ProgresstoJSON(progress);
         }
 
         return "Failed";
