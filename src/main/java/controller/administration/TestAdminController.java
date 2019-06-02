@@ -77,6 +77,7 @@ public class TestAdminController extends TaskAdminController{
         Test test = opt.get();
         Variant variant = new Variant(num, right, text);
         test.addVariant(variant);
+        variant.setTest(test);
         variantRepo.save(variant);
 
         return "OK";

@@ -67,6 +67,7 @@ public class LexicalTheoryAdminController extends TaskAdminController{
         LexicalTheory theory = opt.get();
         Word word = new Word(name, desc, trans, picture);
         theory.addWord(word);
+        word.setTheory(theory);
         wordRepo.save(word);
         return "OK";
     }
