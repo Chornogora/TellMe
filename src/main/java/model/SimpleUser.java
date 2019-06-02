@@ -54,6 +54,11 @@ public class SimpleUser extends User {
         this.birthday = birthday;
     }
 
+    public void addPoints(int points){
+        this.points += points;
+        this.level = Levels.getLevelByPoints(points);
+    }
+
     public void setPoints(int points){
         this.points = points;
         this.level = Levels.getLevelByPoints(points);
