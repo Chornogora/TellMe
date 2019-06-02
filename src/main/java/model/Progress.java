@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Progress {
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
+    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private SimpleUser user;
@@ -24,6 +27,10 @@ public class Progress {
 
     @Column(name = "progress_isdone")
     private boolean isDone;
+
+    public Progress(){
+
+    }
 
     public Progress(Lesson lesson, SimpleUser user){
         this.lesson = lesson;
@@ -41,5 +48,21 @@ public class Progress {
         if(taskPassedNumber == lesson.getTasks().size()){
             isDone = true;
         }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Lesson getLesson(){
+        return lesson;
+    }
+
+    public SimpleUser getUser() {
+        return user;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }

@@ -25,8 +25,12 @@ public class Test extends Task{
     @OneToMany(mappedBy = "test", fetch = FetchType.LAZY)
     private List<Variant> variants;
 
-    public Test(int number, String testPictureLink, String testText, String type){
-        super(number);
+    public Test(){
+
+    }
+
+    public Test(Lesson lesson, int number, String testPictureLink, String testText, String type){
+        super(lesson, number);
         this.testPicture = testPictureLink;
         this.testText = testText;
         this.type = TYPES.valueOf(type);

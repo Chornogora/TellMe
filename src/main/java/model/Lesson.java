@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
     private List<Task> tasks;
 
+    @Expose
     @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
     private List<Progress> progresses;
 
@@ -46,6 +49,15 @@ public class Lesson {
     public Lesson(String name, int points, Levels lvl, List<Task> lst){
         this(name, points, lvl);
         this.tasks = lst;
+    }
+
+    public Task getTaskByNumber(int number){
+        for(Task task : tasks){
+            if(number == task.getNumber()){
+                return task;
+            }
+        }
+        return null;
     }
 
     public String getName() {
@@ -98,5 +110,9 @@ public class Lesson {
 
     public int getMax(){
         return tasks.size();
+    }
+
+    public long getId() {
+        return id;
     }
 }

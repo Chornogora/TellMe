@@ -53,19 +53,15 @@ public class TestAdminController extends TaskAdminController{
 
         Test test;
         try{
-            test = new Test(lesson.getMax()+1, picture, text, type);
+            test = new Test(lesson, lesson.getMax()+1, picture, text, type);
         }catch(IllegalArgumentException e){
             return "Incorrect type";
         }
 
         lesson.addTask(test);
         testRepo.save(test);
+        lessonRepo.save(lesson);
         return "OK";
-    }
-
-    @Override
-    public String add(@RequestParam("lessonName") long lessonId) {
-        return null;
     }
 
     @PostMapping("/addVariant")

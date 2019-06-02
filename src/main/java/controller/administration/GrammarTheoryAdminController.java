@@ -24,12 +24,6 @@ public class GrammarTheoryAdminController extends TaskAdminController {
     }
 
     @Override
-
-    public String add(long lessonId) {
-        return null;
-    }
-
-    @Override
     @PostMapping("/delete")
     public String delete(@RequestParam("taskId") long taskId){
         Optional<GrammarTheory> opt = GrammarRepo.findById(taskId);
@@ -50,9 +44,10 @@ public class GrammarTheoryAdminController extends TaskAdminController {
             return "Incorrect id";
         }
 
-        GrammarTheory gr = new GrammarTheory(lesson.getMax() + 1, content);
+        GrammarTheory gr = new GrammarTheory(lesson, lesson.getMax() + 1, content);
         lesson.addTask(gr);
         GrammarRepo.save(gr);
+        lessonRepo.save(lesson);
         return "OK";
     }
 }
