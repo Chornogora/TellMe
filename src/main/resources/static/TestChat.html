@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="js/Cookie.js"></script>
+
+        <style>
+            .outer{
+                position:absolute;
+                left:25%; top:5%;
+                background-color: aquamarine;
+                width:60%;
+                height:65%;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                overflow: auto;
+            }
+
+            .message{
+                width: 80%;
+                background-color: orangered;
+            }
+
+        </style>
+
+        <script>
+            let address = "http://192.168.0.103:5000";
+            let webSocket;
+
+            function getDate(timestamp){
+                return timestamp.dayOfMonth + "." + timestamp.month + "." + timestamp.year + " " + timestamp.hourOfDay + ":" + timestamp.minute;
+            }
+
+            function sendMessage(){
+                let id = getCookie("user");
+                if(id == null){
+                    alert("Check if you are autorized");
+                    return;
+                }
+                id = JSON.parse(id).id;
+
+                let chatId = getCookie("chatId");
+
+                let text = $("#textMessage")[0].value;
+
+                if(text == ""){
+                    return;
+                }
+                webSocket.send(chatId + " " + id + " " + text);
+            }
+
+            function OpenChat(chatId){
+
+                let request = new XMLHttpRequest();
+                let params = "?chatId=" + chatId;
+                request.open("POST", address + "/chat/open" + params, true);
+
+                request.onload = function(){
+                    let resp = request.response;
+                    webSocket = new WebSocket("ws://192.168.0.103:" + resp + "/point");
+                    webSocket.onmessage = function(evt) {
+                        let message = JSON.parse(evt.data);
+                        let div = document.createElement("div");
+                        div.className = "message";
+                        div.innerText = "(" + message.senderLogin + ", " + getDate(JSON.parse(message.sentTimestamp)) + ")\n" + message.text;
+
+                        $("#messages")[0].appendChild(div);
+                        $("#messages")[0].appendChild(document.createElement("br"));
+                    };
+                };
+
+                request.send();
+            }
+
+            $(function(){
+                let chatId = parseInt(getCookie("chatId"), 10);
+                let request = new XMLHttpRequest();
+
+                let params = "?chatId=" + chatId;
+                request.open("GET", address + "/chat/messages/getAll" + params, true);
+
+                request.onload = function(){
+                    let resp = request.response;
+                    let object = JSON.parse(resp);
+
+                    for(let message of object){
+                        let div = document.createElement("div");
+                        div.className = "message";
+                        div.innerText = "(" + message.senderLogin + ", " + getDate(JSON.parse(message.sentTimestamp)) + ")\n" + message.text;
+
+                        $("#messages")[0].appendChild(div);
+                        $("#messages")[0].appendChild(document.createElement("br"));
+                    }
+                };
+                request.send();
+
+                OpenChat(chatId);
+            })
+        </script>
+
+    </head>
+    <body>
+        <div id = "messages" class="outer">
+
+        </div>
+
+        <div style="border: 3px solid yellow; position: absolute; top:73%; width: 50%; left: 30%">
+            <textarea id = "textMessage" style="height: 100%; width: 100%">Enter your text here</textarea>
+            <img style="width: 5%; height: 7%; left: 60%;" src="http://192.168.0.103:5000/images/Send.png" onclick="sendMessage()"/>
+        </div>
+    </body>
+</html>

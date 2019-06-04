@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,6 +15,7 @@ public class Message {
     @Column(name = "message_id")
     private long id;
 
+    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="chat_id")
     private Chat chat;
@@ -37,5 +40,21 @@ public class Message {
         this.sender = user;
         this.text = text;
         this.sentTimestamp = new GregorianCalendar();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Calendar getSentTimestamp() {
+        return sentTimestamp;
+    }
+
+    public SimpleUser getSender() {
+        return sender;
+    }
+
+    public String getText() {
+        return text;
     }
 }
