@@ -41,4 +41,20 @@ public class Message {
         this.text = text;
         this.sentTimestamp = new GregorianCalendar();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public Calendar getSentTimestamp() {
+        return sentTimestamp;
+    }
+
+    public SimpleUser getSender() {
+        return sender;
+    }
+
+    public String getText() {
+        return text;
+    }
 }

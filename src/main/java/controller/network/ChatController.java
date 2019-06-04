@@ -9,6 +9,8 @@ import model.Message;
 import model.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -53,8 +55,8 @@ public class ChatController implements ElementGetter {
         }
 
         Chat chat = opt.get();
-
-        return util.JSONparser.toJSON(chat.getMessages());
+        List<Message> messages = chat.getMessages();
+        return util.JSONparser.MessagetoJSON(messages);
     }
 
     @PostMapping("/create")
@@ -104,6 +106,6 @@ public class ChatController implements ElementGetter {
 
         Message message = new Message(chat, user, text);
         messageRepo.save(message);
-        return util.JSONparser.toJSON(message);
+        return util.JSONparser.MessagetoJSON(message);
     }
 }

@@ -2,6 +2,7 @@ package util;
 
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
+import model.Message;
 import model.Progress;
 
 import java.lang.reflect.Type;
@@ -20,6 +21,13 @@ public class JSONparser {
         return gson.toJson(object);
     }
 
+    public static String MessagetoJSON(Object object){
+        GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new AnnotationExclusionStrategy());
+        builder.registerTypeAdapter(Message.class, new MessageAdapter());
+        Gson gson = builder.create();
+        return gson.toJson(object);
+    }
+
     private static class AnnotationExclusionStrategy implements ExclusionStrategy {
 
         @Override
@@ -33,7 +41,7 @@ public class JSONparser {
         }
     }
 
-    public static class ProgressAdapter implements JsonSerializer<Progress> {
+    private static class ProgressAdapter implements JsonSerializer<Progress> {
         @Override
         public JsonElement serialize(Progress progress, Type type, JsonSerializationContext jsc) {
             JsonObject jsonObject = new JsonObject();
@@ -42,6 +50,18 @@ public class JSONparser {
             jsonObject.addProperty("user_id", progress.getUser().getId());
             jsonObject.addProperty("taskPassedNumber", progress.getTaskPassedNumber());
             jsonObject.addProperty("isDone", progress.isDone());
+            return jsonObject;
+        }
+    }
+
+    private static class MessageAdapter implements JsonSerializer<Message> {
+        @Override
+        public JsonElement serialize(Message message, Type type, JsonSerializationContext jsc) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("id", message.getId());
+            jsonObject.addProperty("senderLogin", message.getSender().getLogin());
+            jsonObject.addProperty("text", message.getText());
+            jsonObject.addProperty("sentTimestamp", toJSON(message.getSentTimestamp()));
             return jsonObject;
         }
     }
