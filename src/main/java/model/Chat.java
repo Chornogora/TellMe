@@ -17,15 +17,23 @@ public class Chat {
     @JoinColumn(name = "creator_id")
     private SimpleUser creator;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY)
     private List<Message> messages;
 
     @Column(name = "chat_theme")
     private String theme;
 
+    public Chat(){
+
+    }
+
     public Chat(SimpleUser user, String theme){
         this.creator = user;
         this.theme = theme;
         this.messages = new ArrayList<>();
+    }
+
+    public List<Message> getMessages() {
+        return messages;
     }
 }

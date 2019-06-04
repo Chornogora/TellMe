@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+        <script src="js/Cookie.js"></script>
     </head>
     <body>
         <form method="POST" action="authorization/authorize" target="tgt" onsubmit="showAnswer(this)">
@@ -14,7 +15,7 @@
         <script>
             function showAnswer(form){
                 let request = new XMLHttpRequest();
-                request.onload = () => {alert(request.responseText)};
+                request.onload = () => {setCookie("user", request.responseText)};
                 request.open(form.method, form.action, true);
                 request.send(new FormData(form));
             }

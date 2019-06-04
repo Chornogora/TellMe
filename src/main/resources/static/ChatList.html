@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="js/Cookie.js"></script>
+    <meta charset="UTF-8">
+    <title>Chat List</title>
+    <style>
+        .outer{
+            position:absolute;
+            left:25%; top:5%;
+            background-color: aquamarine;
+            width:60%;
+            height:80%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            overflow: auto;
+        }
+
+        .chat{
+            width: 80%;
+            background-color: orangered;
+            height: 80px;
+        }
+
+    </style>
+    <script>
+        function changeVisibility(){
+            let object = $("#newChatPanel")[0];
+            object.style.visibility = (object.style.visibility == "visible") ? "hidden" : "visible";
+        }
+
+        function createChat(){
+            let address = "http://localhost:5000";
+            let request = new XMLHttpRequest();
+
+            let text = $("#chatName")[0].value;
+            if(text == ""){
+                return;
+            }
+
+            //<create params>
+
+            let params = "?";
+            let user = getCookie("user");
+            if(user == null){
+                alert("Check if you are autorized");
+                return;
+            }
+            let id = JSON.parse(user);
+            id = id.id;
+            params += "userId=" + id;
+            params += "&";
+            params += "theme=" + text;
+
+            //</create params>
+
+            request.open("POST", address + "/chat/create" + params, true);
+            request.onload = function(){
+                let resp = request.response;
+                switch(resp){
+                    case "Theme is absent": alert(resp); break;
+                    case "Invalid id": alert("Check if you are autorized"); break;
+                    default: alert("Chat successfully created!"); location.reload();
+                }
+
+            };
+
+            request.send();
+        }
+    </script>
+</head>
+<body>
+    <div id = "chats" class="outer">
+    </div>
+    <br />
+    <img src ="http://localhost:5000/images/Plus.png" style = "width:5%; position:absolute; top: 87%; left: 30%" id="plus" onclick="changeVisibility()"/>
+    <div id="newChatPanel" style = "visibility:hidden; width:25%; height:10%; position:absolute; top: 87%; left: 37%">
+        <input id="chatName" type="text" maxlength="30" placeholder="write name of new chat"/>
+        <input type="submit" value="Create" onclick="createChat()"/>
+    </div>
+    <script>
+        $(function () {
+            let address = "http://localhost:5000";
+            let request = new XMLHttpRequest();
+
+            request.open("GET", address + "/chat/getAll", true);
+
+            request.onload = function(){
+                let resp = request.response;
+                let object = JSON.parse(resp);
+
+                for(let i = object.length-1; i >= 0; --i){
+                    let chat = object[i];
+                    let div = document.createElement("div");
+                    div.className = "chat";
+                    div.innerText = chat.theme + " (creator: " + chat.creator.login + ")";
+                    div.chatId = chat.id;
+
+                    //TODO onclick
+                    div.onclick = function(){
+                      setCookie("chatId", div.chatId);
+                      location.href = "TestChat.html";
+                    };
+
+                    $("#chats")[0].appendChild(div);
+                    $("#chats")[0].appendChild(document.createElement("br"));
+                }
+            };
+
+            request.send();
+        })
+    </script>
+</body>
+</html>
