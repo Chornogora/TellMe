@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class Variant {
     @Column(name = "variant_text")
     private String text;
 
+    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Test test;
@@ -37,6 +40,10 @@ public class Variant {
 
     public boolean isRight(){
         return this.text.equals(this.rightEquivalent);
+    }
+
+    public boolean isRight(String answer){
+        return rightEquivalent.equals(answer);
     }
 
     public int getNumber() {

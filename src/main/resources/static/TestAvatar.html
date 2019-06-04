@@ -39,7 +39,7 @@
                 };
 
                 let id = parseInt(document.getElementById("userId").value);
-                request.open("GET", "http://localhost:5000/personal/getAvatar?id=" + id, true);
+                request.open("GET", "personal/getAvatar?id=" + id, true);
                 request.send();
             }
         </script>

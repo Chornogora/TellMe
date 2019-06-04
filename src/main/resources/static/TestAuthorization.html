@@ -6,8 +6,8 @@
     </head>
     <body>
         <form method="POST" action="authorization/authorize" target="tgt" onsubmit="showAnswer(this)">
-            <input type="text" name="login">
-            <input type="password" name="password">
+            <input type="text" name="login" placeholder="login">
+            <input type="password" name="password" placeholder="password">
             <input type="submit">
         </form>
 
@@ -19,6 +19,9 @@
                 request.send(new FormData(form));
             }
         </script>
+
+        <br />
+        <br />
 
         <iframe name="tgt">
 

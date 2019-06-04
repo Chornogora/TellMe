@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public abstract class Task {
     @Column(name="task_number")
     private int number;
 
+    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
@@ -23,14 +26,20 @@ public abstract class Task {
 
     }
 
-    public Task(int number){
+    public Task(Lesson lesson, int number){
+        this.lesson = lesson;
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
 
     public void setNumber(int number) {
+        Task task = lesson.getTaskByNumber(number);
+        if(task != null){
+            task.setNumber(this.number);
+        }
         this.number = number;
     }
 

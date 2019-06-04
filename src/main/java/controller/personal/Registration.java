@@ -1,6 +1,10 @@
-package controller;
+package controller.personal;
 
+import dao.LessonRepo;
+import dao.ProgressRepo;
 import dao.SimpleUserRepo;
+import model.Lesson;
+import model.Progress;
 import model.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,11 +22,15 @@ import java.util.Properties;
 public class Registration {
 
     private final SimpleUserRepo simpleUserRepo;
+    private final ProgressRepo prRepo;
+    private final LessonRepo lRepo;
     private HashMap<String, SimpleUser> codes;
 
     @Autowired
-    public Registration(SimpleUserRepo simpleUserRepo) {
+    public Registration(SimpleUserRepo simpleUserRepo, ProgressRepo pr, LessonRepo lr) {
         this.simpleUserRepo = simpleUserRepo;
+        this.prRepo = pr;
+        this.lRepo = lr;
         codes = new HashMap<>();
     }
 
@@ -33,7 +41,7 @@ public class Registration {
             @RequestParam("email") String email,
             @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday
     ) {
-        Properties properties = util.Property.getProperties("src/main/resources/mailBoxSecondConfig.properties");
+        Properties properties = util.Property.getInstance().getProperties("src/main/resources/mailBoxSecondConfig.properties");
         String sender = properties.getProperty("mailBox.Email");
         String pass = properties.getProperty("mailBox.Password");
 
@@ -56,9 +64,20 @@ public class Registration {
     public String confirmCode(@RequestParam("code") String code) {
         SimpleUser user = codes.get(code);
         if (user == null) {
-            throw new IllegalArgumentException("Invalid code");
+            return "Invalid code";
         }
         simpleUserRepo.save(user);
+
+        //<Create Progresses>
+
+        Iterable<Lesson> lessons = lRepo.findAll();
+        for(Lesson lesson : lessons){
+            Progress progress = new Progress(lesson, user);
+            prRepo.save(progress);
+        }
+
+        //</Create Progresses>
+
         return util.JSONparser.toJSON(user);
     }
 
