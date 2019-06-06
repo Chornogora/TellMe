@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function sendRequest() {
+        let object = new XMLHttpRequest();
+
+        object.open("GET","http://localhost:5000/lesson/getAll",true);
+
+        object.onload = ()=>{
+          let response = object.response;
+          response = JSON.parse(response);
+          console.log(response);
+        };
+
+        object.send();
+    }
+    sendRequest();
+</script>
+</body>
+</html>
