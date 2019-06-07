@@ -76,6 +76,10 @@ public class SimpleUser extends User {
         this.avatar = avatar;
     }
 
+    public void setLevel(){
+        this.level = Levels.getLevelByPoints(this.points);
+    }
+
     public Date getBirthday() {
         return birthday;
     }

@@ -25,7 +25,7 @@ public enum Levels {
         return Integer.valueOf(points);
     }
 
-    static Levels getLevelByPoints(int points){
+    public static Levels getLevelByPoints(int points){
 
         if(points < getPoints(1)){
             return ELEMENTARY;

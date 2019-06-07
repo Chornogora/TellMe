@@ -1,7 +1,9 @@
 package controller;
 
+import model.Levels;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -19,5 +21,11 @@ public class LevelsController {
             map.put(level.name(), level.getMinPoints());
         }
         return util.JSONparser.toJSON(map);
+    }
+
+    @GetMapping("/getByPoints")
+    public String getLevelByPoints(@RequestParam("points") int points){
+        Levels level = Levels.getLevelByPoints(points);
+        return level.toString();
     }
 }

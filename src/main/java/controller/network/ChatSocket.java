@@ -84,6 +84,7 @@ public class ChatSocket extends WebSocketServer {
     }
 
     private void close(){
+        System.out.println("Server Socket has closed");
         SocketDispatcher.freePort(port);
         try {
             this.stop();

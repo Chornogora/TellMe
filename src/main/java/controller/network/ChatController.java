@@ -87,7 +87,11 @@ public class ChatController implements ElementGetter {
         if(port != -1){
             return String.valueOf(port);
         }
-        return String.valueOf(SocketDispatcher.createChatSocket(this, chatId));
+        port = SocketDispatcher.createChatSocket(this, chatId);
+        if(port == -1){
+            return "Cannot open Chat";
+        }
+        return String.valueOf(port);
     }
 
     public String addMessage(long chatId, long userId, String text){
