@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tellme</title>
+
+        <style>
+            .myButton {
+                -moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+                -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+                box-shadow:inset 0px 1px 0px 0px #a4e271;
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
+                background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+                background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+                background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+                background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+                background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+                background-color:#89c403;
+                -moz-border-radius:6px;
+                -webkit-border-radius:6px;
+                border-radius:6px;
+                border:1px solid #74b807;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:15px;
+                font-weight:bold;
+                padding:6px 24px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #528009;
+            }
+            .myButton:hover {
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403));
+                background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+                background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+                background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+                background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+                background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+                background-color:#77a809;
+            }
+            .myButton:active {
+                position:relative;
+                top:1px;
+            }
+        </style>
+
+        <script src="js/Cookie.js"></script>
+        <script>
+            let address = "http://192.168.43.36:5000/authorization/authorize";
+
+            function authorize() {
+                let login = document.getElementById("login").value;
+                let password = document.getElementById("password").value;
+
+                let request = new XMLHttpRequest();
+                request.onload = () => {
+                    let response = request.response;
+                    switch(response) {
+                        case "Invalid login" :
+                        case "Invalid password" :
+                            alert(response);
+                            return;
+                        default:
+                            setCookie("user", response);
+                            location.href = "Learning.html";
+                    }
+                };
+                request.open("POST", address + "?login=" + login + "&password=" + password, true);
+                request.send();
+            }
+        </script>
+
+    </head>
+    <body style="background: linear-gradient(90deg, blueviolet, yellow)">
+        <div style="position:absolute; left:42.5%; top:20%; width:15%; height:40%; border:3px solid black">
+            <span style="position: absolute; width:100%; height: 30%; text-align: center; background-color:#00CC99; color: red; font-size: 500%; font-weight: 600; border-bottom: 3px solid black">
+            TellMe
+          </span>
+            <label style = "position: absolute; top: 40%; left: 5%">
+                <input type="text" id="login"/>
+                Login
+            </label>
+            <label style = "position: absolute; top: 60%; left: 5%">
+                <input type="password" id = "password"/>
+                Password
+            </label>
+            <button style = "position: absolute; top: 80%; left: 30%;" class="myButton" onclick="authorize()">Submit</button>
+        </div>
+    </body>
+</html>

@@ -31,7 +31,7 @@
         }
 
         function createChat(){
-            let address = "https://tellmeprod.herokuapp.com";
+            let address = "http://192.168.43.36:5000";
             let request = new XMLHttpRequest();
 
             let text = $("#chatName")[0].value;
@@ -74,14 +74,14 @@
     <div id = "chats" class="outer">
     </div>
     <br />
-    <img src ="https://tellmeprod.herokuapp.com/images/Plus.png" style = "width:5%; position:absolute; top: 87%; left: 30%" id="plus" onclick="changeVisibility()"/>
+    <img src ="http://192.168.43.36:5000/images/Plus.png" style = "width:5%; position:absolute; top: 87%; left: 30%" id="plus" onclick="changeVisibility()"/>
     <div id="newChatPanel" style = "visibility:hidden; width:25%; height:10%; position:absolute; top: 87%; left: 37%">
         <input id="chatName" type="text" maxlength="30" placeholder="write name of new chat"/>
         <input type="submit" value="Create" onclick="createChat()"/>
     </div>
     <script>
         $(function () {
-            let address = "https://tellmeprod.herokuapp.com";
+            let address = "http://192.168.43.36:5000";
             let request = new XMLHttpRequest();
 
             request.open("GET", address + "/chat/getAll", true);

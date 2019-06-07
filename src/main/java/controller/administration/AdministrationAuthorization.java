@@ -23,6 +23,9 @@ public class AdministrationAuthorization extends AbstractAuthorization {
     @PostMapping("/authorize")
     public String authorize(@RequestParam("login") String login, @RequestParam("password") String password){
         Administrator admin = simpleAdministratorRepo.findByLogin(login);
+        if(admin == null){
+            return "Invalid login";
+        }
         return super.authorize(admin, password);
     }
 }

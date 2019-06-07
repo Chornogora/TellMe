@@ -40,6 +40,9 @@ class SocketDispatcher {
 
     static int createChatSocket(ChatController controller, long chatId){
         try {
+            if(ports.size() == 0){
+                return -1;
+            }
             int port = ports.removeFirst();
             ChatSocket wss = new ChatSocket(hostName, port, controller);
             wss.start();

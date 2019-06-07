@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="js/Cookie.js"></script>
+    <style>
+        #container {
+            position: absolute;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            width: 100%;
+
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            overflow: auto;
+            background: linear-gradient(0deg, #00FF00, #0000FF, #FF0000);
+        }
+
+        .lesson{
+            position: absolute;
+            height: 100%;
+            text-align: center;
+            background-color:#00CC99;
+            color: red;
+            font-size: 500%;
+            font-weight: 600;
+        }
+
+        .lName{
+            position: absolute;
+            width:100%;
+            height: 15%;
+            text-align: center;
+            background-color:#00CC99;
+            color: red;
+            font-size: 500%;
+            font-weight: 600;
+        }
+
+        .lImage{
+            position: absolute;
+            width:100%;
+            top:15%;
+            height: 70%;
+        }
+
+        .lProgress{
+            position: absolute;
+            bottom: 15%;
+            height: 15%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id = "container">
+
+    </div>
+    <script>
+        let address = "http://192.168.43.36:5000/lesson/getAll";
+
+        $(function(){
+            let request = new XMLHttpRequest();
+
+            request.onload = function (){
+                let lessons = JSON.parse(request.response);
+                for(let i = 0; i < lessons.length; ++i){
+                    let div = document.createElement("div");
+                    div.className = "lesson";
+                    div.style.left = i*(10 + div.style.width);
+                    let span = document.createElement("span");
+                    span.className = "lName";
+                    span.innerText = lessons[i].name + " (" + lessons[i].level+")";
+                    div.appendChild(span);
+                    let img = document.createElement("img");
+                    img.src = "photos/" + ((i+1)%4) + ".jpg";
+                    img.className = "lImage";
+                    //img.style.width = img.style.height;
+                    div.appendChild(img);
+
+                    document.getElementById("container").appendChild(div);
+
+                }
+            };
+
+            request.open("GET", address, true);
+            request.send();
+        })
+    </script>
+</body>
+</html>
