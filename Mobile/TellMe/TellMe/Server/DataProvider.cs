@@ -10,12 +10,14 @@ using Xamarin.Forms;
 
 namespace TellMe.Server {
 
+    public class NoConnectionException : Exception { }
     public class InitFailedException : Exception { }
     public class UserExistsException : Exception { }
     public class InvalidCodeException : Exception { }
     public class InvalidLoginException : Exception { }
     public class InvalidPasswordException : Exception { }
     public class UnAutorizedUserException : Exception { }
+    public class NoSuchUserException : Exception { }
 
     public class DataProvider : IDataProvider {
 
@@ -27,11 +29,13 @@ namespace TellMe.Server {
 
         //<INIT>
         private static readonly string InitPath = App.QueryPathes["Init", "Path"];
+        private static readonly string InitMeth = App.QueryPathes["Init", "Method"];
         private const string InitOK = "OK";
         //</INIT>
 
         //<REGISTRATION>
         private static readonly string SignUpPath = App.QueryPathes["SignUp", "Path"];
+        private static readonly string SignUpMeth = App.QueryPathes["SignUp", "Method"];
         private const string LoginKey = "login";
         private const string PasswordKey = "password";
         private const string EmailKey = "email";
@@ -41,19 +45,33 @@ namespace TellMe.Server {
 
         //<ACTIVATION>
         private static readonly string ActivatePath = App.QueryPathes["Activate", "Path"];
+        private static readonly string ActivateMeth = App.QueryPathes["Activate", "Method"];
         private const string CodeKey = "code";
         private const string InvalidCodeResponse = "Invalid code";
         //</ACTIVATION>
 
         //<AUTORIZATION>
         private static readonly string LogInPath = App.QueryPathes["LogIn", "Path"];
+        private static readonly string LogInMeth = App.QueryPathes["LogIn", "Method"];
         private const string InvalidLoginResponse = "Invalid login";
         private const string InvalidPasswordResponse = "Invalid password";
         //</AUTORIZATION>
 
+        //<GET_USER>
+        private static readonly string GetUserPath = App.QueryPathes["GetUser", "Path"];
+        private static readonly string GetUserMeth = App.QueryPathes["GetUser", "Mathod"];
+        private const string IdKey = "id";
+        private const string InvalidIdResponse = "Invalid id";
+        //</GET_USER>
+
+        //<GET_USER>
+        private static readonly string GetLevelsPath = App.QueryPathes["GetLevels", "Path"];
+        private static readonly string GetLevelsMeth = App.QueryPathes["GetLevels", "Mathod"];
+        //</GET_USER>
+
         public void Init() {
 
-            string IsInitOK = QueryGET(InitPath, "");
+            string IsInitOK = Query(InitPath, InitMeth, "");
 
             if (IsInitOK != InitOK)
                 throw new InitFailedException();
@@ -64,7 +82,7 @@ namespace TellMe.Server {
             string birthday = Birth == null ? StrNull : $"{Birth.Year}-{Birth.Month}-{Birth.Day}";
 
             string dataString = $"{LoginKey}={Login}&{PasswordKey}={Password}&{EmailKey}={Email}&{BirthKey}={birthday}";
-            string response = QueryPOST(SignUpPath, dataString);
+            string response = Query(SignUpPath, SignUpMeth, dataString);
 
             if (response.StartsWith(LoginExistsResopnse))
                 throw new UserExistsException();
@@ -73,7 +91,7 @@ namespace TellMe.Server {
         public string ActivateAccount(string Code) {
 
             string dataString = $"{CodeKey}={Code}";
-            string response = QueryPOST(ActivatePath, dataString);
+            string response = Query(ActivatePath, ActivateMeth, dataString);
 
             if (response.StartsWith(InvalidCodeResponse))
                 throw new InvalidCodeException();
@@ -84,7 +102,7 @@ namespace TellMe.Server {
         public string LogIn(string Login, string Password) {
 
             string dataString = $"{LoginKey}={Login}&{PasswordKey}={Password}";
-            string response = QueryPOST(LogInPath, dataString);
+            string response = Query(LogInPath, LogInMeth, dataString);
 
             if (response.StartsWith(InvalidLoginResponse))
                 throw new InvalidLoginException();
@@ -93,6 +111,27 @@ namespace TellMe.Server {
                 throw new InvalidPasswordException();
 
             return response;
+        }
+
+        public string GetUserInfo(int id) {
+
+            string dataString = $"{IdKey}={id.ToString()}";
+            string response = Query(GetUserPath, GetUserMeth, dataString);
+
+            if (response.StartsWith(InvalidIdResponse))
+                throw new NoSuchUserException();
+
+            return response;
+        }
+
+        public string GetLevels() => Query(GetLevelsPath, GetLevelsMeth, "");
+
+        private string Query(string path, string meth, string data) {
+            try {
+                return meth == WebRequestMethods.Http.Post ? QueryPOST(path, data) : QueryGET(path, data);
+            } catch(WebException) {
+                throw new NoConnectionException();
+            }
         }
 
         private string QueryPOST(string path, string dataString) {
@@ -126,11 +165,6 @@ namespace TellMe.Server {
                 responseData = responseStream.ReadToEnd();
 
             return responseData;
-        }
-
-        public string GetUserInfo(int id) {
-
-            throw new NotImplementedException();
         }
     }
 }

@@ -14,6 +14,7 @@ using TellMe.Server;
 using TellMe.Model;
 
 using Newtonsoft.Json;
+using TellMe.Pages;
 
 namespace TellMe
 {
@@ -22,6 +23,7 @@ namespace TellMe
         public static IContainer ObjectManager { get; private set; }
         public static ConfigurationManager QueryPathes { get; private set; }
         public static FileManager UserConfig { get; private set; }
+        public static UserCache CurrentUser { get; private set; }
 
         private void InitServices() {
 
@@ -36,26 +38,21 @@ namespace TellMe
             builder.RegisterType<SignUpPage>().SingleInstance();
             builder.RegisterType<LogInPage>().SingleInstance();
             builder.RegisterType<ActivationPage>().SingleInstance();
-            builder.RegisterType<ProfilePage>().UsingConstructor(typeof(User)).SingleInstance();
-            builder.RegisterType<LessonsPage>().SingleInstance();
 
             ObjectManager = builder.Build();
-
             QueryPathes = new ConfigurationManager("Pathes.json");
 
             UserConfig = new FileManager(Environment.SpecialFolder.Personal, "UserData.json");
             UserConfig.CreateFileIfNotExists();
+
+            Common.Load();
         }
 
         public static void RegistrateUserConfig(User user) {
-
-            UserConfig.WriteFile(JsonConvert.SerializeObject(new UserCache(user)));
+            CurrentUser = new UserCache(user);
+            UserConfig.WriteFile(JsonConvert.SerializeObject(CurrentUser));
         }
-
-        public static void Close() {
-
-            Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
-        }
+        public static void Close() => Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
 
         public App() {
 
@@ -71,16 +68,12 @@ namespace TellMe
             if (UserCacheJson == "")
                 this.MainPage = App.ObjectManager.Resolve<HelloPage>();
             else {
-
-                try {
-
-                    UserCache UserCache = JsonConvert.DeserializeObject<UserCache>(UserCacheJson);
-                    TypedParameter id = new TypedParameter(typeof(User), ObjectManager.Resolve<DataProvider>().GetUserInfo(UserCache.id));
-                    this.MainPage = ObjectManager.Resolve<ProfilePage>(id);
-                }
-                catch (NotImplementedException ex) {
-
-                    this.MainPage = App.ObjectManager.Resolve<HelloPage>();
+                UserCache CachedUser = JsonConvert.DeserializeObject<UserCache>(UserCacheJson);
+                if ((DateTime.Now - CachedUser.lastLogin).TotalMinutes >= Constants.SESSION_LIFETIME_MINUTES)
+                    this.MainPage = ObjectManager.Resolve<HelloPage>();
+                else {
+                    CurrentUser = CachedUser;
+                    this.MainPage = new ProfilePage();
                 }
             }
         }

@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("TellMe.Pages.ActivationPage.xaml", "Pages/ActivationPage.xaml", typeof(global::TellMe.ActivationPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("TellMe.Pages.ActivationPage.xaml", "Pages/ActivationPage.xaml", typeof(global::TellMe.Pages.ActivationPage))]
 
-namespace TellMe {
+namespace TellMe.Pages {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Pages\\ActivationPage.xaml")]

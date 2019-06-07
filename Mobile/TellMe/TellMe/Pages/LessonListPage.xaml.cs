@@ -7,22 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Autofac;
-
-namespace TellMe
+namespace TellMe.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LessonsPage : ContentPage
+    public partial class LessonListPage : ContentPage
     {
-        public LessonsPage()
+        public LessonListPage()
         {
             InitializeComponent();
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            App.Current.MainPage = App.ObjectManager.Resolve<HelloPage>();
-            return true;
         }
     }
 }

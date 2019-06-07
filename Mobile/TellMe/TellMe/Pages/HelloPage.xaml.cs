@@ -14,10 +14,8 @@ using Autofac;
 
 using TellMe.Server;
 
-namespace TellMe {
+namespace TellMe.Pages {
 
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(true)]
     public partial class HelloPage : ContentPage {
 
@@ -26,28 +24,23 @@ namespace TellMe {
             InitializeComponent();
 
             try {
-
-                Thread T = new Thread(() => App.ObjectManager.Resolve<DataProvider>().Init());
-                T.Start();
-            }
-            catch (InitFailedException) {
-
-                DisplayAlert("Error", "Server is not responding", "OK");
-                App.Close();
+                Task.Run(() => App.ObjectManager.Resolve<DataProvider>().Init());
+            } catch (NoConnectionException) {
+                DisplayAlert("Error", "No Internet connection", "OK"); return;
+            } catch(InitFailedException) {
+                DisplayAlert("Error", "No Internet connection", "OK"); return;
             }
 
-            SignUpButton.Clicked += SignUpButton_Clicked;
+            SignUpButton.Clicked += (sender, e) => App.Current.MainPage = App.ObjectManager.Resolve<SignUpPage>();
             LogInButton.Clicked += LogInButton_Clicked;
         }
 
-        private void LogInButton_Clicked(object sender, EventArgs e) {
-
-            App.Current.MainPage = App.ObjectManager.Resolve<LogInPage>();
-        }
-
-        private void SignUpButton_Clicked(object sender, EventArgs e) {
-
-            App.Current.MainPage = App.ObjectManager.Resolve<SignUpPage>();
+        private void LogInButton_Clicked(object sender, EventArgs e)
+        {
+            if (App.CurrentUser != null && (DateTime.Now - App.CurrentUser.lastLogin).TotalMinutes < Constants.SESSION_LIFETIME_MINUTES)
+                App.Current.MainPage = new ProfilePage();
+            else
+                App.Current.MainPage = App.ObjectManager.Resolve<LogInPage>();
         }
     }
 }

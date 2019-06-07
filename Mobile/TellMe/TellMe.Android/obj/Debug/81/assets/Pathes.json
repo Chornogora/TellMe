@@ -1,21 +1,31 @@
 ﻿{
   "Activate": {
-    "Path": "https://tellmeprod.herokuapp.com/registration/confirm",
+    "Path": "http://192.168.43.36:5000/registration/confirm",
     "Method": "POST"
   },
 
   "LogIn": {
-    "Path": "https://tellmeprod.herokuapp.com/authorization/authorize",
+    "Path": "http://192.168.43.36:5000/authorization/authorize",
     "Method": "POST"
   },
 
   "SignUp": {
-    "Path": "https://tellmeprod.herokuapp.com/registration/register",
+    "Path": "http://192.168.43.36:5000/registration/register",
     "Method": "POST"
   },
 
   "Init": {
-    "Path": "https://tellmeprod.herokuapp.com/init",
-    "Method":  "GET"
+    "Path": "http://192.168.43.36:5000/init",
+    "Method": "GET"
+  },
+
+  "GetUser": {
+    "Path": "http://192.168.43.36:5000/authorization/get",
+    "Method": "GET"
+  },
+
+  "GetLevels": {
+    "Path": "http://192.168.43.36:5000/level/get",
+    "Method": "GET"
   }
 }

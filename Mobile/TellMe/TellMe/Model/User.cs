@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace TellMe.Model {
 
+    [JsonObject(MemberSerialization.OptOut)]
     public class User {
 
         public DateTime birthday { get; set; }

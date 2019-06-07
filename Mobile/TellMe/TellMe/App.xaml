@@ -30,6 +30,14 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="VerticalOptions" Value="Start"/>
             </Style>
+
+            <Style x:Key="NavigationButton" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="HeightRequest" Value="60"/>
+            </Style>
             
         </ResourceDictionary>
     </Application.Resources>
