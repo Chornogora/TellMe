@@ -86,7 +86,7 @@ public class TournamentSocket extends WebSocketServer {
                 List<Task> lst = l.getTasks();
                 for(Task task : lst){
                     if(task instanceof Test){
-                        allTests.add((Test)task);
+                        allTests.add(new Test((Test)task));
                     }
                 }
             }

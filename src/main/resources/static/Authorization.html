@@ -71,6 +71,10 @@
                 request.open("POST", address + "?login=" + login + "&password=" + password, true);
                 request.send();
             }
+
+            document.onload = function(){
+                deleteCookie("user");
+            }
         </script>
 
     </head>

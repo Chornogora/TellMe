@@ -31,6 +31,14 @@ public class Test extends Task{
 
     }
 
+    public Test(Test test){
+        this.type = test.type;
+        this.testPicture = test.testPicture;
+        this.testText = test.testText;
+        this.variants = new ArrayList<>();
+        this.variants.addAll(test.variants);
+    }
+
     public Test(Lesson lesson, int number, String testPictureLink, String testText, String type){
         super(lesson, number);
         this.testPicture = testPictureLink;
