@@ -14,3 +14,17 @@ function getCookie(key){
     }
     return null;
 }
+
+function deleteCookie(key){
+    let array = document.cookie.split("; ");
+    let result;
+    for(let pair of array) {
+        let pairKey = pair.split("=")[0];
+        if (key == pairKey) {
+            result = pair;
+            document.cookie = pairKey + "=" + "null" + "; expires=-1";
+            break;
+        }
+    }
+    return result;
+}

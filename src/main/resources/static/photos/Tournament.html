@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="js/Cookie.js"></script>
+</head>
+<body>
+    <div>
+
+    </div>
+    <script>
+        let address = "http://192.168.0.103:5000";
+        let webSocket;
+
+        $(function () {
+
+            user = getCookie("user");
+            if(user == null){
+                location.href = address + "/Authorization.html"
+            }
+            let id = user.id;
+
+            let request = new XMLHttpRequest();
+
+            request.open("POST", address + "/tournament/open?id=" + id, true);
+
+            request.onload = function(){
+                let resp = request.response;
+                if(resp == "Invalid id"){
+                    alert("Try to authorize again");
+                    location.href = address + "/Authorization.html"
+                }else if(resp == "Cannot open Chat"){
+                    alert("Troubles with opening chat");
+                    location.href = address + "/Profile.html";
+                }
+
+                webSocket = new WebSocket("ws://192.168.0.103:" + resp + "/tpoint");
+                webSocket.onmessage = function(evt) {
+                    let message = evt.data;
+                    alert(message);
+                };
+
+            };
+
+            request.send();
+        })
+    </script>
+</body>
+</html>

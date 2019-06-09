@@ -7,8 +7,6 @@ public class Tournament {
 
     private SimpleUser player2;
 
-    private List<Test> questions;
-
     private int score1;
 
     private int score2;
@@ -20,8 +18,19 @@ public class Tournament {
         score2 = 0;
     }
 
-    public Tournament(SimpleUser user1, SimpleUser user2, List<Test> tests){
-        this(user1, user2);
-        this.questions = tests;
+    public void incrementScore1(){
+        score1++;
+    }
+
+    public void incrementScore2(){
+        score1++;
+    }
+
+    public int getScore1() {
+        return score1;
+    }
+
+    public int getScore2() {
+        return score2;
     }
 }

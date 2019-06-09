@@ -19,7 +19,6 @@ import java.util.Set;
 
 @ServerEndpoint(value = "/point")
 public class ChatSocket extends WebSocketServer {
-    public String hostName;
     private final ChatController controller;
     private final int port;
     private Set<WebSocket> connections;
@@ -85,7 +84,7 @@ public class ChatSocket extends WebSocketServer {
 
     private void close(){
         System.out.println("Server Socket has closed");
-        SocketDispatcher.freePort(port);
+        SocketDispatcher.freeChatPort(port);
         try {
             this.stop();
         } catch (IOException e) {
