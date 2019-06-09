@@ -81,7 +81,7 @@
                     if(enemy.avatar){
                         document.getElementById("enemyAvatar").src = enemy.avatar;
                     }else{
-                        document.getElementById("#enemyAvatar").src = address + "/images/anonymous.jpg";
+                        document.getElementById("enemyAvatar").src = address + "/images/anonymous.jpg";
                     }
                     break;
                 case "time":
@@ -94,6 +94,16 @@
                     test = JSON.parse(argument);
                     runTest(test);
                     break;
+                case "score":
+                    if(argument == "enemy"){
+                        let score = document.getElementById("score2").innerText;
+                        score = parseInt(score);
+                        document.getElementById("score2").innerText = score + 1;
+                    }else{
+                        let score = document.getElementById("score1").innerText;
+                        score = parseInt(score);
+                        document.getElementById("score1").innerText = score + 1;
+                    }
                 default:
                     alert(command + " " + argument);
             }
@@ -150,7 +160,7 @@
                     document.getElementById("vars").appendChild(rad);
                     break;
             }
-            let submit = document.createElement("button");
+            let submit = document.createElement("p");
             submit.innerText = "Submit";
             submit.className = "myButton";
             submit.onclick = function(){

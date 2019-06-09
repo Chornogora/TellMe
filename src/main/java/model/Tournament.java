@@ -23,7 +23,7 @@ public class Tournament {
     }
 
     public void incrementScore2(){
-        score1++;
+        score2++;
     }
 
     public int getScore1() {

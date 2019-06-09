@@ -30,6 +30,7 @@ public class TournamentSocket extends WebSocketServer {
     private List<Test> tests;
     private Test currentTest;
     private STATUS status;
+    Timer timer;
 
     public enum STATUS{
         NEW, WAITING, STARTED, FINISHED
@@ -120,13 +121,40 @@ public class TournamentSocket extends WebSocketServer {
             for(WebSocket socket : connections){
                 socket.send("test~" + util.JSONparser.toJSON(currentTest));
             }
-            Timer timer = new Timer();
-            //timer.start();
+            timer = new Timer();
+            timer.start();
             try {
                 timer.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        if(tournament.getScore1() == tournament.getScore2()){
+            for(int i = tests.size()/2; i < tests.size(); ++i){
+                isCreatorAnswered = isEnemyAnswered = false;
+                currentTest = tests.get(i);
+                for(WebSocket socket : connections){
+                    socket.send("test~" + util.JSONparser.toJSON(currentTest));
+                }
+                timer = new Timer();
+                timer.start();
+                try {
+                    timer.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if(tournament.getScore1() > tournament.getScore2()){
+            connections.get(0).send("result~victory");
+            connections.get(1).send("result~defeat");
+        }else if(tournament.getScore1() < tournament.getScore2()){
+            connections.get(1).send("result~victory");
+            connections.get(0).send("result~defeat");
+        }else{
+            connections.get(1).send("result~draw");
+            connections.get(0).send("result~draw");
         }
     }
 
@@ -148,7 +176,7 @@ public class TournamentSocket extends WebSocketServer {
                     s.send("status~started");
                 }
                 conn.send("enemy~"+util.JSONparser.toJSON(creator));
-                startTournament();
+                new Thread(this::startTournament).start();
                 break;
             default:
                 connections.remove(conn);
@@ -174,13 +202,31 @@ public class TournamentSocket extends WebSocketServer {
         String[] request = message.split("~");
         switch(request[0]){
             case "answer":
+                boolean isCr = false;
                 if(conn == connections.get(0)){
                     isCreatorAnswered = true;
+                    isCr = true;
                 }else{
                     isEnemyAnswered = true;
                 }
-                conn.send(String.valueOf(currentTest.isPassed(request[1])));
+                if(currentTest.isPassed(request[1])){
+                    if(isCr){
+                        tournament.incrementScore1();
+                    }else{
+                        tournament.incrementScore2();
+                    }
+                    for(WebSocket socket : connections){
+                        if(socket.equals(conn)){
+                            socket.send("score~myself");
+                        }else{
+                            socket.send("score~enemy");
+                        }
+                    }
+                }
                 break;
+        }
+        if(isEnemyAnswered && isCreatorAnswered){
+            timer.interrupt();
         }
     }
 
