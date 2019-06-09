@@ -18,13 +18,14 @@ import java.util.*;
 @ServerEndpoint(value = "/tpoint")
 public class TournamentSocket extends WebSocketServer {
     private final int port;
-    private Set<WebSocket> connections;
+    private List<WebSocket> connections;
     private TournamentController controller;
 
     private SimpleUser creator;
+    private boolean isCreatorAnswered;
     private SimpleUser enemy;
+    private boolean isEnemyAnswered;
     private int timeInterval;
-    private int numAnswered;
     private Tournament tournament;
     private List<Test> tests;
     private Test currentTest;
@@ -38,14 +39,19 @@ public class TournamentSocket extends WebSocketServer {
 
         @Override
         public void run(){
-            for(int i = timeInterval; i >= 0; --i){
-                for(WebSocket socket : connections){
-                    socket.send("time:" + i);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        return;
+            for(int i = timeInterval; i >= -1; --i){
+                int counter = 0;
+                for(int n = 0; n < connections.size(); ++n){
+                    if(n == 0 && !isCreatorAnswered){
+                        connections.get(n).send("time~" + i);
+                    }else if(n == 1 && !isEnemyAnswered){
+                        connections.get(n).send("time~" + i);
                     }
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    return;
                 }
             }
 
@@ -55,7 +61,7 @@ public class TournamentSocket extends WebSocketServer {
     public TournamentSocket(String hostName, int p, TournamentController cont, SimpleUser user){
         super(new InetSocketAddress(hostName, p));
         port = p;
-        connections = new HashSet<>();
+        connections = new ArrayList<>();
         controller = cont;
         creator = user;
 
@@ -76,6 +82,10 @@ public class TournamentSocket extends WebSocketServer {
         enemy = user;
         createTests();
         tournament = new Tournament(creator, enemy);
+        for(WebSocket socket : connections){
+            String JsonUser = util.JSONparser.toJSON(user);
+            socket.send("enemy~" + JsonUser);
+        }
     }
 
     private void createTests() {
@@ -105,12 +115,13 @@ public class TournamentSocket extends WebSocketServer {
 
     private void startTournament(){
         for(int i = 0; i < tests.size()/2; ++i){
+            isCreatorAnswered = isEnemyAnswered = false;
             currentTest = tests.get(i);
             for(WebSocket socket : connections){
-                socket.send("test:" + util.JSONparser.toJSON(currentTest));
+                socket.send("test~" + util.JSONparser.toJSON(currentTest));
             }
             Timer timer = new Timer();
-            timer.start();
+            //timer.start();
             try {
                 timer.join();
             } catch (InterruptedException e) {
@@ -125,23 +136,26 @@ public class TournamentSocket extends WebSocketServer {
 
     @OnOpen
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
+        connections.add(conn);
         switch(status){
             case NEW:
                 status = STATUS.WAITING;
-                conn.send("status:waiting");
+                conn.send("status~waiting");
                 break;
             case WAITING:
                 status = STATUS.STARTED;
                 for(WebSocket s : connections){
-                    s.send("status:started");
+                    s.send("status~started");
                 }
+                conn.send("enemy~"+util.JSONparser.toJSON(creator));
                 startTournament();
                 break;
             default:
+                connections.remove(conn);
                 conn.send("Lobby Overloaded");
                 return;
         }
-        connections.add(conn);
+
         System.out.println("New user: " + conn.getRemoteSocketAddress());
     }
 
@@ -157,9 +171,16 @@ public class TournamentSocket extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        String[] request = message.split(":");
+        String[] request = message.split("~");
         switch(request[0]){
-
+            case "answer":
+                if(conn == connections.get(0)){
+                    isCreatorAnswered = true;
+                }else{
+                    isEnemyAnswered = true;
+                }
+                conn.send(String.valueOf(currentTest.isPassed(request[1])));
+                break;
         }
     }
 
