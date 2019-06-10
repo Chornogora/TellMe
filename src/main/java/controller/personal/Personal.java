@@ -1,8 +1,10 @@
 package controller.personal;
 
 import dao.SimpleUserRepo;
+import model.Levels;
 import model.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +21,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/personal")
@@ -37,7 +42,7 @@ public class Personal{
     }
 
     @PostMapping("/setAvatar")
-    public String setAvatar(@RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
+    public String setAvatar(HttpServletRequest request, @RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
         Optional<SimpleUser> opt = simpleUserRepo.findById(id);
         if(!opt.isPresent()){
             return "Incorrect id";
@@ -85,7 +90,8 @@ public class Personal{
 
         user.setAvatar(DYNAMIC_IMAGES_ROOT + user.getId() + extension);
         simpleUserRepo.save(user);
-        return user.getAvatar();
+
+        return getRedirect();
     }
 
     @GetMapping("/getAvatar")
@@ -100,5 +106,29 @@ public class Personal{
             return "images/anonymous.jpg";
         }
         return user.getAvatar();
+    }
+
+    @PostMapping("/updateProfile")
+    public String updateProfile(@RequestParam("login") String login,
+                                @RequestParam("email") String email,
+                                @RequestParam("birthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthday){
+        SimpleUser user = simpleUserRepo.findByLogin(login);
+        user.setEmail(email);
+        user.setBirthday(birthday);
+        user.setLevel();
+        simpleUserRepo.save(user);
+        return util.JSONparser.toJSON(user);
+    }
+
+    private String getRedirect(){
+        StringBuilder result = new StringBuilder("");
+        try(Scanner sc = new Scanner(new File("target/classes/static/redirect.html"))) {
+            while(sc.hasNextLine()){
+                result.append(sc.nextLine()).append('\n');
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 }

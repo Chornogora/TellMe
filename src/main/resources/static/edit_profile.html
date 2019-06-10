@@ -42,7 +42,9 @@
     <script src="resources/scripts/axure/math.js"></script> 
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/home/data.js"></script> 
+    <script src="files/home/data.js"></script>
+
+    <script src="js/Cookie.js"></script>
 </head>
 <body>
 	<div id="base" class="" style="display: inline-block;">
@@ -109,37 +111,62 @@
     </div>
 	<div style="width: 500px; text-align: center; display: inline-block; margin-left: 500px;">
 		<h2>Edit Profile</h2>
-		<form action="#">
-			<img src="#">
-			<div class="form-group">
-				<label for="email">Upload new avatar</label><br>
-				<input type="file" id="file">
-			</div>
-			<div class="form-group">
-				<label for="email">Nickname</label>
-				<input type="text" class="form-control" id="nickname">
-			</div>
-			<div class="form-group">
-				<label for="email">Birthday</label>
-				<input type="date" class="form-control" id="birthday">
-			</div>
+        <img src="#" id = "avatar" style="max-width: 100%">
+        <form method="POST" action="personal/setAvatar" enctype="multipart/form-data">
+            <div id = "imageDiv" style="visibility: visible">
+                <input type="number" name = "id" id="uid" style="visibility: hidden">
+                <input type="file" name = "avatar" width="70">
+                <input type="submit">
+            </div>
+        </form>
+        <div>
 			<div class="form-group">
 				<label for="email">Email address:</label>
-				<input type="email" class="form-control" id="email">
+				<input type="email" name="email" class="form-control" id="email" />
 			</div>
-			<div class="form-group">
-				<label for="pwd">Password:</label>
-				<input type="password" class="form-control" id="pwd">
-			</div>
-			<div class="form-group">
-				<label for="pwd">Language:</label>
-				<select name="select"> 
-					<option value="value1">English</option> 
-					<option value="value2" selected>Russian</option>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-danger">Save changes</button>
-		</form>
+            <div class="form-group">
+                <label for="email">Birthday</label>
+                <input type="date" name="birthday" class="form-control" id="birthday" />
+            </div>
+			<button type="submit" class="btn btn-danger" onclick="sendUpdate()">Save changes</button>
+		</div>
+
+        <script>
+
+            function sendUpdate(){
+                let req = new XMLHttpRequest();
+
+                let login = (JSON.parse(getCookie("user"))).login;
+                let email = document.getElementById("email").value;
+                let birthday = document.getElementById("birthday").value;
+
+                req.open("post", "http://192.168.0.103:5000/personal/updateProfile?login=" + login +
+                    "&email=" + email + "&birthday=" + birthday, true);
+
+                req.onload = ()=>{
+                  setCookie("user", req.response);
+                };
+                req.send();
+            }
+
+            let user = getCookie("user");
+            if(user == null){
+                location.href = address + "/Authorization.html"
+            }
+            let object = JSON.parse(user);
+
+            document.getElementById("uid").value=object.id;
+            document.getElementById("birthday").value=object.birthday;
+            document.getElementById("email").value = object.email;
+
+
+            if(object.avatar){
+                document.getElementById("avatar").src = object.avatar;
+            }else{
+                document.getElementById("avatar").src = "http://192.168.0.103:5000/images/anonymous.jpg";
+            }
+
+        </script>
 	</div>
 </body>
 </html>
