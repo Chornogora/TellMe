@@ -44,7 +44,7 @@
         <div class="col">
             <div class="collapse multi-collapse" id="lesson_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/lesson/delete" target="tgt">
+                    <form method="POST" action="/administration/lesson/delete" target="tgt" onsubmit="deleteLesson()">
 
                         <div class="form-group">
                             <label for="nameForLesson">Name</label>
@@ -60,10 +60,10 @@
 
             <div class="collapse multi-collapse" id="grammar_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/grammar/delete" target="tgt">
+                    <form method="POST" action="/administration/grammar/delete" target="tgt" onsubmit="deleteGrammar()">
 
                         <div class="form-group">
-                            <label for="lesson_Id">Lesson ID</label>
+                            <label for="lesson_Id">Grammar ID</label>
                             <input type="text" class="form-control" id="lesson_Id" name="lessonId"
                                    placeholder="Write id of lesson">
                         </div>
@@ -77,7 +77,7 @@
             <div class="collapse multi-collapse" id="lexical_collapse">
 
                 <div class="card-body">
-                    <form method="POST" action="/administration/lexical/delete" target="tgt">
+                    <form method="POST" action="/administration/lexical/delete" target="tgt" onsubmit="deleteLexical()">
 
                         <div class="form-group">
                             <label for="lesson_Id">Task ID</label>
@@ -93,11 +93,11 @@
             </div>
             <div class="collapse multi-collapse" id="test_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/test/delete" target="tgt">
+                    <form method="POST" action="/administration/test/delete" target="tgt" onsubmit="deleteTest()">
 
                         <div class="form-group">
-                            <label for="lesson_Id">Test ID</label>
-                            <input type="text" class="form-control" id="lesson_Id_test" name="lessonId"
+                            <label for="test_taskId">Test ID</label>
+                            <input type="text" class="form-control" id="test_taskId" name="test_taskId"
                                    placeholder="Write id of test">
                         </div>
 
@@ -109,6 +109,116 @@
     </div>
 </div>
 </div>
+
+<script>
+    function deleteLesson() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "name=" + document.getElementById("nameForLesson").value;
+
+        request.open("POST", address + "/administration/lesson/delete" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteGrammar() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("lesson_Id").value;
+
+        request.open("POST", address + "/administration/grammar/delete" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteLexical() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("lesson_Id_lexical").value;
+
+        request.open("POST", address + "/administration/lexical/delete" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteTest() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("test_taskId").value;
+
+        request.open("POST", address + "/administration/test/delete" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
