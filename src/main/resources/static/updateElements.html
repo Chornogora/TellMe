@@ -3,8 +3,519 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./indexAdmin.html">Admin panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./indexAdmin.html">Add elements <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./updateElements.html">Update elements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./deleteElements.html">Delete elements</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+    </span>
+        </div>
+    </nav>
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#lesson_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Lesson</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#grammar_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Grammar</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#lexical_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Lexical</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#test_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Test</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="lesson_collapse">
+                <div class="card card-body">
+                    <form method="POST" action="/administration/lesson/add" target="tgt" onsubmit="addLesson()">
 
+                        <div class="form-group">
+                            <label for="nameForLesson">Name</label>
+                            <input type="text" class="form-control" id="nameForLesson" name="name"
+                                   placeholder="Write name of lesson">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numberOfPoints">Points</label>
+                            <input type="text" class="form-control" id="numberOfPoints" name="points"
+                                   placeholder="Write number of points">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="mr-sm-2" for="levels">Levels</label>
+                            <select class="custom-select mr-sm-2" id="levels">
+                                <option selected>BEGINNER</option>
+                                <option value="1">ELEMENTARY</option>
+                                <option value="2">PREINTERMEDIATE</option>
+                                <option value="3">INTERMEDIATE</option>
+                                <option value="4">UPPERINTERMEDIATE</option>
+                                <option value="5">ADVANCED</option>
+                                <option value="6">MASTER</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="collapse multi-collapse" id="grammar_collapse">
+                <div class="card card-body">
+                    <form method="POST" action="/administration/grammar/add" target="tgt" onsubmit="addGrammar()">
+
+                        <div class="form-group">
+                            <label for="lesson_Id">Lesson ID</label>
+                            <input type="text" class="form-control" id="lesson_Id" name="lessonId"
+                                   placeholder="Write id of lesson">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content_info">Content</label>
+                            <input type="text" class="form-control" id="content_info" placeholder="Write information">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="collapse multi-collapse" id="lexical_collapse">
+                <div class="card card-body">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Add lexical
+                                    </button>
+
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <form method="POST" action="/administration/lexical/add" target="tgt"
+                                          onsubmit="addLexical()">
+
+                                        <div class="form-group">
+                                            <label for="lesson_Id_lexical">Lesson ID</label>
+                                            <input type="text" class="form-control" id="lesson_Id_lexical"
+                                                   name="lesson_Id_lexical"
+                                                   placeholder="Write id of lesson">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                        Add word
+                                    </button>
+
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <form method="POST" action="/administration/lexical/addWord" target="tgt"
+                                          onsubmit="addWord()">
+
+                                        <div class="form-group">
+                                            <label for="task_Id">Task id</label>
+                                            <input type="text" class="form-control" id="task_Id"
+                                                   name="task_Id"
+                                                   placeholder="Write id of lexical task">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="word_name">Word name</label>
+                                            <input type="text" class="form-control" id="word_name"
+                                                   name="word_name"
+                                                   placeholder="Write name of word">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <input type="text" class="form-control" id="description"
+                                                   name="description"
+                                                   placeholder="Write description of this word">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="translation">Translation</label>
+                                            <input type="text" class="form-control" id="translation"
+                                                   name="translation"
+                                                   placeholder="Write translation of this word">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="picture_lexical">Picture</label>
+                                            <input type="file" class="form-control-file" id="picture_lexical">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse multi-collapse" id="test_collapse">
+
+                <div class="card card-body">
+                    <div class="accordion" id="accordionTest">
+                        <div class="card">
+                            <div class="card-header" id="headOne">
+                                <h5 class="mb-0">
+
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapsOne" aria-expanded="true" aria-controls="collapsOne">
+                                        Add test
+                                    </button>
+
+                                </h5>
+                            </div>
+
+                            <div id="collapsOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+
+                                <div class="card card-body">
+                                    <form method="POST" action="/administration/test/add" target="tgt"
+                                          onsubmit="addTest()">
+
+                                        <div class="form-group">
+                                            <label for="lesson_Id_test">Lesson ID</label>
+                                            <input type="text" class="form-control" id="lesson_Id_test" name="lessonId"
+                                                   placeholder="Write id of test">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="picture">Picture</label>
+                                            <input type="file" class="form-control-file" id="picture">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="text_test">Text</label>
+                                            <input type="text" class="form-control" id="text_test" name="text_test"
+                                                   placeholder="Write content for test">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="mr-sm-2" for="typeOfTest">Levels</label>
+                                            <select class="custom-select mr-sm-2" id="typeOfTest">
+                                                <option selected>ONE_CORRECT</option>
+                                                <option value="1">SEVERAL_CORRECT</option>
+                                                <option value="2">WRITE_WORD</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headTwo">
+                                <h5 class="mb-0">
+
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapsTwo" aria-expanded="false"
+                                            aria-controls="collapsTwo">
+                                        Add word
+                                    </button>
+
+                                </h5>
+                            </div>
+                            <div id="collapsTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <form method="POST" action="/administration/test/addVariant" target="tgt"
+                                          onsubmit="addVariants()">
+
+                                        <div class="form-group">
+                                            <label for="task_Id_second">Task id</label>
+                                            <input type="text" class="form-control" id="task_Id_second"
+                                                   name="task_Id_second"
+                                                   placeholder="Write id of task">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="numberOfTestVariants">number</label>
+                                            <input type="text" class="form-control" id="numberOfTestVariants"
+                                                   name="numberOfTestVariants"
+                                                   placeholder="Write number of test variant">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="rightVariant">Right variant</label>
+                                            <input type="text" class="form-control" id="rightVariant"
+                                                   name="rightVariant"
+                                                   placeholder="Write right variant">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="text_testVariant">Text</label>
+                                            <input type="text" class="form-control" id="text_testVariant"
+                                                   name="text_testVariant"
+                                                   placeholder="Write text">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function addLesson() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "name=" + document.getElementById("nameForLesson").value;
+        lesson += "&";
+        lesson += "points=" + document.getElementById("numberOfPoints").value;
+        lesson += "&";
+        lesson += "level=" + document.getElementById("levels").value;
+
+        request.open("POST", address + "/administration/lesson/add" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Lesson exists":
+                    alert(resp);
+                    break;
+                case "Illegal arguments":
+                    alert("Please");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+
+    }
+
+    function addGrammar() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "lessonId=" + document.getElementById("lesson_Id").value;
+        lesson += "&";
+        lesson += "content=" + document.getElementById("content_info").value;
+
+
+        request.open("POST", address + "/administration/grammar/add" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Lesson exists":
+                    alert(resp);
+                    break;
+                case "Illegal arguments":
+                    alert("Please");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+
+    }
+
+    function addLexical() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "lessonId=" + document.getElementById("lesson_Id_lexical").value;
+
+        request.open("POST", address + "/administration/lexical/add" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Incorrect id":
+                    alert(resp);
+                    break;
+                case "Illegal arguments":
+                    alert("Please");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+    }
+
+    function addWord() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("task_Id").value;
+        lesson += "&";
+        lesson += "wordName=" + document.getElementById("word_name").value;
+        lesson += "&";
+        lesson += "description=" + document.getElementById("description").value;
+        lesson += "&";
+        lesson += "translation=" + document.getElementById("translation").value;
+        lesson += "&";
+        lesson += "picture=" + "";
+
+        request.open("POST", address + "/administration/lexical/addWord" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Lesson exists":
+                    alert(resp);
+                    break;
+                case "Illegal arguments":
+                    alert("Please");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+
+
+    }
+
+    function addTest() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "lessonId=" + document.getElementById("lesson_Id_test").value;
+        lesson += "&";
+        lesson += "picture=" + "";
+        lesson += "&";
+        lesson += "text=" + document.getElementById("text_test").value;
+        lesson += "&";
+        lesson += "type=" + document.getElementById("typeOfTest").value;
+
+
+        request.open("POST", address + "/administration/test/add" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Incorrect type":
+                    alert(resp);
+                    break;
+                case "Incorrect id":
+                    alert("Please");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+
+    }
+
+    function addVariants() {
+        let address = "http://localhost:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("task_Id_second").value;
+        lesson += "&";
+        lesson += "number=" + document.getElementById("numberOfTestVariants").value;
+        lesson += "&";
+        lesson += "rightVariant=" + document.getElementById("rightVariant").value;
+        lesson += "&";
+        lesson += "text=" + document.getElementById("text_testVariant").value;
+
+        request.open("POST", address + "/administration/test/addVariant" + lesson, false);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Incorrect id":
+                    alert(resp);
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+
+        request.send();
+    }
+
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
