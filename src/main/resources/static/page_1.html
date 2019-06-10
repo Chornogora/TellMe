@@ -182,7 +182,7 @@
             document.getElementById("level").innerText += object.level;
 
             let req = new XMLHttpRequest();
-            req.open("GET", "http://192.168.43.37:5000/level/get", true);
+            req.open("GET", "http://192.168.43.36:5000/level/get", true);
 
             req.onload = function(){
                 let resp = req.response;
@@ -206,8 +206,6 @@
                     min = "∞";
                 }
 
-
-
                 document.getElementById("progress").innerText += object.points + "/" + min;
             };
 
@@ -215,19 +213,6 @@
 
 
             document.getElementById("login").innerText = object.login;
-            /*let array = document.getElementsByClassName("progress-bar");
-            let points = [100, 500, 5000, 15000, 30000, 50000];
-
-            for(let i = 0 ; i < array.length; ++i){
-                let coef = user.points / points[i];
-                if(coef > 1){
-                    array[i].style.width = "100%";
-                }else{
-                    let value = (coef * 100) + "%";
-                    array[i].style.width = value;
-                    alert(array[i].style.width);
-                }
-            }*/
         }
     </script>
 </body>

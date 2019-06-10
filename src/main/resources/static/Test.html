@@ -9,7 +9,7 @@
     function sendRequest() {
         let object = new XMLHttpRequest();
 
-        object.open("GET","http://localhost:5000/lesson/getAll",true);
+        object.open("GET","http://192.168.43.36:5000/lesson/getAll",true);
 
         object.onload = ()=>{
           let response = object.response;

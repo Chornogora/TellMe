@@ -139,7 +139,7 @@
         </div>
     </div>
     <script>
-        let address = "http://192.168.43.37:5000";
+        let address = "http://192.168.43.36:5000";
         let webSocket;
         let test;
 
@@ -173,6 +173,7 @@
                         score = parseInt(score);
                         document.getElementById("score1").innerText = score + 1;
                     }
+                    break;
                 case "result":
                     alert(argument);
                     location.href = "page_1.html";
@@ -271,7 +272,7 @@
                     location.href = address + "/Profile.html";
                 }
 
-                webSocket = new WebSocket("ws://192.168.43.37:" + resp + "/tpoint");
+                webSocket = new WebSocket("ws://192.168.43.36:" + resp + "/tpoint");
                 webSocket.onmessage = function(evt) {
                     let message = evt.data;
                     message = message.split("~");

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./indexAdmin.html">Admin panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./indexAdmin.html">Add elements <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./updateElements.html">Update elements</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./deleteElements.html">Delete elements</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+    </span>
+        </div>
+    </nav>
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#lesson_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Lesson</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#grammar_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Grammar</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#lexical_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Lexical</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#test_collapse" role="button"
+           aria-expanded="true" aria-controls="multiCollapseExample1">Test</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="lesson_collapse">
+                <div class="card card-body">
+                    <form method="POST" action="/administration/lesson/delete" target="tgt" onsubmit="deleteLesson()">
+
+                        <div class="form-group">
+                            <label for="nameForLesson">Name</label>
+                            <input type="text" class="form-control" id="nameForLesson" name="name"
+                                   placeholder="Write name of lesson">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="collapse multi-collapse" id="grammar_collapse">
+                <div class="card card-body">
+                    <form method="POST" action="/administration/grammar/delete" target="tgt" onsubmit="deleteGrammar()">
+
+                        <div class="form-group">
+                            <label for="taskId_grammar">Grammar ID</label>
+                            <input type="text" class="form-control" id="taskId_grammar" name="taskId_grammar"
+                                   placeholder="Write id of lesson">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="collapse multi-collapse" id="lexical_collapse">
+
+                <div class="card-body">
+                    <form method="POST" action="/administration/lexical/delete" target="tgt" onsubmit="deleteLexical()">
+
+                        <div class="form-group">
+                            <label for="lesson_Id_lexical">Task ID</label>
+                            <input type="text" class="form-control" id="lesson_Id_lexical"
+                                   name="lessonId"
+                                   placeholder="Write id of lexical">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="collapse multi-collapse" id="test_collapse">
+                <div class="card card-body">
+                    <form method="POST" action="/administration/test/delete" target="tgt" onsubmit="deleteTest()">
+
+                        <div class="form-group">
+                            <label for="test_taskId">Test ID</label>
+                            <input type="text" class="form-control" id="test_taskId" name="test_taskId"
+                                   placeholder="Write id of test">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function deleteLesson() {
+        let address = "http://192.168.43.36:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "name=" + document.getElementById("nameForLesson").value;
+
+        request.open("POST", address + "/administration/lesson/delete" + lesson, true);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteGrammar() {
+        let address = "http://192.168.43.36:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("taskId_grammar").value;
+
+        request.open("POST", address + "/administration/grammar/delete" + lesson, true);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteLexical() {
+        let address = "http://192.168.43.36:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "taskId=" + document.getElementById("lesson_Id_lexical").value;
+
+        request.open("POST", address + "/administration/lexical/delete" + lesson, true);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Not exists":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+
+    function deleteTest() {
+        let address = "http://192.168.43.36:5000";
+        let request = new XMLHttpRequest();
+
+        let lesson = "?";
+        lesson += "lessonId=" + document.getElementById("test_taskId").value;
+
+        request.open("POST", address + "/administration/test/delete" + lesson, true);
+
+        request.onload = function () {
+            let resp = request.response;
+            switch (resp) {
+                case "Incorrect id":
+                    alert("Write correct name");
+                    break;
+                case "Opened":
+                    alert("You cant delete this lesson because it is opened");
+                    break;
+                default:
+                    alert("OK!");
+                    location.reload();
+            }
+
+        };
+        request.send();
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

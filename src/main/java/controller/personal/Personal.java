@@ -42,8 +42,8 @@ public class Personal{
     }
 
     @PostMapping("/setAvatar")
-    public String setAvatar(HttpServletRequest request, @RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
-        Optional<SimpleUser> opt = simpleUserRepo.findById(id);
+    public String setAvatar(@RequestParam("id") long id, @RequestParam("avatar") MultipartFile image){
+     Optional<SimpleUser> opt = simpleUserRepo.findById(id);
         if(!opt.isPresent()){
             return "Incorrect id";
         }

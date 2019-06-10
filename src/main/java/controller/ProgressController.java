@@ -76,6 +76,7 @@ public class ProgressController implements ElementGetter{
         if (progress.getTaskPassedNumber()+1 == progress.getLesson().getTasks().size() && !progress.isDone()) {
             progress.setDone();
             progress.getUser().addPoints(progress.getLesson().getPoints());
+            userRepo.save(progress.getUser());
         }
         prRepo.save(progress);
     }
