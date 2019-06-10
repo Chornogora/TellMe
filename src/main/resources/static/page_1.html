@@ -60,7 +60,7 @@
           <p></p>
         </div>
       </div>
-      <div id="u2" class="ax_default icon" onclick="location.href='TestChat.html'">
+      <div id="u2" class="ax_default icon" onclick="location.href='ChatList.html'">
         <img id="u2_img" class="img " src="images/home/u2.svg"/>
         <div id="u2_text" class="text " style="display:none; visibility: hidden">
           <p></p>
@@ -182,7 +182,7 @@
             document.getElementById("level").innerText += object.level;
 
             let req = new XMLHttpRequest();
-            req.open("GET", "http://192.168.0.103:5000/level/get", true);
+            req.open("GET", "http://192.168.43.37:5000/level/get", true);
 
             req.onload = function(){
                 let resp = req.response;

@@ -12,9 +12,9 @@ import java.util.Optional;
 @RequestMapping("/tournament")
 public class TournamentController {
 
-    private final SimpleUserRepo userRepo;
+    final SimpleUserRepo userRepo;
 
-    public final LessonRepo lRepo;
+    final LessonRepo lRepo;
 
     @Autowired
     public TournamentController(SimpleUserRepo suRepo, LessonRepo lr){

@@ -148,10 +148,16 @@ public class TournamentSocket extends WebSocketServer {
         }
         if(tournament.getScore1() > tournament.getScore2()){
             connections.get(0).send("result~victory");
+            creator.addPoints((int)creator.getLevel().getMinPoints()/20);
             connections.get(1).send("result~defeat");
+
+            controller.userRepo.save(creator);
         }else if(tournament.getScore1() < tournament.getScore2()){
             connections.get(1).send("result~victory");
+            enemy.addPoints((int)creator.getLevel().getMinPoints()/20);
             connections.get(0).send("result~defeat");
+
+            controller.userRepo.save(enemy);
         }else{
             connections.get(1).send("result~draw");
             connections.get(0).send("result~draw");

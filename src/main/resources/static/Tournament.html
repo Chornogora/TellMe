@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <title>Tournament</title>
     <script src="js/Cookie.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/home/styles.css" type="text/css" rel="stylesheet"/>
     <style>
         .myButton {
             -moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
@@ -50,6 +57,68 @@
 
 </head>
 <body>
+<div id="base" class="" style="display: inline-block;">
+    <div id="u0" class="ax_default box_1 selected">
+        <div id="u0_div" class="selected"></div>
+        <div id="u0_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u1" class="ax_default box_2">
+        <div id="u1_div" class=""></div>
+        <div id="u1_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u2" class="ax_default icon" onclick="location.href='ChatList.html'">
+        <img id="u2_img" class="img " src="images/home/u2.svg"/>
+        <div id="u2_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u3" class="ax_default icon" onclick="location.href='Tournament.html'">
+        <img id="u3_img" class="img " src="images/home/u3.svg"/>
+        <div id="u3_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u4" class="ax_default icon" onclick="location.reload()">
+        <img id="u4_img" class="img " src="images/home/u4.svg"/>
+        <div id="u4_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u5" class="ax_default icon" onclick="location.reload()">
+        <img id="u5_img" class="img " src="images/home/u5.svg"/>
+        <div id="u5_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u6" class="ax_default icon" onclick="location.href='page_1.html'">
+        <img id="u6_img" class="img " src="images/home/u6.svg"/>
+        <div id="u6_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u7" class="ax_default icon">
+        <img id="u7_img" class="img " src="images/home/u7.svg"/>
+        <div id="u7_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u8" class="ax_default icon" onclick="location.href='Authorization.html'">
+        <img id="u8_img" class="img " src="images/home/u8.svg"/>
+        <div id="u8_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+    <div id="u9" class="ax_default image">
+        <img id="u9_img" class="img " src="images/home/p1.png"/>
+        <div id="u9_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+        </div>
+    </div>
+</div>
     <div>
         <img id="myAvatar" style = "position: absolute; left:25%; top:5%; width: 12%; border:4px solid yellow" />
         <img src = "https://i.gifer.com/AvGf.gif" id="enemyAvatar" style = "position: absolute; left:60%; top:5%; width: 12%; border:4px solid yellow" />
@@ -70,7 +139,7 @@
         </div>
     </div>
     <script>
-        let address = "http://192.168.0.103:5000";
+        let address = "http://192.168.43.37:5000";
         let webSocket;
         let test;
 
@@ -104,6 +173,9 @@
                         score = parseInt(score);
                         document.getElementById("score1").innerText = score + 1;
                     }
+                case "result":
+                    alert(argument);
+                    location.href = "page_1.html";
             }
         }
 
@@ -199,7 +271,7 @@
                     location.href = address + "/Profile.html";
                 }
 
-                webSocket = new WebSocket("ws://192.168.0.103:" + resp + "/tpoint");
+                webSocket = new WebSocket("ws://192.168.43.37:" + resp + "/tpoint");
                 webSocket.onmessage = function(evt) {
                     let message = evt.data;
                     message = message.split("~");

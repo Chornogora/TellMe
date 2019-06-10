@@ -5,7 +5,14 @@
         <title>Chat</title>
         <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
         <script src="js/Cookie.js"></script>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+        <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+        <link href="files/home/styles.css" type="text/css" rel="stylesheet"/>
         <style>
             .outer{
                 position:absolute;
@@ -27,7 +34,7 @@
         </style>
 
         <script>
-            let address = "http://192.168.43.36:5000";
+            let address = "http://192.168.43.37:5000";
             let webSocket;
 
             function getDate(timestamp){
@@ -60,7 +67,7 @@
 
                 request.onload = function(){
                     let resp = request.response;
-                    webSocket = new WebSocket("ws://192.168.43.36:" + resp + "/point");
+                    webSocket = new WebSocket("ws://192.168.43.37:" + resp + "/point");
                     webSocket.onmessage = function(evt) {
                         let message = JSON.parse(evt.data);
                         let div = document.createElement("div");
@@ -76,6 +83,11 @@
             }
 
             $(function(){
+                user = getCookie("user");
+                if(user == null){
+                    location.href = address + "/Authorization.html"
+                }
+
                 let chatId = parseInt(getCookie("chatId"), 10);
                 let request = new XMLHttpRequest();
 
@@ -103,13 +115,75 @@
 
     </head>
     <body>
+    <div id="base" class="" style="display: inline-block;">
+        <div id="u0" class="ax_default box_1 selected">
+            <div id="u0_div" class="selected"></div>
+            <div id="u0_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u1" class="ax_default box_2">
+            <div id="u1_div" class=""></div>
+            <div id="u1_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u2" class="ax_default icon" onclick="location.href='ChatList.html'">
+            <img id="u2_img" class="img " src="images/home/u2.svg"/>
+            <div id="u2_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u3" class="ax_default icon" onclick="location.href='Tournament.html'">
+            <img id="u3_img" class="img " src="images/home/u3.svg"/>
+            <div id="u3_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u4" class="ax_default icon" onclick="location.reload()">
+            <img id="u4_img" class="img " src="images/home/u4.svg"/>
+            <div id="u4_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u5" class="ax_default icon" onclick="location.reload()">
+            <img id="u5_img" class="img " src="images/home/u5.svg"/>
+            <div id="u5_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u6" class="ax_default icon" onclick="location.href='page_1.html'">
+            <img id="u6_img" class="img " src="images/home/u6.svg"/>
+            <div id="u6_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u7" class="ax_default icon">
+            <img id="u7_img" class="img " src="images/home/u7.svg"/>
+            <div id="u7_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u8" class="ax_default icon" onclick="location.href='Authorization.html'">
+            <img id="u8_img" class="img " src="images/home/u8.svg"/>
+            <div id="u8_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+        <div id="u9" class="ax_default image">
+            <img id="u9_img" class="img " src="images/home/p1.png"/>
+            <div id="u9_text" class="text " style="display:none; visibility: hidden">
+                <p></p>
+            </div>
+        </div>
+    </div>
         <div id = "messages" class="outer">
 
         </div>
 
         <div style="border: 3px solid yellow; position: absolute; top:73%; width: 50%; left: 30%">
             <textarea id = "textMessage" style="height: 100%; width: 100%">Enter your text here</textarea>
-            <img style="width: 5%; height: 7%; left: 60%;" src="http://192.168.43.36:5000/images/Send.png" onclick="sendMessage()"/>
+            <img style="width: 5%; height: 7%; left: 60%;" src="http://192.168.43.37:5000/images/Send.png" onclick="sendMessage()"/>
         </div>
     </body>
 </html>
