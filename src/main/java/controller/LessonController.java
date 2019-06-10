@@ -40,7 +40,7 @@ public class LessonController implements ElementGetter{
         return util.JSONparser.toJSON(set);
     }
 
-    @GetMapping("/detNum")
+    @GetMapping("/getNum")
     public String getNumTasks(@RequestParam("id") long lessonId){
         Optional<Lesson> opt = lRepo.findById(lessonId);
         if(!opt.isPresent()){
