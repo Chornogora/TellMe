@@ -39,4 +39,15 @@ public class LessonController implements ElementGetter{
         Iterable<Lesson> set = lRepo.findAll();
         return util.JSONparser.toJSON(set);
     }
+
+    @GetMapping("/detNum")
+    public String getNumTasks(@RequestParam("id") long lessonId){
+        Optional<Lesson> opt = lRepo.findById(lessonId);
+        if(!opt.isPresent()){
+            return "Invalid id";
+        }
+
+        Lesson lesson = opt.get();
+        return String.valueOf(lesson.getTasks().size());
+    }
 }

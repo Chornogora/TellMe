@@ -153,18 +153,31 @@
 	</div>
 
     <script>
+        function getAvatar(object){
+            let req = new XMLHttpRequest();
+            req.open("GET", "personal/getAvatar?id=" + object.id, true);
+
+            req.onload = ()=>{
+                let response = req.response;
+                if(response){
+                    document.getElementById("avatar").src = response;
+                    object.avatar = response;
+                    setCookie("user", JSON.stringify(object));
+                }else{
+                    document.getElementById("avatar").src = "images/anonymous.jpg";
+                }
+            };
+
+            req.send();
+        }
+
         window.onload = function(){
             let user = getCookie("user");
             if(user == null){
                 location.href = address + "/Authorization.html"
             }
             let object = JSON.parse(user);
-
-            if(object.avatar){
-                document.getElementById("avatar").src = object.avatar;
-            }else{
-                document.getElementById("avatar").src = "http://192.168.0.103:5000/images/anonymous.jpg";
-            }
+            getAvatar(object);
 
             document.getElementById("level").innerText += object.level;
 
