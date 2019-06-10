@@ -65,7 +65,7 @@
                             return;
                         default:
                             setCookie("user", response);
-                            location.href = "Learning.html";
+                            location.href = "page_1.html";
                     }
                 };
                 request.open("POST", address + "?login=" + login + "&password=" + password, true);
@@ -93,5 +93,6 @@
             </label>
             <button style = "position: absolute; top: 80%; left: 30%;" class="myButton" onclick="authorize()">Submit</button>
         </div>
+        <button style = "position: absolute; top: 65%; left: 47%;" class="myButton" onclick="location.href='Registration.html'">Sign Up</button>
     </body>
 </html>
