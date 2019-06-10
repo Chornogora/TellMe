@@ -63,8 +63,8 @@
                     <form method="POST" action="/administration/grammar/delete" target="tgt" onsubmit="deleteGrammar()">
 
                         <div class="form-group">
-                            <label for="lesson_Id">Grammar ID</label>
-                            <input type="text" class="form-control" id="lesson_Id" name="lessonId"
+                            <label for="taskId_grammar">Grammar ID</label>
+                            <input type="text" class="form-control" id="taskId_grammar" name="taskId_grammar"
                                    placeholder="Write id of lesson">
                         </div>
 
@@ -80,7 +80,7 @@
                     <form method="POST" action="/administration/lexical/delete" target="tgt" onsubmit="deleteLexical()">
 
                         <div class="form-group">
-                            <label for="lesson_Id">Task ID</label>
+                            <label for="lesson_Id_lexical">Task ID</label>
                             <input type="text" class="form-control" id="lesson_Id_lexical"
                                    name="lessonId"
                                    placeholder="Write id of lexical">
@@ -143,7 +143,7 @@
         let request = new XMLHttpRequest();
 
         let lesson = "?";
-        lesson += "taskId=" + document.getElementById("lesson_Id").value;
+        lesson += "taskId=" + document.getElementById("taskId_grammar").value;
 
         request.open("POST", address + "/administration/grammar/delete" + lesson, false);
 
@@ -197,14 +197,14 @@
         let request = new XMLHttpRequest();
 
         let lesson = "?";
-        lesson += "taskId=" + document.getElementById("test_taskId").value;
+        lesson += "lessonId=" + document.getElementById("test_taskId").value;
 
         request.open("POST", address + "/administration/test/delete" + lesson, false);
 
         request.onload = function () {
             let resp = request.response;
             switch (resp) {
-                case "Not exists":
+                case "Incorrect id":
                     alert("Write correct name");
                     break;
                 case "Opened":
