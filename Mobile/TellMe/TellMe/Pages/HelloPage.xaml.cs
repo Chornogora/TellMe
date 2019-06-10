@@ -23,6 +23,13 @@ namespace TellMe.Pages {
 
             InitializeComponent();
 
+            this.Appearing += HelloPage_Appearing;
+            SignUpButton.Clicked += (sender, e) => App.Current.MainPage = App.ObjectManager.Resolve<SignUpPage>();
+            LogInButton.Clicked += LogInButton_Clicked;
+        }
+
+        private void HelloPage_Appearing(object sender, EventArgs e)
+        {
             try {
                 Task.Run(() => App.ObjectManager.Resolve<DataProvider>().Init());
             } catch (NoConnectionException) {
@@ -30,9 +37,6 @@ namespace TellMe.Pages {
             } catch(InitFailedException) {
                 DisplayAlert("Error", "No Internet connection", "OK"); return;
             }
-
-            SignUpButton.Clicked += (sender, e) => App.Current.MainPage = App.ObjectManager.Resolve<SignUpPage>();
-            LogInButton.Clicked += LogInButton_Clicked;
         }
 
         private void LogInButton_Clicked(object sender, EventArgs e)

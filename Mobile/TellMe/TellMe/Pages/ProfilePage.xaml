@@ -6,17 +6,56 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
+            <Style x:Key="LoginSign" BasedOn="{StaticResource NavigationButton}" TargetType="Button">
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+            </Style>
+
             <Style x:Key="GoToLessonsButton" BasedOn="{StaticResource NavigationButton}" TargetType="Button">
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/>
             </Style>
-            
+
+            <Style x:Key="Avatar" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+
+            <Style x:Key="LevelProgress" BasedOn="{StaticResource BottomProgressBar}" TargetType="ProgressBar">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="ProgressColor" Value="{StaticResource Yellow}"/>
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout>
+
+            <StackLayout>
+                <Button x:Name="Header" Text="Profile" Style="{StaticResource LoginSign}" />
+                <ProgressBar x:Name="LevelProgress" Style="{StaticResource LevelProgress}"/>
+            </StackLayout>
+
+            <Grid Margin="10.9, 20, 10.9, 0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                
+                <Label Style="{StaticResource SignSegoeLabel}" Text="Login: " Grid.Row="0" Grid.Column="0"/>
+                <Label x:Name="ULogin" Style="{StaticResource SignSegoeLabel}" Grid.Row="0" Grid.Column="1"/>
+
+                <Label Style="{StaticResource SignSegoeLabel}" Text="Level: " Grid.Row="1" Grid.Column="0"/>
+                <Label x:Name="ULevel" Style="{StaticResource SignSegoeLabel}" Grid.Row="1" Grid.Column="1"/>
+
+                <Label Style="{StaticResource SignSegoeLabel}" Text="Progress: " Grid.Row="2" Grid.Column="0"/>
+                <Label x:Name="UProgress" Style="{StaticResource SignSegoeLabel}" Grid.Row="2" Grid.Column="1"/>
+
+                <Image x:Name="Avatar" Style="{StaticResource Avatar}" Grid.RowSpan="3" Grid.Column="2"/>
+            </Grid>
             
-            <Button Text="Study!" Style="{StaticResource GoToLessonsButton}" />
+            <Button x:Name="Lessons" Text="Study!" Style="{StaticResource GoToLessonsButton}" />
             
         </StackLayout>
     </ContentPage.Content>

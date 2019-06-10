@@ -4,16 +4,27 @@
              x:Class="TellMe.Pages.LessonListPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-
-            <!--<Style x:Key="LessonList" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundGreen}"/>
-                <Setter Property="Padding" Value="0,20,0,20"/>
-                <Setter Property="Spacing" Value="5"/>
+            
+            <Style x:Key="PassedLesson" BasedOn="{StaticResource ListItem}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource LessonPassedColor}"/>
             </Style>
 
-            <Style x:Key="Lesson" BasedOn="{StaticResource ListItemSegoe}" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource BackColorBisque}"/>
-            </Style>-->
+            <Style x:Key="NotPassedLesson" BasedOn="{StaticResource ListItem}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource LessonNotPassedColor}"/>
+            </Style>
+
+            <Style x:Key="LockedLesson" BasedOn="{StaticResource ListItem}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource LessonLockedColor}"/>
+            </Style>
+
+            <Style x:Key="LessonProgress" BasedOn="{StaticResource BottomProgressBar}" TargetType="ProgressBar">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="ProgressColor" Value="{StaticResource Yellow}"/>
+            </Style>
+
+            <Style x:Key="LessonLevelBlock" BasedOn="{StaticResource List}" TargetType="StackLayout">
+                
+            </Style>
 
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -21,7 +32,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="LessonsList">
-
+                
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

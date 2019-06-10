@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TellMe.Pages.GrammarPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="GrammarText" BasedOn="{StaticResource SignSegoeLabel}" TargetType="Label">
+                <Setter Property="Margin" Value="10,10,10,10"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="GrammarList" Style="{StaticResource List}">
+                <Button x:Name="Header" Style="{StaticResource HeaderSign}"/>
+                <Label x:Name="GrammarText" Style="{StaticResource GrammarText}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

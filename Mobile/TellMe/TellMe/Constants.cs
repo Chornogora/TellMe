@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,7 +30,8 @@ namespace TellMe
 
     public class Constants {
 
-        public const int SESSION_LIFETIME_MINUTES = 1;
+        public const int SESSION_LIFETIME_MINUTES = 60;
+        public const string AVATAR_STORAGE_PATH = "http://192.168.43.36:5000/";
 
         public static Color ValidColor = Color.Green;
         public static Color InvalidColor = Color.Red;
@@ -78,6 +80,18 @@ namespace TellMe
         public static void ApplyTextChangedHandler(List<Entry> Inputs, EventHandler<TextChangedEventArgs> Handler) {
             foreach (Entry input in Inputs)
                 input.TextChanged += Handler;
+        }
+
+        public class Enumerator<T> : IEnumerator<T> {
+            private List<T> Items;
+            private int index = -1;
+
+            public Enumerator(List<T> Items) => this.Items = Items;
+            public T Current => Items[index];
+            object IEnumerator.Current => this.Current;
+            public bool MoveNext() => ++index < Items.Count;
+            public void Dispose() { }
+            public void Reset() => index = -1;
         }
     }
 }

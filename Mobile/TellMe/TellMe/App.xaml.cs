@@ -25,6 +25,8 @@ namespace TellMe
         public static FileManager UserConfig { get; private set; }
         public static UserCache CurrentUser { get; private set; }
 
+        public static User U { get; set; }
+
         private void InitServices() {
 
             ContainerBuilder builder = new ContainerBuilder();

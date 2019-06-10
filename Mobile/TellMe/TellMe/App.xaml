@@ -12,6 +12,9 @@
             <Color x:Key="White">#FFFFFF</Color>
             <Color x:Key="BackgroundGreen">#00CC99</Color>
 
+            <Color x:Key="LessonPassedColor">#2D9800</Color>
+            <Color x:Key="LessonNotPassedColor">#FF9E00</Color>
+            <Color x:Key="LessonLockedColor">#F2F2F2</Color>
 
             <Style x:Key="MenuPage" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundGreen}"></Setter>
@@ -38,7 +41,33 @@
                 <Setter Property="FontSize" Value="24"/>
                 <Setter Property="HeightRequest" Value="60"/>
             </Style>
+
+            <Style x:Key="Progress" TargetType="ProgressBar">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="HeaderSign" BasedOn="{StaticResource NavigationButton}" TargetType="Button">
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+            </Style>
+
+            <Style x:Key="BottomProgressBar" BasedOn="{StaticResource Progress}" TargetType="ProgressBar">
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="Margin" Value="0,-8,0,0"/>
+            </Style>
+
+            <Style x:Key="List" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundGreen}"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="Spacing" Value="0"/>
+            </Style>
             
+            <Style x:Key="ListItem" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

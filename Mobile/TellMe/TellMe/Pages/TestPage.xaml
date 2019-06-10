@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="TellMe.Pages.TestPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="Text" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Margin" Value="10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="TestCB" TargetType="controls:CheckBox"></Style>
+            <Style x:Key="TestRB" TargetType="controls:CustomRadioButton"></Style>
+
+            <Style x:Key="TestList" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="SendButton" BasedOn="{StaticResource NavigationButton}" TargetType="Button">
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/> <!--Move to bottom-->
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="TestList" Style="{StaticResource List}">
+
+                <Button x:Name="Header" Style="{StaticResource HeaderSign}"/>
+                <Label x:Name="TestText" Style="{StaticResource Text}" />
+                <ScrollView>
+                    <StackLayout x:Name="Tests" Style="{StaticResource TestList}">
+
+                    </StackLayout>
+                </ScrollView>
+                <Button x:Name="Check" Text="Send" Style="{StaticResource SendButton}"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

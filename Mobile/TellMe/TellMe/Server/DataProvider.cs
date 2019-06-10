@@ -18,6 +18,9 @@ namespace TellMe.Server {
     public class InvalidPasswordException : Exception { }
     public class UnAutorizedUserException : Exception { }
     public class NoSuchUserException : Exception { }
+    public class NoSuchLessonException : Exception { }
+    public class NoSuchProgressException : Exception { }
+    public class WrongAnswerException : Exception { }
 
     public class DataProvider : IDataProvider {
 
@@ -59,15 +62,64 @@ namespace TellMe.Server {
 
         //<GET_USER>
         private static readonly string GetUserPath = App.QueryPathes["GetUser", "Path"];
-        private static readonly string GetUserMeth = App.QueryPathes["GetUser", "Mathod"];
+        private static readonly string GetUserMeth = App.QueryPathes["GetUser", "Method"];
         private const string IdKey = "id";
         private const string InvalidIdResponse = "Invalid id";
         //</GET_USER>
 
-        //<GET_USER>
+        //<GET_LEVELS>
         private static readonly string GetLevelsPath = App.QueryPathes["GetLevels", "Path"];
-        private static readonly string GetLevelsMeth = App.QueryPathes["GetLevels", "Mathod"];
-        //</GET_USER>
+        private static readonly string GetLevelsMeth = App.QueryPathes["GetLevels", "Method"];
+        //</GET_LEVELS>
+
+        //<GET_LESSONS>
+        private static readonly string GetLessonsPath = App.QueryPathes["GetLessons", "Path"];
+        private static readonly string GetLessonsMeth = App.QueryPathes["GetLessons", "Method"];
+        //</GET_LESSONS>
+
+        //<GET_PROGRESS>
+        private static readonly string GetProgressPath = App.QueryPathes["GetProgress", "Path"];
+        private static readonly string GetProgressMeth = App.QueryPathes["GetProgress", "Method"];
+        private const string GetProgressIdKey = "userId";
+        private const string GetProgressInvalidIdResponse = "Invalid id";
+        //</GET_PROGRESS>
+
+        //<GET_TASKS_COUNT>
+        private static readonly string GetTasksCountPath = App.QueryPathes["GetTasksCount", "Path"];
+        private static readonly string GetTasksCountMeth = App.QueryPathes["GetTasksCount", "Method"];
+        private const string GetTasksCountIdKey = "id";
+        private const string GetTasksCountInvalidIdResponse = "Invalid id";
+        //</GET_TASKS_COUNT>
+
+        //<GET_LESSON>
+        private static readonly string GetLessonPath = App.QueryPathes["GetLesson", "Path"];
+        private static readonly string GetLessonMeth = App.QueryPathes["GetLesson", "Method"];
+        private const string GetLessonIdKey = "id";
+        private const string GetLessonInvalidIdResponse = "Invalid id";
+        //</GET_LESSON>
+
+        //<GET_LESSON_TASKS>
+        private static readonly string GetLessonTasksPath = App.QueryPathes["GetLessonTasks", "Path"];
+        private static readonly string GetLessonTasksMeth = App.QueryPathes["GetLessonTasks", "Method"];
+        private const string GetLessonTasksIdKey = "id";
+        private const string GetLessonTasksInvalidIdResponse = "Invalid id";
+        //</GET_LESSON_TASKS>
+
+        //<PASS_THEORY>
+        private static readonly string PassTheoryPath = App.QueryPathes["PassTheory", "Path"];
+        private static readonly string PassTheoryMeth = App.QueryPathes["PassTheory", "Method"];
+        private const string PassTheoryIdKey = "progressId";
+        private const string PassTheoryInvalidIdResponse = "Invalid id";
+        //</PASS_THEORY>
+
+        //<PASS_TEST>
+        private static readonly string PassTestPath = App.QueryPathes["PassTest", "Path"];
+        private static readonly string PassTestMeth = App.QueryPathes["PassTest", "Method"];
+        private const string PassTestIdKey = "progressId";
+        private const string PassTestAnswerKey = "answer";
+        private const string PassTestInvalidIdResponse = "Invalid id";
+        private const string PassTestWrongAnswerResponse = "Failed";
+        //</PASS_TEST>
 
         public void Init() {
 
@@ -125,11 +177,75 @@ namespace TellMe.Server {
         }
 
         public string GetLevels() => Query(GetLevelsPath, GetLevelsMeth, "");
+        public string GetLessons() => Query(GetLessonsPath, GetLessonsMeth, "");
+
+        public string GetProgress(int id) {
+
+            string dataString = $"{GetProgressIdKey}={id.ToString()}";
+            string response = Query(GetProgressPath, GetProgressMeth, dataString);
+
+            if (response.StartsWith(GetProgressInvalidIdResponse))
+                throw new NoSuchUserException();
+
+            return response;
+        }
+
+        public int GetTasksCount(int id) {
+
+            string dataString = $"{GetTasksCountIdKey}={id.ToString()}";
+            string response = Query(GetTasksCountPath, GetTasksCountMeth, dataString);
+
+            if (response.StartsWith(GetTasksCountInvalidIdResponse))
+                throw new NoSuchLessonException();
+
+            return Convert.ToInt32(response);
+        }
+
+        public string GetLesson(int id) {
+            string dataString = $"{GetLessonIdKey}={id.ToString()}";
+            string response = Query(GetLessonPath, GetLessonMeth, dataString);
+
+            if (response.StartsWith(GetLessonInvalidIdResponse))
+                throw new NoSuchLessonException();
+
+            return response;
+        }
+
+        public string GetLessonTasks(int id)
+        {
+            string dataString = $"{GetLessonTasksIdKey}={id.ToString()}";
+            string response = Query(GetLessonTasksPath, GetLessonTasksMeth, dataString);
+
+            if (response.StartsWith(GetLessonTasksInvalidIdResponse))
+                throw new NoSuchLessonException();
+
+            return response;
+        }
+
+        public void PassTheory(int id)
+        {
+            string dataString = $"{PassTheoryIdKey}={id.ToString()}";
+            string response = Query(PassTheoryPath, PassTheoryMeth, dataString);
+
+            if (response.StartsWith(PassTheoryInvalidIdResponse))
+                throw new NoSuchProgressException();
+        }
+
+        public void PassTest(int id, string answer)
+        {
+            string dataString = $"{PassTheoryIdKey}={id.ToString()}&{PassTestAnswerKey}={answer}";
+            string response = Query(PassTestPath, PassTestMeth, dataString);
+
+            if (response.StartsWith(PassTestInvalidIdResponse))
+                throw new NoSuchProgressException();
+            else if (response.StartsWith(PassTestWrongAnswerResponse))
+                throw new WrongAnswerException();
+        }
 
         private string Query(string path, string meth, string data) {
             try {
                 return meth == WebRequestMethods.Http.Post ? QueryPOST(path, data) : QueryGET(path, data);
-            } catch(WebException) {
+            } catch(WebException e) {
                 throw new NoConnectionException();
             }
         }
