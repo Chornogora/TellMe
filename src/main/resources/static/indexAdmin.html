@@ -210,18 +210,17 @@
                                  data-parent="#accordionExample">
 
                                 <div class="card card-body">
-                                    <form method="POST" action="/administration/test/add" target="tgt"
-                                          onsubmit="addTest()">
+                                    <div>
 
                                         <div class="form-group">
                                             <label for="lesson_Id_test">Lesson ID</label>
                                             <input type="text" class="form-control" id="lesson_Id_test" name="lessonId"
-                                                   placeholder="Write id of test">
+                                                   placeholder="Write id of lesson">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="picture">Picture</label>
-                                            <input type="file" class="form-control-file" id="picture">
+                                            <label for="picture">Picture link</label>
+                                            <input type="text" class="form-control" id="picture">
                                         </div>
 
                                         <div class="form-group">
@@ -239,8 +238,8 @@
                                             </select>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                        <p type="submit" class="btn btn-primary" onclick="addTest()">Submit</p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -252,7 +251,7 @@
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                             data-target="#collapsTwo" aria-expanded="false"
                                             aria-controls="collapsTwo">
-                                        Add word
+                                        Add Variant
                                     </button>
 
                                 </h5>
@@ -446,7 +445,7 @@
         let lesson = "?";
         lesson += "lessonId=" + document.getElementById("lesson_Id_test").value;
         lesson += "&";
-        lesson += "picture=" + "";
+        lesson += "picture=" + document.getElementById("picture").value;
         lesson += "&";
         lesson += "text=" + document.getElementById("text_test").value;
         lesson += "&";
