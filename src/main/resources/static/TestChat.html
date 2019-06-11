@@ -32,9 +32,9 @@
             }
 
         </style>
-
+        <script src = "js/address.js"></script>
         <script>
-            let address = "http://192.168.43.36:5000";
+            let addr = "http://"+address+":5000";
             let webSocket;
 
             function getDate(timestamp){
@@ -63,11 +63,11 @@
 
                 let request = new XMLHttpRequest();
                 let params = "?chatId=" + chatId;
-                request.open("POST", address + "/chat/open" + params, true);
+                request.open("POST", addr + "/chat/open" + params, true);
 
                 request.onload = function(){
                     let resp = request.response;
-                    webSocket = new WebSocket("ws://192.168.43.36:" + resp + "/point");
+                    webSocket = new WebSocket("ws://"+address+":" + resp + "/point");
                     webSocket.onmessage = function(evt) {
                         let message = JSON.parse(evt.data);
                         let div = document.createElement("div");
@@ -92,7 +92,7 @@
                 let request = new XMLHttpRequest();
 
                 let params = "?chatId=" + chatId;
-                request.open("GET", address + "/chat/messages/getAll" + params, true);
+                request.open("GET", addr + "/chat/messages/getAll" + params, true);
 
                 request.onload = function(){
                     let resp = request.response;
@@ -183,7 +183,7 @@
 
         <div style="border: 3px solid yellow; position: absolute; top:73%; width: 50%; left: 30%">
             <textarea id = "textMessage" style="height: 100%; width: 100%">Enter your text here</textarea>
-            <img style="width: 5%; height: 7%; left: 60%;" src="http://192.168.43.36:5000/images/Send.png" onclick="sendMessage()"/>
+            <img style="width: 5%; height: 7%; left: 60%;" src="images/Send.png" onclick="sendMessage()"/>
         </div>
     </body>
 </html>

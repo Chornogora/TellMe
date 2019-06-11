@@ -32,6 +32,7 @@
         }
 
     </style>
+    <script src="js/address.js"></script>
     <script>
         function changeVisibility(){
             let object = $("#newChatPanel")[0];
@@ -39,7 +40,7 @@
         }
 
         function createChat(){
-            let address = "http://192.168.43.36:5000";
+            let address = "http://"+ address + ":5000";
             let request = new XMLHttpRequest();
 
             let text = $("#chatName")[0].value;
@@ -144,23 +145,24 @@
     <div id = "chats" class="outer">
     </div>
     <br />
-    <img src ="http://192.168.43.36:5000/images/Plus.png" style = "width:5%; position:absolute; top: 87%; left: 30%" id="plus" onclick="changeVisibility()"/>
+    <img style = "width:5%; position:absolute; top: 87%; left: 30%" id="plus" onclick="changeVisibility()"/>
     <div id="newChatPanel" style = "visibility:hidden; width:25%; height:10%; position:absolute; top: 87%; left: 37%">
         <input id="chatName" type="text" maxlength="30" placeholder="write name of new chat"/>
         <input type="submit" value="Create" onclick="createChat()"/>
     </div>
     <script>
         $(function () {
+            $("#plus")[0].src = "http://" + address + ":5000/images/Plus.png";
 
             user = getCookie("user");
             if(user == null){
                 location.href = address + "/Authorization.html"
             }
 
-            let address = "http://192.168.43.36:5000";
+            let addr = "http://" + address + ":5000";
             let request = new XMLHttpRequest();
 
-            request.open("GET", address + "/chat/getAll", true);
+            request.open("GET", addr + "/chat/getAll", true);
 
             request.onload = function(){
                 let resp = request.response;
@@ -170,7 +172,7 @@
                     let chat = object[i];
                     let div = document.createElement("div");
                     div.className = "chat";
-                    div.innerText = chat.theme + " (creator: " + chat.creator.login + ")";
+                    div.innerText = chat.theme + " (creator: " + chat.creatorLogin + ")";
                     div.chatId = chat.id;
 
                     //TODO onclick

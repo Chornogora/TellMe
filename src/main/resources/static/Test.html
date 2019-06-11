@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/address.js"></script>
 </head>
 <body>
 <script>
     function sendRequest() {
         let object = new XMLHttpRequest();
 
-        object.open("GET","http://192.168.43.36:5000/lesson/getAll",true);
+        object.open("GET","http://" + address + ":5000/lesson/getAll",true);
 
         object.onload = ()=>{
           let response = object.response;
@@ -18,8 +19,10 @@
         };
 
         object.send();
+
     }
-    sendRequest();
+    //sendRequest();
+    alert(address);
 </script>
 </body>
 </html>

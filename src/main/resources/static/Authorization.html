@@ -48,8 +48,9 @@
         </style>
 
         <script src="js/Cookie.js"></script>
+        <script src="js/address.js"></script>
         <script>
-            let address = "http://192.168.43.36:5000/authorization/authorize";
+            let addr = "http://"+address+":5000/authorization/authorize";
 
             function authorize() {
                 let login = document.getElementById("login").value;
@@ -68,7 +69,7 @@
                             location.href = "page_1.html";
                     }
                 };
-                request.open("POST", address + "?login=" + login + "&password=" + password, true);
+                request.open("POST", addr + "?login=" + login + "&password=" + password, true);
                 request.send();
             }
 

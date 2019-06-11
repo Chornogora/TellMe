@@ -49,7 +49,7 @@
 
     <script src="js/Cookie.js"></script>
     <script>
-        let address = "http://192.168.43.36:5000/registration/";
+        let addr = "http://" + address + ":5000/registration/";
 
         function confirmation(){
             let array = document.getElementsByTagName("label");
@@ -71,7 +71,7 @@
                     }
                 };
                 let conf = document.getElementById("confirm").value;
-                request.open("POST", address + "confirm?code=" + conf, true);
+                request.open("POST", addr + "confirm?code=" + conf, true);
                 request.send();
             }
         }
@@ -93,7 +93,7 @@
                         confirmation();
                 }
             };
-            request.open("POST", address + "register?login=" + login + "&password=" + password
+            request.open("POST", addr + "register?login=" + login + "&password=" + password
                 + "&email=" + email + "&birthday=" + date, true);
             request.send();
         }

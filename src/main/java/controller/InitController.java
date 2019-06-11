@@ -3,9 +3,12 @@ package controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Scanner;
 
 @RestController
 public class InitController {
@@ -26,5 +29,18 @@ public class InitController {
             e.printStackTrace();
         }
         return "Server Error";
+    }
+
+    @GetMapping("/")
+    private String getRedirect(){
+        StringBuilder result = new StringBuilder();
+        try(Scanner sc = new Scanner(new File("target/classes/static/redirect.html"))) {
+            while(sc.hasNextLine()){
+                result.append(sc.nextLine()).append('\n');
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 }

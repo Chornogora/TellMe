@@ -5,6 +5,8 @@ import dao.ProgressRepo;
 import dao.SimpleUserRepo;
 import model.Lesson;
 import model.Levels;
+import model.Progress;
+import model.SimpleUser;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,6 +41,17 @@ public class LessonAdminController {
         }
 
         lessonRepo.save(lesson);
+
+        //<create progresses>
+
+        Iterable<SimpleUser> users = userRepo.findAll();
+        for(SimpleUser user : users){
+            Progress progress = new Progress(lesson, user);
+            prRepo.save(progress);
+        }
+
+        //</create progresses>
+
         return util.JSONparser.toJSON(lesson);
     }
 

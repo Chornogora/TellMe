@@ -121,7 +121,7 @@ public class Personal{
     }
 
     private String getRedirect(){
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         try(Scanner sc = new Scanner(new File("target/classes/static/redirect.html"))) {
             while(sc.hasNextLine()){
                 result.append(sc.nextLine()).append('\n');

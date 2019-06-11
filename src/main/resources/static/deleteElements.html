@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="js/address.js"></script>
 </head>
 <body>
 <div class="container">
@@ -112,13 +113,13 @@
 
 <script>
     function deleteLesson() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://"+ address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
         lesson += "name=" + document.getElementById("nameForLesson").value;
 
-        request.open("POST", address + "/administration/lesson/delete" + lesson, true);
+        request.open("POST", addr + "/administration/lesson/delete" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -139,13 +140,13 @@
     }
 
     function deleteGrammar() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
         lesson += "taskId=" + document.getElementById("taskId_grammar").value;
 
-        request.open("POST", address + "/administration/grammar/delete" + lesson, true);
+        request.open("POST", addr + "/administration/grammar/delete" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -166,13 +167,13 @@
     }
 
     function deleteLexical() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://"+ address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
         lesson += "taskId=" + document.getElementById("lesson_Id_lexical").value;
 
-        request.open("POST", address + "/administration/lexical/delete" + lesson, true);
+        request.open("POST", addr + "/administration/lexical/delete" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -193,13 +194,13 @@
     }
 
     function deleteTest() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://"+ address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
         lesson += "lessonId=" + document.getElementById("test_taskId").value;
 
-        request.open("POST", address + "/administration/test/delete" + lesson, true);
+        request.open("POST", addr + "/administration/test/delete" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;

@@ -36,4 +36,16 @@ public class Chat {
     public List<Message> getMessages() {
         return messages;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public SimpleUser getCreator() {
+        return creator;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
 }

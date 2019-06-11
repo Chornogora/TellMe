@@ -54,7 +54,7 @@
             top:1px;
         }
     </style>
-
+    <script src="js/address.js"></script>
 </head>
 <body>
 <div id="base" class="" style="display: inline-block;">
@@ -139,7 +139,7 @@
         </div>
     </div>
     <script>
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://"+address+":5000";
         let webSocket;
         let test;
 
@@ -150,7 +150,7 @@
                     if(enemy.avatar){
                         document.getElementById("enemyAvatar").src = enemy.avatar;
                     }else{
-                        document.getElementById("enemyAvatar").src = address + "/images/anonymous.jpg";
+                        document.getElementById("enemyAvatar").src = addr + "/images/anonymous.jpg";
                     }
                     break;
                 case "time":
@@ -184,7 +184,7 @@
             if(test.testPicture){
                 document.getElementById("#testImage").src = test.testPicture;
             }else{
-                document.getElementById("testImage").src = address+"/images/test.jpg";
+                document.getElementById("testImage").src = addr+"/images/test.jpg";
             }
             document.getElementById("testText").innerText = test.testText;
 
@@ -266,13 +266,13 @@
                 let resp = request.response;
                 if(resp == "Invalid id"){
                     alert("Try to authorize again");
-                    location.href = address + "/Authorization.html"
+                    location.href = addr + "/Authorization.html"
                 }else if(resp == "Cannot open Chat"){
                     alert("Troubles with opening chat");
-                    location.href = address + "/Profile.html";
+                    location.href = addr + "/Profile.html";
                 }
 
-                webSocket = new WebSocket("ws://192.168.43.36:" + resp + "/tpoint");
+                webSocket = new WebSocket("ws://" + address + ":" + resp + "/tpoint");
                 webSocket.onmessage = function(evt) {
                     let message = evt.data;
                     message = message.split("~");
@@ -291,7 +291,7 @@
 
             user = getCookie("user");
             if(user == null){
-                location.href = address + "/Authorization.html"
+                location.href = addr + "/Authorization.html"
             }
             let object = JSON.parse(user);
             let id = object.id;

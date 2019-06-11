@@ -45,6 +45,7 @@
     <script src="files/home/data.js"></script>
 
     <script src="js/Cookie.js"></script>
+    <script src = "js/address.js"></script>
 </head>
 <body> 	
 	<div id="base" class="" style="display: inline-block;">
@@ -174,7 +175,7 @@
         window.onload = function(){
             let user = getCookie("user");
             if(user == null){
-                location.href = address + "/Authorization.html"
+                location.href = "http://" + address + ":5000/Authorization.html"
             }
             let object = JSON.parse(user);
             getAvatar(object);
@@ -182,7 +183,7 @@
             document.getElementById("level").innerText += object.level;
 
             let req = new XMLHttpRequest();
-            req.open("GET", "http://192.168.43.36:5000/level/get", true);
+            req.open("GET", "http://" + address + ":5000/level/get", true);
 
             req.onload = function(){
                 let resp = req.response;

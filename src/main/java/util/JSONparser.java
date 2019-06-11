@@ -2,6 +2,7 @@ package util;
 
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
+import model.Chat;
 import model.Message;
 import model.Progress;
 
@@ -24,6 +25,13 @@ public class JSONparser {
     public static String MessagetoJSON(Object object){
         GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new AnnotationExclusionStrategy());
         builder.registerTypeAdapter(Message.class, new MessageAdapter());
+        Gson gson = builder.create();
+        return gson.toJson(object);
+    }
+
+    public static String ChattoJSON(Object object){
+        GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new AnnotationExclusionStrategy());
+        builder.registerTypeAdapter(Chat.class, new ChatAdapter());
         Gson gson = builder.create();
         return gson.toJson(object);
     }
@@ -62,6 +70,17 @@ public class JSONparser {
             jsonObject.addProperty("senderLogin", message.getSender().getLogin());
             jsonObject.addProperty("text", message.getText());
             jsonObject.addProperty("sentTimestamp", toJSON(message.getSentTimestamp()));
+            return jsonObject;
+        }
+    }
+
+    private static class ChatAdapter implements JsonSerializer<Chat> {
+        @Override
+        public JsonElement serialize(Chat chat, Type type, JsonSerializationContext jsc) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("id", chat.getId());
+            jsonObject.addProperty("creatorLogin", chat.getCreator().getLogin());
+            jsonObject.addProperty("theme", chat.getTheme());
             return jsonObject;
         }
     }

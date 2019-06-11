@@ -45,6 +45,7 @@
     <script src="files/home/data.js"></script>
 
     <script src="js/Cookie.js"></script>
+    <script src="js/address.js"></script>
 </head>
 <body>
 	<div id="base" class="" style="display: inline-block;">
@@ -112,7 +113,7 @@
 	<div style="width: 500px; text-align: center; display: inline-block; margin-left: 500px;">
 		<h2>Edit Profile</h2>
         <img src="#" id = "avatar" style="max-width: 100%">
-        <form method="POST" action="http://192.168.43.36:5000/personal/setAvatar" enctype="multipart/form-data">
+        <form method="POST" id = "photoForm"  enctype="multipart/form-data">
             <div id = "imageDiv" style="visibility: visible">
                 <input type="number" name = "id" id="uid" style="visibility: hidden">
                 <input type="file" name = "avatar" width="70">
@@ -140,7 +141,7 @@
                 let email = document.getElementById("email").value;
                 let birthday = document.getElementById("birthday").value;
 
-                req.open("post", "http://192.168.43.36:5000/personal/updateProfile?login=" + login +
+                req.open("post", "http://"+ address +":5000/personal/updateProfile?login=" + login +
                     "&email=" + email + "&birthday=" + birthday, true);
 
                 req.onload = ()=>{
@@ -148,6 +149,8 @@
                 };
                 req.send();
             }
+
+            document.getElementById("photoForm").action = "http://" + address + ":5000/personal/setAvatar";
 
             let user = getCookie("user");
             if(user == null){
@@ -163,7 +166,7 @@
             if(object.avatar){
                 document.getElementById("avatar").src = object.avatar;
             }else{
-                document.getElementById("avatar").src = "http://192.168.43.36:5000/images/anonymous.jpg";
+                document.getElementById("avatar").src = "http://" + address + ":5000/images/anonymous.jpg";
             }
 
         </script>

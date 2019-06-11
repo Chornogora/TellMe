@@ -10,6 +10,7 @@ import model.SimpleUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,11 @@ public class ChatController implements ElementGetter {
     @GetMapping("/getAll")
     public String getAll(){
         Iterable<Chat> set = chatRepo.findAll();
-        return util.JSONparser.toJSON(set);
+        List<Chat> lst = new ArrayList<>();
+        for(Chat ch : set){
+            lst.add(ch);
+        }
+        return util.JSONparser.ChattoJSON(lst.toArray(new Chat[lst.size()]));
     }
 
     @GetMapping("/messages/getAll")

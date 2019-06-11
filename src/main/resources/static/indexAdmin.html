@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src = "js/address.js"></script>
 </head>
 <body>
 <div class="container">
@@ -308,7 +309,7 @@
 <script>
 
     function addLesson() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -318,7 +319,7 @@
         lesson += "&";
         lesson += "level=" + document.getElementById("levels").value;
 
-        request.open("POST", address + "/administration/lesson/add" + lesson, true);
+        request.open("POST", addr + "/administration/lesson/add" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -341,7 +342,7 @@
     }
 
     function addGrammar() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -350,7 +351,7 @@
         lesson += "content=" + document.getElementById("content_info").value;
 
 
-        request.open("POST", address + "/administration/grammar/add" + lesson, true);
+        request.open("POST", addr + "/administration/grammar/add" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -373,13 +374,13 @@
     }
 
     function addLexical() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
         lesson += "lessonId=" + document.getElementById("lesson_Id_lexical").value;
 
-        request.open("POST", address + "/administration/lexical/add" + lesson, true);
+        request.open("POST", addr + "/administration/lexical/add" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -401,7 +402,7 @@
     }
 
     function addWord() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -415,7 +416,7 @@
         lesson += "&";
         lesson += "picture=" + "";
 
-        request.open("POST", address + "/administration/lexical/addWord" + lesson, true);
+        request.open("POST", addr + "/administration/lexical/addWord" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -439,7 +440,7 @@
     }
 
     function addTest() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -452,7 +453,7 @@
         lesson += "type=" + document.getElementById("typeOfTest").value;
 
 
-        request.open("POST", address + "/administration/test/add" + lesson, true);
+        request.open("POST", addr + "/administration/test/add" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -475,7 +476,7 @@
     }
 
     function addVariants() {
-        let address = "http://192.168.43.36:5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -487,7 +488,7 @@
         lesson += "&";
         lesson += "text=" + document.getElementById("text_testVariant").value;
 
-        request.open("POST", address + "/administration/test/addVariant" + lesson, true);
+        request.open("POST", addr + "/administration/test/addVariant" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
