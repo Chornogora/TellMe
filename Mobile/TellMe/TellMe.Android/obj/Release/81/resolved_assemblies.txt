@@ -1,4 +1,6 @@
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\TellMe.Android.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Autofac.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\ExifLib.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\FormsViewGroup.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Java.Interop.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -10,6 +12,7 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\andro
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Microsoft.Extensions.Primitives.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Mono.Android.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Mono.Android.Export.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\mscorlib.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Newtonsoft.Json.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.Core.dll
@@ -44,7 +47,15 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\andro
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Xamarin.Forms.Platform.Android.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Xamarin.Forms.Platform.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\Xamarin.Forms.Xaml.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Core.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Forms.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Forms.Droid.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Ioc.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Platform.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Platform.Droid.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\XLabs.Serialization.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.Data.dll
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.ComponentModel.Composition.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.Net.Http.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.Runtime.Serialization.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe.Android\obj\Release\81\android\assets\System.ServiceModel.Internals.dll

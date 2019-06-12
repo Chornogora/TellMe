@@ -30,8 +30,9 @@ namespace TellMe
 
     public class Constants {
 
+        public const int INLINE_INDICATORS_COUNT = 10;
         public const int SESSION_LIFETIME_MINUTES = 60;
-        public const string AVATAR_STORAGE_PATH = "http://192.168.43.36:5000/";
+        public const string AVATAR_STORAGE_PATH = "http://192.168.43.37:5000/";
 
         public static Color ValidColor = Color.Green;
         public static Color InvalidColor = Color.Red;

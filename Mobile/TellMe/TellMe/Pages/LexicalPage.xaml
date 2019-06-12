@@ -6,47 +6,44 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="WordsGrid" TargetType="Grid">
-                <Setter Property="RowSpacing" Value="1"/>
-                <Setter Property="ColumnSpacing" Value="1"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/><!--Border-->
+            <Style x:Key="WordStackItem" BasedOn="{StaticResource SignSegoeButton}" TargetType="Button">
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Margin" Value="10.9,20,10.9,20"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
             </Style>
 
-            <Style x:Key="GridHeader" BasedOn="{StaticResource SignSegoeLabel}" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+            <Style x:Key="WordName" BasedOn="{StaticResource WordStackItem}" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
             </Style>
 
-            <Style x:Key="Word" BasedOn="{StaticResource SignSegoeLabel}" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Style x:Key="WordTranslation" BasedOn="{StaticResource WordStackItem}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
             </Style>
 
-            <Style x:Key="EngWord" BasedOn="{StaticResource Word}" TargetType="Label"></Style>
-            <Style x:Key="RusWord" BasedOn="{StaticResource Word}" TargetType="Label"></Style>
-            <Style x:Key="Desciption" BasedOn="{StaticResource Word}" TargetType="Label"></Style>
+            <Style x:Key="WordDescription" BasedOn="{StaticResource WordStackItem}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedBrown}"/>
+                <Setter Property="TextColor" Value="{StaticResource Yellow}"/>
+            </Style>
 
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="LexicalList" Style="{StaticResource List}">
+            <StackLayout>
                 
                 <Button x:Name="Header" Style="{StaticResource HeaderSign}"/>
-                <Grid x:Name="Words" Style="{StaticResource WordsGrid}" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="50*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Word" Style="{StaticResource GridHeader}" Grid.Row="0" Grid.Column="0"/>
-                    <Label Text="Translation" Style="{StaticResource GridHeader}" Grid.Row="0" Grid.Column="1"/>
-                    <Label Text="Description" Style="{StaticResource GridHeader}" Grid.Row="0" Grid.Column="2"/>
-                </Grid>
                 
+                <Button x:Name="WordName" Style="{StaticResource WordName}"/>
+                <Button x:Name="WordTranslation" Style="{StaticResource WordTranslation}"/>
+                <Button x:Name="WordDescription" Style="{StaticResource WordDescription}"/>
+
+                <Button x:Name="Next" Text="Next" Style="{StaticResource NavigationButton}"/>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

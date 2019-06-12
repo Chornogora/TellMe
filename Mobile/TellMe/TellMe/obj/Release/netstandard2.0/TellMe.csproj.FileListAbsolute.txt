@@ -12,7 +12,6 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\T
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\App.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\ActivationPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\HelloPage.xaml.g.cs
-C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\LessonsPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\LogInPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\SignUpPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\TellMe.csproj.CoreCompileInputs.cache
@@ -22,3 +21,9 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\X
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\TellMe.csproj.CopyComplete
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\TellMe.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\TellMe.pdb
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\GrammarPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\LessonListPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\LessonPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\LexicalPage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\ProfilePage.xaml.g.cs
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Release\netstandard2.0\Pages\TestPage.xaml.g.cs

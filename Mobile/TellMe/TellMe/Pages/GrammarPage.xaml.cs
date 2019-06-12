@@ -33,7 +33,7 @@ namespace TellMe.Pages
             Header.Text = L.name + ": Grammar " + GrammarNum;
             GrammarText.Text = LT.content;
 
-            if(!P.Pass(true, LT.number))
+            if(!P.Pass(true, LT))
                 DisplayAlert("Error", "No Internet connection", "OK");
         }
 

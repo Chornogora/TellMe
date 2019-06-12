@@ -25,4 +25,11 @@ namespace TellMe.Model
         public bool IsGrammar() { return content != null && content != ""; }
         public bool IsLexical() { return words != null && words.Count != 0; }
     }
+
+    public enum TestType
+    {
+        ONE_CORRECT,
+        SEVERAL_CORRECT,
+        WRITE_WORD
+    };
 }

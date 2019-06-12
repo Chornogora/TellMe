@@ -42,6 +42,12 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
                 
                 <Label Style="{StaticResource SignSegoeLabel}" Text="Login: " Grid.Row="0" Grid.Column="0"/>
                 <Label x:Name="ULogin" Style="{StaticResource SignSegoeLabel}" Grid.Row="0" Grid.Column="1"/>

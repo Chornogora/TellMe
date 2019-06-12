@@ -1,66 +1,66 @@
 ﻿{
   "Activate": {
-    "Path": "http://192.168.43.36:5000/registration/confirm",
+    "Path": "http://93.76.235.211:5000/registration/confirm",
     "Method": "POST"
   },
 
   "LogIn": {
-    "Path": "http://192.168.43.36:5000/authorization/authorize",
+    "Path": "http://93.76.235.211:5000/authorization/authorize",
     "Method": "POST"
   },
 
   "SignUp": {
-    "Path": "http://192.168.43.36:5000/registration/register",
+    "Path": "http://93.76.235.211:5000/registration/register",
     "Method": "POST"
   },
 
   "Init": {
-    "Path": "http://192.168.43.36:5000/init",
+    "Path": "http://93.76.235.211:5000/init",
     "Method": "GET"
   },
 
   "GetUser": {
-    "Path": "http://192.168.43.36:5000/authorization/get",
+    "Path": "http://93.76.235.211:5000/authorization/get",
     "Method": "GET"
   },
 
   "GetLevels": {
-    "Path": "http://192.168.43.36:5000/level/get",
+    "Path": "http://93.76.235.211:5000/level/get",
     "Method": "GET"
   },
 
   "GetLessons": {
-    "Path": "http://192.168.43.36:5000/lesson/getAll",
+    "Path": "http://93.76.235.211:5000/lesson/getAll",
     "Method": "GET"
   },
 
   "GetProgress": {
-    "Path": "http://192.168.43.36:5000/progress/get",
+    "Path": "http://93.76.235.211:5000/progress/get",
     "Method": "GET"
   },
 
   "GetTasksCount": {
-    "Path": "http://192.168.43.36:5000/lesson/getNum",
+    "Path": "http://93.76.235.211:5000/lesson/getNum",
     "Method": "GET"
   },
 
   "GetLesson": {
-    "Path": "http://192.168.43.36:5000/lesson/get",
+    "Path": "http://93.76.235.211:5000/lesson/get",
     "Method": "GET"
   },
 
   "GetLessonTasks": {
-    "Path": "http://192.168.43.36:5000/lesson/getTasks",
+    "Path": "http://93.76.235.211:5000/lesson/getTasks",
     "Method": "GET"
   },
 
   "PassTheory": {
-    "Path": "http://192.168.43.36:5000/progress/passTheory",
+    "Path": "http://93.76.235.211:5000/progress/passTheory",
     "Method": "POST"
   },
 
   "PassTest": {
-    "Path": "http://192.168.43.36:5000/progress/passTest",
+    "Path": "http://93.76.235.211:5000/progress/passTest",
     "Method": "POST"
   }
 }

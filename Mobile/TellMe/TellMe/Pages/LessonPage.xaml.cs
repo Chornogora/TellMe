@@ -48,7 +48,7 @@ namespace TellMe.Pages
                 TaskProgressIndicator.Style = (Style)(Resources[Passed ? "PassedTaskIndicator" : (Locked ? "LockedTaskIndicator" : "NotPassedTaskIndicator")]);
                 LessonProgressIndicatorsGrid.Children.Add(TaskProgressIndicator, Column, Row);
 
-                if (++Column == 10) {
+                if (++Column == Constants.INLINE_INDICATORS_COUNT) {
                     Row++;
                     Column = 0;
                 }

@@ -109,6 +109,7 @@ namespace TellMe.Server {
         private static readonly string PassTheoryPath = App.QueryPathes["PassTheory", "Path"];
         private static readonly string PassTheoryMeth = App.QueryPathes["PassTheory", "Method"];
         private const string PassTheoryIdKey = "progressId";
+        private const string PassTheoryTaskIdKey = "taskId";
         private const string PassTheoryInvalidIdResponse = "Invalid id";
         //</PASS_THEORY>
 
@@ -116,6 +117,7 @@ namespace TellMe.Server {
         private static readonly string PassTestPath = App.QueryPathes["PassTest", "Path"];
         private static readonly string PassTestMeth = App.QueryPathes["PassTest", "Method"];
         private const string PassTestIdKey = "progressId";
+        private const string PassTestTaskIdKey = "taskId";
         private const string PassTestAnswerKey = "answer";
         private const string PassTestInvalidIdResponse = "Invalid id";
         private const string PassTestWrongAnswerResponse = "Failed";
@@ -222,18 +224,18 @@ namespace TellMe.Server {
             return response;
         }
 
-        public void PassTheory(int id)
+        public void PassTheory(int id, int taskId)
         {
-            string dataString = $"{PassTheoryIdKey}={id.ToString()}";
+            string dataString = $"{PassTheoryIdKey}={id.ToString()}&{PassTheoryTaskIdKey}={taskId.ToString()}";
             string response = Query(PassTheoryPath, PassTheoryMeth, dataString);
 
             if (response.StartsWith(PassTheoryInvalidIdResponse))
                 throw new NoSuchProgressException();
         }
 
-        public void PassTest(int id, string answer)
+        public void PassTest(int id, int taskId, string answer)
         {
-            string dataString = $"{PassTheoryIdKey}={id.ToString()}&{PassTestAnswerKey}={answer}";
+            string dataString = $"{PassTheoryIdKey}={id.ToString()}&{PassTestTaskIdKey}={taskId.ToString()}&{PassTestAnswerKey}={answer}";
             string response = Query(PassTestPath, PassTestMeth, dataString);
 
             if (response.StartsWith(PassTestInvalidIdResponse))

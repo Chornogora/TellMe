@@ -9,7 +9,6 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\Tel
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\TellMe.pdb
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\HelloPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\SignUpPage.xaml.g.cs
-C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.csprojAssemblyReference.cache
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\Mono.Android.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\Xamarin.Forms.Platform.Android.dll
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\bin\Debug\netstandard2.0\FormsViewGroup.dll
@@ -27,3 +26,4 @@ C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pag
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\LexicalPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\Pages\TestPage.xaml.g.cs
 C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Олег\source\repos\TellMe\TellMe\TellMe\obj\Debug\netstandard2.0\TellMe.csprojAssemblyReference.cache

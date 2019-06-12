@@ -20,6 +20,8 @@ namespace TellMe.Pages
         private LessonTask LT { get; set; }
         private int GrammarNum { get; set; }
 
+        private IEnumerator<Word> WordsSequence { get; set; }
+
         public LexicalPage(Lesson L, Progress P, LessonTask LT, int LexicalNum)
         {
             this.L = L;
@@ -27,32 +29,40 @@ namespace TellMe.Pages
 
             this.LT = LT;
             this.GrammarNum = GrammarNum;
+            WordsSequence = LT.words.GetEnumerator();
 
             InitializeComponent();
 
             Header.Text = L.name + ": Lexics " + LexicalNum;
 
-            int H = 1;
-            foreach(Word W in LT.words)
+            Next.Clicked += Next_Clicked; 
+            if(!NextWord())
             {
-                Label EWord = new Label();
-                EWord.Text = W.name;
-                EWord.Style = (Style)Resources["EngWord"];
-
-                Label RWord = new Label();
-                RWord.Text = W.translation;
-                RWord.Style = (Style)Resources["RusWord"];
-
-                Label Description = new Label();
-                Description.Text = W.description;
-                Description.Style = (Style)Resources["Desciption"];
-
-                Words.Children.Add(EWord, 0, H);
-                Words.Children.Add(RWord, 1, H);
-                Words.Children.Add(Description, 2, H++);
+                DisplayAlert("Sorry", "This task is out of words", "OK");
+                return;
             }
+        }
 
-            P.Pass(true, LT.number);
+        private void Next_Clicked(object sender, EventArgs e)
+        {
+            if (!NextWord())
+            {
+                P.Pass(true, LT);
+                DisplayAlert("You're making progress", "Well done!!!", "Continue").
+                    ContinueWith(T => App.Current.MainPage = new LessonPage(L, P));
+            }
+        }
+
+        private bool NextWord()
+        {
+            if (!WordsSequence.MoveNext())
+                return false;
+
+            WordName.Text = WordsSequence.Current.name;
+            WordTranslation.Text = WordsSequence.Current.translation;
+            WordDescription.Text = WordsSequence.Current.description;
+
+            return true;
         }
 
         protected override bool OnBackButtonPressed()

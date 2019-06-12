@@ -23,6 +23,14 @@
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/> <!--Move to bottom-->
             </Style>
 
+            <Style x:Key="TestPicture" TargetType="Image">
+                <Setter Property="Margin" Value="10,10,10,0"/>
+            </Style>
+
+            <Style x:Key="WordEntry" TargetType="Entry">
+                
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -31,14 +39,25 @@
             <StackLayout x:Name="TestList" Style="{StaticResource List}">
 
                 <Button x:Name="Header" Style="{StaticResource HeaderSign}"/>
+                <Image x:Name="TestPicture" Style="{StaticResource TestPicture}"/>
                 <Label x:Name="TestText" Style="{StaticResource Text}" />
+
                 <ScrollView>
                     <StackLayout x:Name="Tests" Style="{StaticResource TestList}">
-
+                        <Grid x:Name="InputWordPanel" IsVisible="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="80*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Answer: " Style="{StaticResource SignSegoeLabel}" Grid.Row="0" Grid.Column="0"/>
+                            <Entry x:Name="InputWordEntry" Style="{StaticResource WordEntry}" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
                     </StackLayout>
                 </ScrollView>
-                <Button x:Name="Check" Text="Send" Style="{StaticResource SendButton}"/>
 
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <Button x:Name="Check" Text="Send" Style="{StaticResource SendButton}"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

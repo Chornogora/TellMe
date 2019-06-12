@@ -16,33 +16,35 @@ namespace TellMe.Model
         public int taskPassedNumber { get; set; }
         public bool isDone { get; set; }
 
-        public bool Pass(bool isTheory, int taskNum, string answer = null)
+        public bool Pass(bool isTheory, LessonTask LT, string answer = null)
         {
-            if (taskNum <= taskPassedNumber + 1)
-            {
+            if (LT.number <= taskPassedNumber + 1) {
                 try
                 {
-                    if(taskNum == taskPassedNumber + 1)
+                    if (isTheory)
                     {
-                        if (isTheory)
-                        {
-                            try { App.ObjectManager.Resolve<DataProvider>().PassTheory(id); }
-                            catch (NoConnectionException) { return false; }
-                            catch (NoSuchProgressException) { return false; }
-                        }
-                        else
-                        {
-                            try { App.ObjectManager.Resolve<DataProvider>().PassTest(id, answer); }
-                            catch (NoConnectionException) { return false; }
-                            catch (NoSuchProgressException) { return false; }
-                            catch (WrongAnswerException) { return false; }
-                        }
-                        taskPassedNumber++;
+                        try { App.ObjectManager.Resolve<DataProvider>().PassTheory(id, LT.id); }
+                        catch (NoConnectionException) { return false; }
+                        catch (NoSuchProgressException) { return false; }
                     }
-                    if (taskPassedNumber == App.ObjectManager.Resolve<DataProvider>().GetTasksCount(lesson_id))
+                    else
                     {
+                        try { App.ObjectManager.Resolve<DataProvider>().PassTest(id, LT.id, answer); }
+                        catch (NoConnectionException) { return false; }
+                        catch (NoSuchProgressException) { return false; }
+                        catch (WrongAnswerException) { return false; }
+                    }
+
+                    if (LT.number == taskPassedNumber + 1)
+                        taskPassedNumber++;
+
+                    if (taskPassedNumber == App.ObjectManager.Resolve<DataProvider>().GetTasksCount(lesson_id)) {
                         App.U.points += JsonConvert.DeserializeObject<Lesson>(App.ObjectManager.Resolve<DataProvider>().GetLesson(lesson_id)).points;
                         isDone = true;
+
+                        int LevelIndex = Common.Levels.IndexOf(App.U.level);
+                        if (App.U.points >= Common.Points[LevelIndex])
+                            App.U.level = Common.Levels[LevelIndex + 1];
                     }
                 }
                 catch (NoConnectionException) { return false; }
