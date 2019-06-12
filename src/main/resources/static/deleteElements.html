@@ -45,65 +45,71 @@
         <div class="col">
             <div class="collapse multi-collapse" id="lesson_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/lesson/delete" target="tgt" onsubmit="deleteLesson()">
+
+                    <div>
 
                         <div class="form-group">
-                            <label for="nameForLesson">Name</label>
-                            <input type="text" class="form-control" id="nameForLesson" name="name"
-                                   placeholder="Write name of lesson">
+                            <label class="mr-sm-2" for="nameForLesson">Lessons name</label>
+                            <select class="custom-select mr-sm-2" id="nameForLesson" name="nameForLesson">
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
 
-                    </form>
+                        <button type="submit" class="btn btn-primary" onclick="deleteLesson()">Submit</button>
+
+                    </div>
+
                 </div>
             </div>
 
             <div class="collapse multi-collapse" id="grammar_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/grammar/delete" target="tgt" onsubmit="deleteGrammar()">
+
+                    <div>
 
                         <div class="form-group">
-                            <label for="taskId_grammar">Grammar ID</label>
-                            <input type="text" class="form-control" id="taskId_grammar" name="taskId_grammar"
-                                   placeholder="Write id of lesson">
+                            <label class="mr-sm-2" for="taskId_grammar">Grammar contents</label>
+                            <select class="custom-select mr-sm-2" id="taskId_grammar" name="taskId_grammar">
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="deleteGrammar()">Submit</button>
 
-                    </form>
+                    </div>
+
                 </div>
             </div>
 
             <div class="collapse multi-collapse" id="lexical_collapse">
 
                 <div class="card-body">
-                    <form method="POST" action="/administration/lexical/delete" target="tgt" onsubmit="deleteLexical()">
 
+                    <div>
                         <div class="form-group">
-                            <label for="lesson_Id_lexical">Task ID</label>
-                            <input type="text" class="form-control" id="lesson_Id_lexical"
-                                   name="lessonId"
-                                   placeholder="Write id of lexical">
+                            <label class="mr-sm-2" for="task_Id">Task id</label>
+                            <select class="custom-select mr-sm-2" id="task_Id" name="taskId_grammar">
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="deleteLexical()">Submit</button>
 
-                    </form>
+                    </div>
+
                 </div>
             </div>
             <div class="collapse multi-collapse" id="test_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/test/delete" target="tgt" onsubmit="deleteTest()">
 
+                    <div>
                         <div class="form-group">
-                            <label for="test_taskId">Test ID</label>
-                            <input type="text" class="form-control" id="test_taskId" name="test_taskId"
-                                   placeholder="Write id of test">
+                            <label class="mr-sm-2" for="task_Id_second">Task id</label>
+                            <select class="custom-select mr-sm-2" id="task_Id_second" name="task_Id_second">
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        <button type="submit" class="btn btn-primary" onclick="deleteTest()">Submit</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -112,8 +118,89 @@
 </div>
 
 <script>
+    loadNameOfLessonsForLesson();
+    loadNameOfGrammarForGrammar();
+    loadNameOfTestsTasksForTest();
+    loadNameOfLexicalTasksForLexical();
+
+    function loadNameOfTestsTasksForTest() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/test/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.testText;
+                document.getElementById("task_Id_second").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLessonsForLesson() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.name);
+                optionElement.innerText = options.name;
+                document.getElementById("nameForLesson").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfGrammarForGrammar() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/grammar/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.content;
+                document.getElementById("taskId_grammar").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLexicalTasksForLexical() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lexical/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.id;
+                document.getElementById("task_Id").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
     function deleteLesson() {
-        let addr = "http://"+ address + ":5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -167,7 +254,7 @@
     }
 
     function deleteLexical() {
-        let addr = "http://"+ address + ":5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -194,7 +281,7 @@
     }
 
     function deleteTest() {
-        let addr = "http://"+ address + ":5000";
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";

@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src = "js/address.js"></script>
+    <script src="js/address.js"></script>
 </head>
 <body>
 <div class="container">
@@ -35,17 +35,20 @@
         <a class="btn btn-primary" data-toggle="collapse" href="#lesson_collapse" role="button"
            aria-expanded="true" aria-controls="multiCollapseExample1">Lesson</a>
         <a class="btn btn-primary" data-toggle="collapse" href="#grammar_collapse" role="button"
-           aria-expanded="true" aria-controls="multiCollapseExample1">Grammar</a>
+           aria-expanded="true" aria-controls="multiCollapseExample1"
+           onclick="loadNameOfLessonsForGrammar()">Grammar</a>
         <a class="btn btn-primary" data-toggle="collapse" href="#lexical_collapse" role="button"
-           aria-expanded="true" aria-controls="multiCollapseExample1">Lexical</a>
+           aria-expanded="true" aria-controls="multiCollapseExample1"
+           onclick="loadNameOfLessonsForLexical()">Lexical</a>
         <a class="btn btn-primary" data-toggle="collapse" href="#test_collapse" role="button"
-           aria-expanded="true" aria-controls="multiCollapseExample1">Test</a>
+           aria-expanded="true" aria-controls="multiCollapseExample1" >Test</a>
     </p>
     <div class="row">
         <div class="col">
             <div class="collapse multi-collapse" id="lesson_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/lesson/add" target="tgt" onsubmit="addLesson()">
+
+                    <div>
 
                         <div class="form-group">
                             <label for="nameForLesson">Name</label>
@@ -72,29 +75,33 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="addLesson()">Submit</button>
 
-                    </form>
+                    </div>
+
                 </div>
             </div>
             <div class="collapse multi-collapse" id="grammar_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/grammar/add" target="tgt" onsubmit="addGrammar()">
+
+                    <div>
 
                         <div class="form-group">
-                            <label for="lesson_Id">Lesson ID</label>
-                            <input type="text" class="form-control" id="lesson_Id" name="lessonId"
-                                   placeholder="Write id of lesson">
+                            <label class="mr-sm-2" for="lesson_Id">Lessons name</label>
+                            <select class="custom-select mr-sm-2" id="lesson_Id" name="lessonId">
+                            </select>
                         </div>
+
 
                         <div class="form-group">
                             <label for="content_info">Content</label>
-                            <input type="text" class="form-control" id="content_info" placeholder="Write information" />
+                            <input type="text" class="form-control" id="content_info" placeholder="Write information"/>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="addGrammar()">Submit</button>
 
-                    </form>
+                    </div>
+
                 </div>
             </div>
             <div class="collapse multi-collapse" id="lexical_collapse">
@@ -115,19 +122,22 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/lexical/add" target="tgt"
-                                          onsubmit="addLexical()">
+
+                                    <div>
 
                                         <div class="form-group">
-                                            <label for="lesson_Id_lexical">Lesson ID</label>
-                                            <input type="text" class="form-control" id="lesson_Id_lexical"
-                                                   name="lesson_Id_lexical"
-                                                   placeholder="Write id of lesson">
+                                            <label class="mr-sm-2" for="lesson_Id_lexical">Lessons name</label>
+                                            <select class="custom-select mr-sm-2" id="lesson_Id_lexical"
+                                                    name="lesson_Id_lexical">
+                                            </select>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
 
-                                    </form>
+                                        <button type="submit" class="btn btn-primary" onclick="addLexical()">Submit
+                                        </button>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -137,7 +147,7 @@
 
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo">
+                                            aria-controls="collapseTwo" >
                                         Add word
                                     </button>
 
@@ -146,14 +156,13 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/lexical/addWord" target="tgt"
-                                          onsubmit="addWord()">
+
+                                    <div>
 
                                         <div class="form-group">
-                                            <label for="task_Id">Task id</label>
-                                            <input type="text" class="form-control" id="task_Id"
-                                                   name="task_Id"
-                                                   placeholder="Write id of lexical task">
+                                            <label class="mr-sm-2" for="task_Id">Lexical id</label>
+                                            <select class="custom-select mr-sm-2" id="task_Id" name="task_Id">
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
@@ -182,8 +191,11 @@
                                             <input type="file" class="form-control-file" id="picture_lexical">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-primary" onclick="addWord()">Submit
+                                        </button>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -210,12 +222,14 @@
                                  data-parent="#accordionExample">
 
                                 <div class="card card-body">
+
                                     <div>
 
                                         <div class="form-group">
-                                            <label for="lesson_Id_test">Lesson ID</label>
-                                            <input type="text" class="form-control" id="lesson_Id_test" name="lessonId"
-                                                   placeholder="Write id of lesson">
+                                            <label class="mr-sm-2" for="lesson_Id_test">Lessons name</label>
+                                            <select class="custom-select mr-sm-2" id="lesson_Id_test"
+                                                    name="lesson_Id_test">
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
@@ -240,6 +254,7 @@
 
                                         <p type="submit" class="btn btn-primary" onclick="addTest()">Submit</p>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -259,14 +274,13 @@
                             <div id="collapsTwo" class="collapse" aria-labelledby="headingTwo"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/test/addVariant" target="tgt"
-                                          onsubmit="addVariants()">
 
+                                    <div>
                                         <div class="form-group">
-                                            <label for="task_Id_second">Task id</label>
-                                            <input type="text" class="form-control" id="task_Id_second"
-                                                   name="task_Id_second"
-                                                   placeholder="Write id of task">
+                                            <label class="mr-sm-2" for="task_Id_second">Tasks id</label>
+                                            <select class="custom-select mr-sm-2" id="task_Id_second"
+                                                    name="task_Id_second">
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
@@ -290,8 +304,10 @@
                                                    placeholder="Write text">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-primary" onclick="addVariants()">Submit
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -306,6 +322,106 @@
 </div>
 
 <script>
+    loadNameOfTestsTasksForTest();
+    loadNameOfLessonsForGrammar();
+    loadNameOfLexicalTasksForLexical();
+    loadNameOfLessonsForLexical();
+    loadNameOfLessonsForTest();
+
+    function loadNameOfLessonsForGrammar() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.name;
+                document.getElementById("lesson_Id").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLexicalTasksForLexical() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lexical/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.id;
+                document.getElementById("task_Id").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfTestsTasksForTest() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/test/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.testText;
+                document.getElementById("task_Id_second").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLessonsForLexical() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.name;
+                document.getElementById("lesson_Id_lexical").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLessonsForTest() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
+
+        request.onload = function () {
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for (let options of object) {
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value", options.id);
+                optionElement.innerText = options.name;
+                document.getElementById("lesson_Id_test").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
 
     function addLesson() {
         let addr = "http://" + address + ":5000";
@@ -330,7 +446,8 @@
                     alert("Please");
                     break;
                 default:
-                    alert("id = " + (JSON.parse(resp)).id);
+                    alert("id = " + (JSON.parse(resp)).id + " " + resp);
+
                     location.reload();
             }
 
@@ -339,6 +456,7 @@
         request.send();
 
     }
+
 
     function addGrammar() {
         let addr = "http://" + address + ":5000";

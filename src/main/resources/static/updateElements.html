@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="js/address.js"></script>
 </head>
 <body>
 <div class="container">
@@ -43,43 +44,110 @@
     <div class="row">
         <div class="col">
             <div class="collapse multi-collapse" id="lesson_collapse">
+
                 <div class="card card-body">
-                    <form method="POST" action="/administration/lesson/add" target="tgt" onsubmit="addLesson()">
+                    <div class="accordion" id="accordionLesson">
+                        <div class="card">
+                            <div class="card-header" id="headorOne">
+                                <h5 class="mb-0">
 
-                        <div class="form-group">
-                            <label for="nameForLesson">Name</label>
-                            <input type="text" class="form-control" id="nameForLesson" name="name"
-                                   placeholder="Write name of lesson">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collaOne" aria-expanded="true" aria-controls="collapOne">
+                                        Update lesson
+                                    </button>
+
+                                </h5>
+                            </div>
+
+                            <div id="collaOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+
+                                <div class="card card-body">
+
+                                    <div>
+                                        <div class="form-group">
+                                            <label class="mr-sm-2" for="nameOfLesson">Name of lesson</label>
+                                            <select class="custom-select mr-sm-2" id="nameOfLesson">
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="numberOfPoints">Points</label>
+                                            <input type="text" class="form-control" id="numberOfPoints" name="points"
+                                                   placeholder="Write number of points">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="mr-sm-2" for="levels">Levels</label>
+                                            <select class="custom-select mr-sm-2" id="levels">
+                                                <option value="BEGINNER" selected>BEGINNER</option>
+                                                <option value="ELEMENTARY">ELEMENTARY</option>
+                                                <option value="PREINTERMEDIATE">PREINTERMEDIATE</option>
+                                                <option value="INTERMEDIATE">INTERMEDIATE</option>
+                                                <option value="UPPERINTERMEDIATE">UPPERINTERMEDIATE</option>
+                                                <option value="ADVANCED">ADVANCED</option>
+                                                <option value="MASTER">MASTER</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" onclick="updateLesson()">Submit
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
+                        <div class="card">
+                            <div class="card-header" id="headorTwo">
+                                <h5 class="mb-0">
 
-                        <div class="form-group">
-                            <label for="numberOfPoints">Points</label>
-                            <input type="text" class="form-control" id="numberOfPoints" name="points"
-                                   placeholder="Write number of points">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collaTwo" aria-expanded="false"
+                                            aria-controls="collapTwo">
+                                        Update status
+                                    </button>
+
+                                </h5>
+                            </div>
+                            <div id="collaTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+
+                                    <div>
+
+                                        <div class="form-group">
+                                            <label class="mr-sm-2" for="nameOfLessons">Name of lesson</label>
+                                            <select class="custom-select mr-sm-2" id="nameOfLessons">
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="mr-sm-2" for="states">Status</label>
+                                            <select class="custom-select mr-sm-2" id="states">
+                                                <option value="true">Open</option>
+                                                <option value="false">Close</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" onclick="updateStatus()">Submit
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="mr-sm-2" for="levels">Levels</label>
-                            <select class="custom-select mr-sm-2" id="levels">
-                                <option selected>BEGINNER</option>
-                                <option value="1">ELEMENTARY</option>
-                                <option value="2">PREINTERMEDIATE</option>
-                                <option value="3">INTERMEDIATE</option>
-                                <option value="4">UPPERINTERMEDIATE</option>
-                                <option value="5">ADVANCED</option>
-                                <option value="6">MASTER</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-
-                    </form>
+                    </div>
                 </div>
+
+
             </div>
+
             <div class="collapse multi-collapse" id="grammar_collapse">
                 <div class="card card-body">
-                    <form method="POST" action="/administration/grammar/add" target="tgt" onsubmit="addGrammar()">
 
+                    <div>
                         <div class="form-group">
                             <label for="lesson_Id">Lesson ID</label>
                             <input type="text" class="form-control" id="lesson_Id" name="lessonId"
@@ -93,7 +161,8 @@
 
                         <button type="submit" class="btn btn-primary">Submit</button>
 
-                    </form>
+                    </div>
+
                 </div>
             </div>
             <div class="collapse multi-collapse" id="lexical_collapse">
@@ -114,9 +183,8 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/lexical/add" target="tgt"
-                                          onsubmit="addLexical()">
 
+                                    <div>
                                         <div class="form-group">
                                             <label for="lesson_Id_lexical">Lesson ID</label>
                                             <input type="text" class="form-control" id="lesson_Id_lexical"
@@ -126,7 +194,8 @@
 
                                         <button type="submit" class="btn btn-primary">Submit</button>
 
-                                    </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -145,9 +214,8 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/lexical/addWord" target="tgt"
-                                          onsubmit="addWord()">
 
+                                    <div>
                                         <div class="form-group">
                                             <label for="task_Id">Task id</label>
                                             <input type="text" class="form-control" id="task_Id"
@@ -182,7 +250,9 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -209,9 +279,8 @@
                                  data-parent="#accordionExample">
 
                                 <div class="card card-body">
-                                    <form method="POST" action="/administration/test/add" target="tgt"
-                                          onsubmit="addTest()">
 
+                                    <div>
                                         <div class="form-group">
                                             <label for="lesson_Id_test">Lesson ID</label>
                                             <input type="text" class="form-control" id="lesson_Id_test" name="lessonId"
@@ -239,7 +308,9 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -259,8 +330,8 @@
                             <div id="collapsTwo" class="collapse" aria-labelledby="headingTwo"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form method="POST" action="/administration/test/addVariant" target="tgt"
-                                          onsubmit="addVariants()">
+
+                                    <div>
 
                                         <div class="form-group">
                                             <label for="task_Id_second">Task id</label>
@@ -291,7 +362,9 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -306,9 +379,48 @@
 </div>
 
 <script>
+    loadNameOfLessons();
+    loadNameOfLesson();
+    function loadNameOfLessons() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
 
-    function addLesson() {
-        let address = "http://192.168.43.36:5000";
+        request.onload = function(){
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for(let options of object){
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value",options.name);
+                optionElement.innerText = options.name + " Status : " + options.isOpened;
+                document.getElementById("nameOfLessons").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function loadNameOfLesson() {
+        let request = new XMLHttpRequest();
+        let addr = "http://" + address + ":5000";
+        request.open("GET", addr + "/lesson/getAll", true);
+
+        request.onload = function(){
+            let resp = request.response;
+            let object = JSON.parse(resp);
+
+            for(let options of object){
+                let optionElement = document.createElement("option");
+                optionElement.setAttribute("value",options.name);
+                optionElement.innerText = options.name;
+                document.getElementById("nameOfLesson").appendChild(optionElement);
+            }
+        };
+        request.send();
+    }
+
+    function updateLesson() {
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
@@ -318,7 +430,7 @@
         lesson += "&";
         lesson += "level=" + document.getElementById("levels").value;
 
-        request.open("POST", address + "/administration/lesson/add" + lesson, false);
+        request.open("POST", addr + "/administration/lesson/update" + lesson, true);
 
         request.onload = function () {
             let resp = request.response;
@@ -340,17 +452,18 @@
 
     }
 
-    function addGrammar() {
-        let address = "http://192.168.43.36:5000";
+    function updateStatus() {
+        let addr = "http://" + address + ":5000";
         let request = new XMLHttpRequest();
 
         let lesson = "?";
-        lesson += "lessonId=" + document.getElementById("lesson_Id").value;
-        lesson += "&";
-        lesson += "content=" + document.getElementById("content_info").value;
+        lesson += "name=" + document.getElementById("nameOfLessons").value;
 
-
-        request.open("POST", address + "/administration/grammar/add" + lesson, false);
+        if (document.getElementById("nameOfLessons").value) {
+            request.open("POST", addr + "/administration/lesson/open" + lesson, true);
+        } else {
+            request.open("POST", addr + "/administration/lesson/close" + lesson, true);
+        }
 
         request.onload = function () {
             let resp = request.response;
@@ -360,140 +473,6 @@
                     break;
                 case "Illegal arguments":
                     alert("Please");
-                    break;
-                default:
-                    alert("OK!");
-                    location.reload();
-            }
-
-        };
-
-        request.send();
-
-    }
-
-    function addLexical() {
-        let address = "http://192.168.43.36:5000";
-        let request = new XMLHttpRequest();
-
-        let lesson = "?";
-        lesson += "lessonId=" + document.getElementById("lesson_Id_lexical").value;
-
-        request.open("POST", address + "/administration/lexical/add" + lesson, false);
-
-        request.onload = function () {
-            let resp = request.response;
-            switch (resp) {
-                case "Incorrect id":
-                    alert(resp);
-                    break;
-                case "Illegal arguments":
-                    alert("Please");
-                    break;
-                default:
-                    alert("OK!");
-                    location.reload();
-            }
-
-        };
-
-        request.send();
-    }
-
-    function addWord() {
-        let address = "http://192.168.43.36:5000";
-        let request = new XMLHttpRequest();
-
-        let lesson = "?";
-        lesson += "taskId=" + document.getElementById("task_Id").value;
-        lesson += "&";
-        lesson += "wordName=" + document.getElementById("word_name").value;
-        lesson += "&";
-        lesson += "description=" + document.getElementById("description").value;
-        lesson += "&";
-        lesson += "translation=" + document.getElementById("translation").value;
-        lesson += "&";
-        lesson += "picture=" + "";
-
-        request.open("POST", address + "/administration/lexical/addWord" + lesson, false);
-
-        request.onload = function () {
-            let resp = request.response;
-            switch (resp) {
-                case "Lesson exists":
-                    alert(resp);
-                    break;
-                case "Illegal arguments":
-                    alert("Please");
-                    break;
-                default:
-                    alert("OK!");
-                    location.reload();
-            }
-
-        };
-
-        request.send();
-
-
-    }
-
-    function addTest() {
-        let address = "http://192.168.43.36:5000";
-        let request = new XMLHttpRequest();
-
-        let lesson = "?";
-        lesson += "lessonId=" + document.getElementById("lesson_Id_test").value;
-        lesson += "&";
-        lesson += "picture=" + "";
-        lesson += "&";
-        lesson += "text=" + document.getElementById("text_test").value;
-        lesson += "&";
-        lesson += "type=" + document.getElementById("typeOfTest").value;
-
-
-        request.open("POST", address + "/administration/test/add" + lesson, false);
-
-        request.onload = function () {
-            let resp = request.response;
-            switch (resp) {
-                case "Incorrect type":
-                    alert(resp);
-                    break;
-                case "Incorrect id":
-                    alert("Please");
-                    break;
-                default:
-                    alert("OK!");
-                    location.reload();
-            }
-
-        };
-
-        request.send();
-
-    }
-
-    function addVariants() {
-        let address = "http://192.168.43.36:5000";
-        let request = new XMLHttpRequest();
-
-        let lesson = "?";
-        lesson += "taskId=" + document.getElementById("task_Id_second").value;
-        lesson += "&";
-        lesson += "number=" + document.getElementById("numberOfTestVariants").value;
-        lesson += "&";
-        lesson += "rightVariant=" + document.getElementById("rightVariant").value;
-        lesson += "&";
-        lesson += "text=" + document.getElementById("text_testVariant").value;
-
-        request.open("POST", address + "/administration/test/addVariant" + lesson, false);
-
-        request.onload = function () {
-            let resp = request.response;
-            switch (resp) {
-                case "Incorrect id":
-                    alert(resp);
                     break;
                 default:
                     alert("OK!");
